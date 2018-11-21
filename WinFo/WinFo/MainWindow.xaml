@@ -1,0 +1,27 @@
+﻿<Window x:Class="WinFo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WinFo.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="399" VerticalAlignment="Top" Width="772" Margin="10,10,0,0">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="2"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="Shares" Content="View Shares"/>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="Network Adapters" Content="View Network Adapters"/>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="User Sessions" Content="View User Sessions"/>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="Computer Sessions"  Content="View Computer Sessions"/>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="IP4 Routes" Content="View IP4 Routes"/>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="Computer System" Content="View Computer System"/>
+        </StackPanel>
+    </Grid>
+</Window>
