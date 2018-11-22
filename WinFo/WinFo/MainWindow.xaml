@@ -22,6 +22,9 @@
             <Button Command="{Binding LoadWindowCommand}" CommandParameter="Computer Sessions"  Content="View Computer Sessions"/>
             <Button Command="{Binding LoadWindowCommand}" CommandParameter="IP4 Routes" Content="View IP4 Routes"/>
             <Button Command="{Binding LoadWindowCommand}" CommandParameter="Computer System" Content="View Computer System"/>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="Environment Variables" Content="Environment Variables"/>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="Startup Entries" Content="Startup Entries"/>
+
         </StackPanel>
     </Grid>
 </Window>

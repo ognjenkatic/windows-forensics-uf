@@ -26,5 +26,9 @@ namespace WinFo.Service
         IIP4RoutingTableService CreateIP4RoutingTableService();
 
         IGroupUserService CreateGroupUserService();
+
+        IEnvironmentVariableService CreateEnvironmentVariableService();
+
+        IStartupEntryService CreateStartupEntryService();
     }
 }

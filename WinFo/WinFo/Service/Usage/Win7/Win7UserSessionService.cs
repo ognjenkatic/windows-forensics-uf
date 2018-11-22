@@ -75,6 +75,7 @@ namespace WinFo.Service.Usage.Win7
         {
             // Maps user sessions to their unique keys
             Dictionary<string, UserSession> sessionsDictionary = new Dictionary<string, UserSession>();
+            List<UserSession> validSessions = new List<UserSession>();
             try
             {
                 EventLog eventLog = new EventLog();
@@ -127,6 +128,8 @@ namespace WinFo.Service.Usage.Win7
                             sessionsDictionary.ContainsKey(identifier))
                         {
                             sessionsDictionary[identifier].End = ele.TimeGenerated;
+                            if (sessionsDictionary[identifier].End > sessionsDictionary[identifier].Beginning)
+                                validSessions.Add(sessionsDictionary[identifier]);
                         }
 
                     }
@@ -137,7 +140,8 @@ namespace WinFo.Service.Usage.Win7
             {
                 MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
             }
-            return sessionsDictionary.Values.ToList<UserSession>();
+
+            return validSessions;
         }
         #endregion
     }

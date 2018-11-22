@@ -65,6 +65,18 @@ namespace WinFo.ViewModel
                             cosv.Show();
                             break;
                         }
+                    case ("Environment Variables"):
+                        {
+                            EnvironmentVariableView evv = new EnvironmentVariableView();
+                            evv.Show();
+                            break;
+                        }
+                    case ("Startup Entries"):
+                        {
+                            StartupEntryView sev = new StartupEntryView();
+                            sev.Show();
+                            break;
+                        }
                 }
             }
             

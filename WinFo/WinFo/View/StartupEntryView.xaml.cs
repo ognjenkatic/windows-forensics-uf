@@ -10,23 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WinFo.Model.Configuration;
-using WinFo.Model.Usage;
-using WinFo.Service;
-using WinFo.Service.Configuration;
-using WinFo.Service.Usage;
-using WinFo.Usage.Model;
 
-namespace WinFo
+namespace WinFo.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for StartupEntryView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StartupEntryView : Window
     {
-        public MainWindow()
+        public StartupEntryView()
         {
             InitializeComponent();
         }

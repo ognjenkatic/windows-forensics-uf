@@ -57,20 +57,26 @@
     </ApplicationDefinition>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Configuration\CPUInfo.cs" />
+    <Compile Include="Model\Configuration\EnvironmentVariable.cs" />
     <Compile Include="Model\Configuration\IP4Route.cs" />
     <Compile Include="Model\Configuration\NetworkAdapter.cs" />
     <Compile Include="Model\Configuration\PhysicalMemory.cs" />
+    <Compile Include="Model\Configuration\StartupEntry.cs" />
     <Compile Include="Model\Configuration\Share.cs" />
     <Compile Include="Model\Configuration\ComputerSystem.cs" />
     <Compile Include="Model\Usage\User.cs" />
     <Compile Include="Model\Usage\UserGroup.cs" />
+    <Compile Include="Service\Configuration\IEnvironmentVariableService.cs" />
     <Compile Include="Service\Configuration\IGroupUserService.cs" />
     <Compile Include="Service\Configuration\INetworkAdapterService.cs" />
     <Compile Include="Service\Configuration\IIP4RoutingTableService.cs" />
+    <Compile Include="Service\Configuration\IStartupEntryService.cs" />
     <Compile Include="Service\Configuration\IShareService.cs" />
+    <Compile Include="Service\Configuration\Win7\Win7EnvironmentVariableService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7GroupUserService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7IP4RoutingTableService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7NetworkAdapterService.cs" />
+    <Compile Include="Service\Configuration\Win7\Win7StartupEntryService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7ShareService.cs" />
     <Compile Include="Service\Configuration\IComputerSystemService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7ComputerSystemService.cs" />
@@ -85,9 +91,11 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ComputerSessionViewModel.cs" />
     <Compile Include="ViewModel\ComputerSystemViewModel.cs" />
+    <Compile Include="ViewModel\EnvironmentVariableViewModel.cs" />
     <Compile Include="ViewModel\IP4RoutingTableViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NetworkAdapterViewModel.cs" />
+    <Compile Include="ViewModel\StartupEntryViewModel.cs" />
     <Compile Include="ViewModel\ShareViewModel.cs" />
     <Compile Include="ViewModel\UserSessionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelCommand.cs" />
@@ -97,6 +105,9 @@
     <Compile Include="View\ComputerSystemView.xaml.cs">
       <DependentUpon>ComputerSystemView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EnvironmentVariableView.xaml.cs">
+      <DependentUpon>EnvironmentVariableView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GroupUserView.xaml.cs">
       <DependentUpon>GroupUserView.xaml</DependentUpon>
     </Compile>
@@ -105,6 +116,9 @@
     </Compile>
     <Compile Include="View\NetworkAdapterView.xaml.cs">
       <DependentUpon>NetworkAdapterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartupEntryView.xaml.cs">
+      <DependentUpon>StartupEntryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ShareView.xaml.cs">
       <DependentUpon>ShareView.xaml</DependentUpon>
@@ -132,6 +146,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EnvironmentVariableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\GroupUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NetworkAdapterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartupEntryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

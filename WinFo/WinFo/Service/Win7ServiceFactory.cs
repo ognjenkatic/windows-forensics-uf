@@ -49,5 +49,15 @@ namespace WinFo.Service
         {
             return new Win7UserSessionService();
         }
+
+        public IEnvironmentVariableService CreateEnvironmentVariableService()
+        {
+            return new Win7EnvironmentVariableService();
+        }
+
+        public IStartupEntryService CreateStartupEntryService()
+        {
+            return new Win7StartupEntryService();
+        }
     }
 }
