@@ -13,3 +13,7 @@ The current version of the application provides information about the following:
 * Shares
 * Account usage
 * Computer usage
+* Environment variables
+* Recently opened files and commands ran
+* Startup programs
+

@@ -64,6 +64,7 @@
     <Compile Include="Model\Configuration\StartupEntry.cs" />
     <Compile Include="Model\Configuration\Share.cs" />
     <Compile Include="Model\Configuration\ComputerSystem.cs" />
+    <Compile Include="Model\Usage\RecentlyUsedEntry.cs" />
     <Compile Include="Model\Usage\User.cs" />
     <Compile Include="Model\Usage\UserGroup.cs" />
     <Compile Include="Service\Configuration\IEnvironmentVariableService.cs" />
@@ -84,7 +85,9 @@
     <Compile Include="Service\ServiceFactoryProducer.cs" />
     <Compile Include="Service\IServiceFactory.cs" />
     <Compile Include="Service\Usage\IComputerSessionService.cs" />
+    <Compile Include="Service\Usage\IRecentlyUsedService.cs" />
     <Compile Include="Service\Usage\IUserSessionService.cs" />
+    <Compile Include="Service\Usage\Win7\Win7RecentlyUsedService.cs" />
     <Compile Include="Service\Usage\Win7\Win7ComputerSessionService.cs" />
     <Compile Include="Service\Usage\Win7\Win7UserSessionService.cs" />
     <Compile Include="Service\Win7ServiceFactory.cs" />
@@ -95,6 +98,7 @@
     <Compile Include="ViewModel\IP4RoutingTableViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NetworkAdapterViewModel.cs" />
+    <Compile Include="ViewModel\RecentlyUsedEntryViewModel.cs" />
     <Compile Include="ViewModel\StartupEntryViewModel.cs" />
     <Compile Include="ViewModel\ShareViewModel.cs" />
     <Compile Include="ViewModel\UserSessionViewModel.cs" />
@@ -116,6 +120,9 @@
     </Compile>
     <Compile Include="View\NetworkAdapterView.xaml.cs">
       <DependentUpon>NetworkAdapterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RecentlyUsedEntryView.xaml.cs">
+      <DependentUpon>RecentlyUsedEntryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StartupEntryView.xaml.cs">
       <DependentUpon>StartupEntryView.xaml</DependentUpon>
@@ -159,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NetworkAdapterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RecentlyUsedEntryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,6 +217,17 @@
   <ItemGroup>
     <Folder Include="Service\Configuration\Win10\" />
     <Folder Include="Service\Usage\Win10\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

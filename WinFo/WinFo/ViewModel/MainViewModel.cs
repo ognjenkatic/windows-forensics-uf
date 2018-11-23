@@ -77,6 +77,12 @@ namespace WinFo.ViewModel
                             sev.Show();
                             break;
                         }
+                    case ("Recently Used"):
+                        {
+                            RecentlyUsedEntryView reuv = new RecentlyUsedEntryView();
+                            reuv.Show();
+                            break;
+                        }
                 }
             }
             

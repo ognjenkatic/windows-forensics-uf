@@ -59,5 +59,10 @@ namespace WinFo.Service
         {
             return new Win7StartupEntryService();
         }
+
+        public IRecentlyUsedService CreateRecentlyUsedService()
+        {
+            return new Win7RecentlyUsedService();
+        }
     }
 }

@@ -10,6 +10,7 @@
         private int _numberOfLogicalProcessors;
         private string _architecture;
         #endregion
+
         #region properties
         public int NumberOfPhysicalProcessors { get => _numberOfPhysicalProcessors; set => _numberOfPhysicalProcessors = value; }
         public int NumberOfLogicalProcessors { get => _numberOfLogicalProcessors; set => _numberOfLogicalProcessors = value; }

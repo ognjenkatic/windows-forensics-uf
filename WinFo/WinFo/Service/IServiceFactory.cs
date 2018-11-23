@@ -30,5 +30,8 @@ namespace WinFo.Service
         IEnvironmentVariableService CreateEnvironmentVariableService();
 
         IStartupEntryService CreateStartupEntryService();
+
+        IRecentlyUsedService CreateRecentlyUsedService();
+
     }
 }

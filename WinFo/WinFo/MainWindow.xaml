@@ -24,6 +24,7 @@
             <Button Command="{Binding LoadWindowCommand}" CommandParameter="Computer System" Content="View Computer System"/>
             <Button Command="{Binding LoadWindowCommand}" CommandParameter="Environment Variables" Content="Environment Variables"/>
             <Button Command="{Binding LoadWindowCommand}" CommandParameter="Startup Entries" Content="Startup Entries"/>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="Recently Used" Content="Recently Used"/>
 
         </StackPanel>
     </Grid>
