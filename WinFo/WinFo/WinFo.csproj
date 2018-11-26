@@ -57,13 +57,17 @@
     </ApplicationDefinition>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Configuration\CPUInfo.cs" />
+    <Compile Include="Model\Configuration\DiskDrive.cs" />
+    <Compile Include="Model\Configuration\DiskPartition.cs" />
     <Compile Include="Model\Configuration\EnvironmentVariable.cs" />
     <Compile Include="Model\Configuration\IP4Route.cs" />
+    <Compile Include="Model\Configuration\LogicalDisk.cs" />
     <Compile Include="Model\Configuration\NetworkAdapter.cs" />
     <Compile Include="Model\Configuration\PhysicalMemory.cs" />
     <Compile Include="Model\Configuration\StartupEntry.cs" />
     <Compile Include="Model\Configuration\Share.cs" />
     <Compile Include="Model\Configuration\ComputerSystem.cs" />
+    <Compile Include="Model\Configuration\Update.cs" />
     <Compile Include="Model\Usage\RecentlyUsedEntry.cs" />
     <Compile Include="Model\Usage\User.cs" />
     <Compile Include="Model\Usage\UserGroup.cs" />
@@ -73,6 +77,7 @@
     <Compile Include="Service\Configuration\IIP4RoutingTableService.cs" />
     <Compile Include="Service\Configuration\IStartupEntryService.cs" />
     <Compile Include="Service\Configuration\IShareService.cs" />
+    <Compile Include="Service\Configuration\IUpdateService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7EnvironmentVariableService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7GroupUserService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7IP4RoutingTableService.cs" />
@@ -81,6 +86,7 @@
     <Compile Include="Service\Configuration\Win7\Win7ShareService.cs" />
     <Compile Include="Service\Configuration\IComputerSystemService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7ComputerSystemService.cs" />
+    <Compile Include="Service\Configuration\Win7\Win7UpdateService.cs" />
     <Compile Include="Service\MyDebug\MyDebugger.cs" />
     <Compile Include="Service\ServiceFactoryProducer.cs" />
     <Compile Include="Service\IServiceFactory.cs" />
@@ -101,6 +107,7 @@
     <Compile Include="ViewModel\RecentlyUsedEntryViewModel.cs" />
     <Compile Include="ViewModel\StartupEntryViewModel.cs" />
     <Compile Include="ViewModel\ShareViewModel.cs" />
+    <Compile Include="ViewModel\UpdateViewModel.cs" />
     <Compile Include="ViewModel\UserSessionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelCommand.cs" />
     <Compile Include="View\ComputerSessionView.xaml.cs">
@@ -129,6 +136,9 @@
     </Compile>
     <Compile Include="View\ShareView.xaml.cs">
       <DependentUpon>ShareView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpdateView.xaml.cs">
+      <DependentUpon>UpdateView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserSessionView.xaml.cs">
       <DependentUpon>UserSessionView.xaml</DependentUpon>
@@ -178,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ShareView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UpdateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

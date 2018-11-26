@@ -8,10 +8,10 @@ using WinFo.Model.Configuration;
 namespace WinFo.Service.Configuration
 {
     /// <summary>
-    /// Interface that defines a startup resource information service
+    /// Interface that defines an update information service
     /// </summary>
-    public interface IStartupEntryService
+    public interface IUpdateService
     {
-        List<StartupEntry> GetStartupEntries();
+        List<Update> GetUpdates();
     }
 }

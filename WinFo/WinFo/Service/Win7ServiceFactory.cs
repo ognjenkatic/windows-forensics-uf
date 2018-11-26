@@ -64,5 +64,10 @@ namespace WinFo.Service
         {
             return new Win7RecentlyUsedService();
         }
+
+        public IUpdateService CreateUpdateService()
+        {
+            return new Win7UpdateService();
+        }
     }
 }

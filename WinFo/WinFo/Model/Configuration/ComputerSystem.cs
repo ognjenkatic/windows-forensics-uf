@@ -28,6 +28,7 @@ namespace WinFo.Model.Configuration
         private DateTime _lastBootUpTime;
 
         private List<PhysicalMemory> _physicalMemoryCollection = new List<PhysicalMemory>();
+        private List<DiskDrive> _diskDriveCollection = new List<DiskDrive>();
         private CPUInfo _cpuInfo;
 
         #endregion
@@ -63,6 +64,7 @@ namespace WinFo.Model.Configuration
         public string Model { get => _model; set => _model = value; }
         public bool IsPartOfDomain { get => _isPartOfDomain; set => _isPartOfDomain = value; }
         public string Workgroup { get => _workgroup; set => _workgroup = value; }
+        public List<DiskDrive> DiskDriveCollection { get => _diskDriveCollection; set => _diskDriveCollection = value; }
         #endregion
     }
 }

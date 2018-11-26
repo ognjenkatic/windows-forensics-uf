@@ -83,6 +83,12 @@ namespace WinFo.ViewModel
                             reuv.Show();
                             break;
                         }
+                    case ("Updates"):
+                        {
+                            UpdateView uv = new UpdateView();
+                            uv.Show();
+                            break;
+                        }
                 }
             }
             

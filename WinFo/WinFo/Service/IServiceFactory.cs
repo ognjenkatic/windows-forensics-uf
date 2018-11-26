@@ -33,5 +33,7 @@ namespace WinFo.Service
 
         IRecentlyUsedService CreateRecentlyUsedService();
 
+        IUpdateService CreateUpdateService();
+
     }
 }
