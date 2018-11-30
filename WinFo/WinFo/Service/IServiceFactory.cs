@@ -35,5 +35,11 @@ namespace WinFo.Service
 
         IUpdateService CreateUpdateService();
 
+        IProcessService CreateProcessService();
+
+        IBIOSService CreateBIOSService();
+
+        IWindowsServiceService CreateWindowsServiceService();
+
     }
 }

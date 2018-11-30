@@ -89,6 +89,24 @@ namespace WinFo.ViewModel
                             uv.Show();
                             break;
                         }
+                    case ("Processes"):
+                        {
+                            ProcessView pv = new ProcessView();
+                            pv.Show();
+                            break;
+                        }
+                    case ("BIOS"):
+                        {
+                            BIOSView vb = new BIOSView();
+                            vb.Show();
+                            break;
+                        }
+                    case ("Services"):
+                        {
+                            WindowsServiceView wsv = new WindowsServiceView();
+                            wsv.Show();
+                            break;
+                        }
                 }
             }
             

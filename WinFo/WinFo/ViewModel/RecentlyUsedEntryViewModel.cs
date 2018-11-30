@@ -10,6 +10,9 @@ using WinFo.Service.Usage;
 
 namespace WinFo.ViewModel
 {
+    /// <summary>
+    /// The view model for recently used information
+    /// </summary>
     public class RecentlyUsedEntryViewModel : BaseViewModel
     {
         #region fields

@@ -69,5 +69,20 @@ namespace WinFo.Service
         {
             return new Win7UpdateService();
         }
+
+        public IProcessService CreateProcessService()
+        {
+            return new Win7ProcessService();
+        }
+
+        public IBIOSService CreateBIOSService()
+        {
+            return new Win7BIOSService();
+        }
+        
+        public IWindowsServiceService CreateWindowsServiceService()
+        {
+            return new Win7WindowsServiceService();
+        }
     }
 }

@@ -26,6 +26,9 @@
             <Button Command="{Binding LoadWindowCommand}" CommandParameter="Startup Entries" Content="Startup Entries"/>
             <Button Command="{Binding LoadWindowCommand}" CommandParameter="Recently Used" Content="Recently Used"/>
             <Button Command="{Binding LoadWindowCommand}" CommandParameter="Updates" Content="Updates"/>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="Processes" Content="Processes"/>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="BIOS" Content="BIOS"/>
+            <Button Command="{Binding LoadWindowCommand}" CommandParameter="Services" Content="Services"/>
 
         </StackPanel>
     </Grid>

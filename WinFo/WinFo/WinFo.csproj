@@ -33,6 +33,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -56,6 +76,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Model\Configuration\BIOS.cs" />
     <Compile Include="Model\Configuration\CPUInfo.cs" />
     <Compile Include="Model\Configuration\DiskDrive.cs" />
     <Compile Include="Model\Configuration\DiskPartition.cs" />
@@ -68,9 +89,13 @@
     <Compile Include="Model\Configuration\Share.cs" />
     <Compile Include="Model\Configuration\ComputerSystem.cs" />
     <Compile Include="Model\Configuration\Update.cs" />
+    <Compile Include="Model\Usage\WindowsService.cs" />
+    <Compile Include="Model\Usage\TCPConnection.cs" />
+    <Compile Include="Model\Usage\Process.cs" />
     <Compile Include="Model\Usage\RecentlyUsedEntry.cs" />
     <Compile Include="Model\Usage\User.cs" />
     <Compile Include="Model\Usage\UserGroup.cs" />
+    <Compile Include="Service\Configuration\IBIOSService.cs" />
     <Compile Include="Service\Configuration\IEnvironmentVariableService.cs" />
     <Compile Include="Service\Configuration\IGroupUserService.cs" />
     <Compile Include="Service\Configuration\INetworkAdapterService.cs" />
@@ -78,6 +103,7 @@
     <Compile Include="Service\Configuration\IStartupEntryService.cs" />
     <Compile Include="Service\Configuration\IShareService.cs" />
     <Compile Include="Service\Configuration\IUpdateService.cs" />
+    <Compile Include="Service\Configuration\Win7\Win7BIOSService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7EnvironmentVariableService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7GroupUserService.cs" />
     <Compile Include="Service\Configuration\Win7\Win7IP4RoutingTableService.cs" />
@@ -91,25 +117,36 @@
     <Compile Include="Service\ServiceFactoryProducer.cs" />
     <Compile Include="Service\IServiceFactory.cs" />
     <Compile Include="Service\Usage\IComputerSessionService.cs" />
+    <Compile Include="Service\Usage\IProcessService.cs" />
     <Compile Include="Service\Usage\IRecentlyUsedService.cs" />
+    <Compile Include="Service\Usage\IWindowsServiceService.cs" />
     <Compile Include="Service\Usage\IUserSessionService.cs" />
+    <Compile Include="Service\Usage\Win7\Win7ProcessService.cs" />
     <Compile Include="Service\Usage\Win7\Win7RecentlyUsedService.cs" />
     <Compile Include="Service\Usage\Win7\Win7ComputerSessionService.cs" />
     <Compile Include="Service\Usage\Win7\Win7UserSessionService.cs" />
+    <Compile Include="Service\Usage\Win7\IPHelperWrapper.cs" />
+    <Compile Include="Service\Usage\Win7\Win7WindowsServiceService.cs" />
     <Compile Include="Service\Win7ServiceFactory.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\BIOSViewModel.cs" />
     <Compile Include="ViewModel\ComputerSessionViewModel.cs" />
     <Compile Include="ViewModel\ComputerSystemViewModel.cs" />
     <Compile Include="ViewModel\EnvironmentVariableViewModel.cs" />
     <Compile Include="ViewModel\IP4RoutingTableViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NetworkAdapterViewModel.cs" />
+    <Compile Include="ViewModel\ProcessViewModel.cs" />
     <Compile Include="ViewModel\RecentlyUsedEntryViewModel.cs" />
     <Compile Include="ViewModel\StartupEntryViewModel.cs" />
     <Compile Include="ViewModel\ShareViewModel.cs" />
     <Compile Include="ViewModel\UpdateViewModel.cs" />
     <Compile Include="ViewModel\UserSessionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelCommand.cs" />
+    <Compile Include="ViewModel\WindowsServiceViewModel.cs" />
+    <Compile Include="View\BIOSView.xaml.cs">
+      <DependentUpon>BIOSView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ComputerSessionView.xaml.cs">
       <DependentUpon>ComputerSessionView.xaml</DependentUpon>
     </Compile>
@@ -128,6 +165,9 @@
     <Compile Include="View\NetworkAdapterView.xaml.cs">
       <DependentUpon>NetworkAdapterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ProcessView.xaml.cs">
+      <DependentUpon>ProcessView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RecentlyUsedEntryView.xaml.cs">
       <DependentUpon>RecentlyUsedEntryView.xaml</DependentUpon>
     </Compile>
@@ -143,6 +183,9 @@
     <Compile Include="View\UserSessionView.xaml.cs">
       <DependentUpon>UserSessionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WindowsServiceView.xaml.cs">
+      <DependentUpon>WindowsServiceView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -155,6 +198,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\BIOSView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ComputerSessionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,6 +226,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ProcessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\RecentlyUsedEntryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -196,6 +247,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserSessionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WindowsServiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
