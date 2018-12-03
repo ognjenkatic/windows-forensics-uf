@@ -41,5 +41,11 @@ namespace WinFo.Service
 
         IWindowsServiceService CreateWindowsServiceService();
 
+        IARPTableService CreateARPTableService();
+
+        IWLANSessionService CreateWLANSessionService();
+
+        IInstalledProgramService CreateInstalledProgramService();
+
     }
 }

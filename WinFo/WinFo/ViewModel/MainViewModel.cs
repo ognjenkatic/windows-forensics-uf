@@ -107,6 +107,24 @@ namespace WinFo.ViewModel
                             wsv.Show();
                             break;
                         }
+                    case ("ARP Table"):
+                        {
+                            ARPTableView atv = new ARPTableView();
+                            atv.Show();
+                            break;
+                        }
+                    case ("WLAN Sessions"):
+                        {
+                            WLANSessionView wsv = new WLANSessionView();
+                            wsv.Show();
+                            break;
+                        }
+                    case ("Installed Programs"):
+                        {
+                            InstalledProgramView ipv = new InstalledProgramView();
+                            ipv.Show();
+                            break;
+                        }
                 }
             }
             

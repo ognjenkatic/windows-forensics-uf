@@ -89,12 +89,15 @@
     <Compile Include="Model\Configuration\Share.cs" />
     <Compile Include="Model\Configuration\ComputerSystem.cs" />
     <Compile Include="Model\Configuration\Update.cs" />
+    <Compile Include="Model\Usage\ARPEntry.cs" />
+    <Compile Include="Model\Usage\InstalledProgram.cs" />
     <Compile Include="Model\Usage\WindowsService.cs" />
     <Compile Include="Model\Usage\TCPConnection.cs" />
     <Compile Include="Model\Usage\Process.cs" />
     <Compile Include="Model\Usage\RecentlyUsedEntry.cs" />
     <Compile Include="Model\Usage\User.cs" />
     <Compile Include="Model\Usage\UserGroup.cs" />
+    <Compile Include="Model\Usage\WLANSession.cs" />
     <Compile Include="Service\Configuration\IBIOSService.cs" />
     <Compile Include="Service\Configuration\IEnvironmentVariableService.cs" />
     <Compile Include="Service\Configuration\IGroupUserService.cs" />
@@ -116,23 +119,32 @@
     <Compile Include="Service\MyDebug\MyDebugger.cs" />
     <Compile Include="Service\ServiceFactoryProducer.cs" />
     <Compile Include="Service\IServiceFactory.cs" />
+    <Compile Include="Service\Usage\IARPTableService.cs" />
     <Compile Include="Service\Usage\IComputerSessionService.cs" />
+    <Compile Include="Service\Usage\IInstalledProgramService.cs" />
     <Compile Include="Service\Usage\IProcessService.cs" />
     <Compile Include="Service\Usage\IRecentlyUsedService.cs" />
     <Compile Include="Service\Usage\IWindowsServiceService.cs" />
     <Compile Include="Service\Usage\IUserSessionService.cs" />
+    <Compile Include="Service\Usage\IWLANSessionService.cs" />
+    <Compile Include="Service\Usage\Win7\Win7ARPTableService.cs" />
+    <Compile Include="Service\Usage\Win7\IPHelperNetTableWrapper.cs" />
+    <Compile Include="Service\Usage\Win7\Win7InstalledProgramService.cs" />
     <Compile Include="Service\Usage\Win7\Win7ProcessService.cs" />
     <Compile Include="Service\Usage\Win7\Win7RecentlyUsedService.cs" />
     <Compile Include="Service\Usage\Win7\Win7ComputerSessionService.cs" />
     <Compile Include="Service\Usage\Win7\Win7UserSessionService.cs" />
-    <Compile Include="Service\Usage\Win7\IPHelperWrapper.cs" />
+    <Compile Include="Service\Usage\Win7\IPHelperExtendedTCPTableWrapper.cs" />
     <Compile Include="Service\Usage\Win7\Win7WindowsServiceService.cs" />
+    <Compile Include="Service\Usage\Win7\Win7WLANSessionService.cs" />
     <Compile Include="Service\Win7ServiceFactory.cs" />
+    <Compile Include="ViewModel\ARPTableViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BIOSViewModel.cs" />
     <Compile Include="ViewModel\ComputerSessionViewModel.cs" />
     <Compile Include="ViewModel\ComputerSystemViewModel.cs" />
     <Compile Include="ViewModel\EnvironmentVariableViewModel.cs" />
+    <Compile Include="ViewModel\InstalledProgramsViewModel.cs" />
     <Compile Include="ViewModel\IP4RoutingTableViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NetworkAdapterViewModel.cs" />
@@ -144,6 +156,10 @@
     <Compile Include="ViewModel\UserSessionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelCommand.cs" />
     <Compile Include="ViewModel\WindowsServiceViewModel.cs" />
+    <Compile Include="ViewModel\WLANSessionViewModel.cs" />
+    <Compile Include="View\ARPTableView.xaml.cs">
+      <DependentUpon>ARPTableView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BIOSView.xaml.cs">
       <DependentUpon>BIOSView.xaml</DependentUpon>
     </Compile>
@@ -158,6 +174,9 @@
     </Compile>
     <Compile Include="View\GroupUserView.xaml.cs">
       <DependentUpon>GroupUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InstalledProgramView.xaml.cs">
+      <DependentUpon>InstalledProgramView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\IP4RoutingTableView.xaml.cs">
       <DependentUpon>IP4RoutingTableView.xaml</DependentUpon>
@@ -186,6 +205,9 @@
     <Compile Include="View\WindowsServiceView.xaml.cs">
       <DependentUpon>WindowsServiceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WLANSessionView.xaml.cs">
+      <DependentUpon>WLANSessionView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -198,6 +220,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ARPTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\BIOSView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GroupUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InstalledProgramView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -251,6 +281,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\WindowsServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WLANSessionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

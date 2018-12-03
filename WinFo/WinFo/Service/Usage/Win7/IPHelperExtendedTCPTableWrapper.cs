@@ -98,13 +98,13 @@ namespace WinFo.Service.Usage.Win7
         public MIB_TCP6ROW_OWNER_PID[] table;
     }
     
-    class IPHelperWrapper : IDisposable
+    class IPHelperExtendedTCPTableWrapper : IDisposable
     {
 
         public const int AF_INET = 2;
         public const int AF_INET6 = 23;
         
-        public IPHelperWrapper() { }
+        public IPHelperExtendedTCPTableWrapper() { }
         
         public void Dispose() { GC.SuppressFinalize(this); }
 
@@ -155,7 +155,7 @@ namespace WinFo.Service.Usage.Win7
             return tableRows != null ? tableRows.ToList() : new List<IPR>();
         }
         
-        ~IPHelperWrapper() { Dispose(); }
+        ~IPHelperExtendedTCPTableWrapper() { Dispose(); }
 
     }
 }

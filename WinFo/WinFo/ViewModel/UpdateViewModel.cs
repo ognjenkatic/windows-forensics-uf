@@ -10,6 +10,9 @@ using WinFo.Service.Configuration;
 
 namespace WinFo.ViewModel
 {
+    /// <summary>
+    /// The view model for update information
+    /// </summary>
     public class UpdateViewModel
     {
         #region fields

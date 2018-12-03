@@ -10,17 +10,23 @@ using System.Management;
 
 namespace WinFo.Service.Usage.Win7
 {
+    /// <summary>
+    /// Service responsable for fetching information about the currently active processes
+    /// </summary>
     public class Win7ProcessService : IProcessService
     {
         private static string _PROCESS_SEARCH_STRING = "SELECT * FROM Win32_Process";
 
-
+        /// <summary>
+        /// Gets a dictionary that maps a list of connections to a PID
+        /// </summary>
+        /// <returns>The dictionary that maps conenctions to PIDS</returns>
         private Dictionary<uint,List<TCPConnection>> GetPidToConnectionsDictionary()
         {
             Dictionary<uint, List<TCPConnection>> pidToConnections = new Dictionary<uint, List<TCPConnection>>();
             try
             {
-                IPHelperWrapper iphw = new IPHelperWrapper();
+                IPHelperExtendedTCPTableWrapper iphw = new IPHelperExtendedTCPTableWrapper();
                 List<MIB_TCPROW_OWNER_PID> cns = iphw.GetAllTCPv4Connections();
 
                 foreach(MIB_TCPROW_OWNER_PID cn in cns)
@@ -56,6 +62,11 @@ namespace WinFo.Service.Usage.Win7
 
             return pidToConnections;
         }
+
+        /// <summary>
+        /// Gets a list of currently active processses
+        /// </summary>
+        /// <returns>The list of currently active processes</returns>
         public List<Model.Usage.Process> GetProcesses()
         {
             List<Model.Usage.Process> processes = new List<Model.Usage.Process>();

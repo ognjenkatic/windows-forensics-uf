@@ -7,6 +7,9 @@ using WinFo.Model.Usage;
 
 namespace WinFo.Service.Usage
 {
+    /// <summary>
+    /// Interface that defines a recently used service
+    /// </summary>
     public interface IRecentlyUsedService
     {
         List<RecentlyUsedEntry> GetRecentlyOpenedFiles();

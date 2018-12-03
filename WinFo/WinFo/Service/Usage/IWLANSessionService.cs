@@ -8,10 +8,10 @@ using WinFo.Model.Usage;
 namespace WinFo.Service.Usage
 {
     /// <summary>
-    /// Interface that defines a windows service service
+    /// Interface that defines a wlan session service
     /// </summary>
-    public interface IWindowsServiceService
+    public interface IWLANSessionService
     {
-        List<WindowsService> GetServices();
+        List<WLANSession> GetWLANSessions();
     }
 }

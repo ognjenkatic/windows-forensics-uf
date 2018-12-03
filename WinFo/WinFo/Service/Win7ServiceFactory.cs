@@ -84,5 +84,20 @@ namespace WinFo.Service
         {
             return new Win7WindowsServiceService();
         }
+
+        public IARPTableService CreateARPTableService()
+        {
+            return new Win7ARPTableService();
+        }
+
+        public IWLANSessionService CreateWLANSessionService()
+        {
+            return new Win7WLANSessionService();
+        }
+
+        public IInstalledProgramService CreateInstalledProgramService()
+        {
+            return new Win7InstalledProgramService();
+        }
     }
 }

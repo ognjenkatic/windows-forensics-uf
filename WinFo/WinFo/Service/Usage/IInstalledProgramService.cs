@@ -8,10 +8,10 @@ using WinFo.Model.Usage;
 namespace WinFo.Service.Usage
 {
     /// <summary>
-    /// Interface that defines a windows service service
+    /// Interface that defines an installed programs service
     /// </summary>
-    public interface IWindowsServiceService
+    public interface IInstalledProgramService
     {
-        List<WindowsService> GetServices();
+        List<InstalledProgram> GetInstalledPrograms();
     }
 }

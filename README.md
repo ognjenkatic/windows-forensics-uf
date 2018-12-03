@@ -8,12 +8,19 @@ The current version of the application provides information about the following:
 * Routing table
 * Network adapters
 * Operating system
+* BIOS
 * Memory and CPU
+* Disk 
 * Users and user groups
 * Shares
-* Account usage
-* Computer usage
+* Account usage sessions
+* Computer usage sessions
+* WLAN sessions
 * Environment variables
 * Recently opened files and commands ran
 * Startup programs
-
+* Installed programs
+* UPDATES
+* ARP TABLE
+* Processes and connections
+* Services
