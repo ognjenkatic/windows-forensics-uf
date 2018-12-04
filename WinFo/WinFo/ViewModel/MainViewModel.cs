@@ -125,6 +125,12 @@ namespace WinFo.ViewModel
                             ipv.Show();
                             break;
                         }
+                    case ("USB Device History"):
+                        {
+                            USBDeviceHistoryView udhv = new USBDeviceHistoryView();
+                            udhv.Show();
+                            break;
+                        }
                 }
             }
             

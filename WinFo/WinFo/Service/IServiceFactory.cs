@@ -47,5 +47,7 @@ namespace WinFo.Service
 
         IInstalledProgramService CreateInstalledProgramService();
 
+        IUSBDeviceHistoryService CreateUSBDeviceHistoryService();
+
     }
 }

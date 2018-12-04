@@ -20,7 +20,8 @@ The current version of the application provides information about the following:
 * Recently opened files and commands ran
 * Startup programs
 * Installed programs
-* UPDATES
-* ARP TABLE
+* Updates
+* ARP Table
 * Processes and connections
 * Services
+* USB Device History

@@ -99,5 +99,10 @@ namespace WinFo.Service
         {
             return new Win7InstalledProgramService();
         }
+
+        public IUSBDeviceHistoryService CreateUSBDeviceHistoryService()
+        {
+            return new Win7USBDeviceHistoryService();
+        }
     }
 }

@@ -33,6 +33,7 @@
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="ARP Table" Content="ARP Table"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="WLAN Sessions" Content="WLAN Sessions"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="Installed Programs" Content="Installed Programs"/>
+                <Button Command="{Binding LoadWindowCommand}" CommandParameter="USB Device History" Content="USB Device History"/>
 
             </StackPanel>
         </ScrollViewer>
