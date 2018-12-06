@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
+using WinFo.Model.Configuration;
+using WinFo.Service;
+using WinFo.Service.Configuration;
 using WinFo.View;
 
 namespace WinFo.ViewModel
@@ -12,10 +18,61 @@ namespace WinFo.ViewModel
     /// </summary
     public class MainViewModel : BaseViewModel
     {
+        #region fields
+        private bool _isSystemInformationBeingUpdated;
+        private string _modelActivity;
+        private ComputerSystem _system;
+        #endregion
+
+        #region properties
         /// <summary>
         /// The command which loads windows based on names passed as parameters
         /// </summary>
         public ViewModelCommand LoadWindowCommand { get; set; }
+
+        /// <summary>
+        /// The command which updates the system information
+        /// </summary>
+        public ViewModelCommand UpdateSystemInformationCommand { get; set; }
+
+        public ComputerSystem System
+        {
+            get
+            {
+                return _system;
+            }
+            set
+            {
+                _system = value;
+                RaisePropertyChanged("System");
+            }
+        }
+
+        public bool IsSystemInformationBeingUpdated
+        {
+            get
+            {
+                return _isSystemInformationBeingUpdated;
+            }
+            set
+            {
+                if (_isSystemInformationBeingUpdated != value)
+                {
+                    _isSystemInformationBeingUpdated = value;
+                    RaisePropertyChanged("IsSystemInformationBeingUpdated");
+                }
+            }
+        }
+
+        public string ModelTarget
+        {
+            get
+            {
+                return "Main Window " + _modelActivity;
+            }
+        }
+        #endregion
+
 
         /// <summary>
         /// Load a window
@@ -128,7 +185,7 @@ namespace WinFo.ViewModel
                     case ("USB Device History"):
                         {
                             USBDeviceHistoryView udhv = new USBDeviceHistoryView();
-                            udhv.Show();
+                            udhv.ShowDialog();
                             break;
                         }
                 }
@@ -146,9 +203,41 @@ namespace WinFo.ViewModel
             return true;
         }
 
+        public bool CanUpdateSystemInformation(object parameter = null)
+        {
+            return !IsSystemInformationBeingUpdated;
+        }
+
+        public async void UpdateSystemInformation(object parameter = null)
+        {
+
+            IsSystemInformationBeingUpdated = true;
+            _modelActivity = "(Fetching System Info)";
+            RaisePropertyChanged("ModelTarget");
+            UpdateSystemInformationCommand.RaiseCanExecuteChanged();
+            System = await Task.Run(() =>
+            {
+                IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
+
+                IComputerSystemService css = sf.CreateComputerSystemService();
+
+                return css.GetComputerSystem();
+            });
+
+
+            IsSystemInformationBeingUpdated = false;
+            _modelActivity = "(Idle)";
+            RaisePropertyChanged("ModelTarget");
+            UpdateSystemInformationCommand.RaiseCanExecuteChanged();
+        }
+
         public MainViewModel()
         {
             LoadWindowCommand = new ViewModelCommand(LoadWindow, CanLoadWindow);
+
+            UpdateSystemInformationCommand = new ViewModelCommand(UpdateSystemInformation, CanUpdateSystemInformation);
+
+            UpdateSystemInformation();
         }
 
     }

@@ -140,8 +140,10 @@ namespace WinFo.Service.Configuration.Win7
                 {
                     
                     computerSystem.BuildNumber              = Convert.ToString(mo["BuildNumber"]);
-                    computerSystem.FreePhysicalMemory       = Convert.ToUInt64(mo["FreePhysicalMemory"]);
-                    computerSystem.FreeVirtualMemory        = Convert.ToUInt64(mo["FreeVirtualMemory"]);
+                    //convert to bytes from kilobytes
+                    computerSystem.FreePhysicalMemory       = Convert.ToUInt64(mo["FreePhysicalMemory"])*1024;
+                    computerSystem.FreeVirtualMemory        = Convert.ToUInt64(mo["FreeVirtualMemory"])*1024;
+
                     computerSystem.Caption                  = Convert.ToString(mo["Caption"]);
                     computerSystem.NumberOfUsers            = Convert.ToUInt32(mo["NumberOfUsers"]);
                     computerSystem.ServicePackMajorVersion  = Convert.ToUInt16(mo["ServicePackMajorVersion"]);

@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,26 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WinFo.Model.Configuration;
-using WinFo.Model.Usage;
-using WinFo.Service;
-using WinFo.Service.Configuration;
-using WinFo.Service.Configuration.Win7;
-using WinFo.Service.Usage;
-using WinFo.Service.Usage.Win7;
-using WinFo.Usage.Model;
 
-namespace WinFo
+namespace WinFo.User_Control
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DiskDriveUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DiskDriveUserControl : UserControl
     {
-        public MainWindow()
+        public DiskDriveUserControl()
         {
             InitializeComponent();
-            
         }
     }
 }
