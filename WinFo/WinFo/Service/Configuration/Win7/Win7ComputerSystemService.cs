@@ -14,7 +14,8 @@ namespace WinFo.Service.Configuration.Win7
         private static string _OPERATING_SYSTEM_SEARCH_STRING = "SELECT BuildNumber , Caption, NumberOfUsers, ServicePackMajorVersion, " +
             "ServicePackMinorVersion, Version, FreePhysicalMemory, FreeVirtualMemory, InstallDate, LastBootUpTime FROM Win32_OperatingSystem";
 
-        private static string _COMPUTER_SYSTEM_INFORMATION_SEARCH_STRING = "SELECT NumberOfProcessors, NumberOfLogicalProcessors, SystemType FROM Win32_ComputerSystem";
+        private static string _COMPUTER_SYSTEM_INFORMATION_SEARCH_STRING = "SELECT * FROM Win32_Processor";
+
         private static string _PHYSICAL_MEMORY_SEARCH_STRING = "SELECT Capacity, Speed FROM Win32_PhysicalMemory";
 
         private static string _COMPUTER_SYSTEM_SEARCH_STRING = "SELECT DNSHostName, Domain, DomainRole, Manufacturer, Model, PartOfDomain, Workgroup FROM Win32_ComputerSystem";
@@ -161,10 +162,21 @@ namespace WinFo.Service.Configuration.Win7
                 {
                     CPUInfo cpui = new CPUInfo();
 
-                    cpui.NumberOfPhysicalProcessors         = Convert.ToInt32(mo["NumberOfProcessors"]);
+                    cpui.NumberOfCores                      = Convert.ToInt32(mo["NumberOfCores"]);
                     cpui.NumberOfLogicalProcessors          = Convert.ToInt32(mo["NumberOfLogicalProcessors"]);
-                    cpui.Architecture                       = Convert.ToString(mo["SystemType"]);
-
+                    cpui.AddressWidth                       = Convert.ToUInt16(mo["AddressWidth"]);
+                    cpui.Caption                            = Convert.ToString(mo["Caption"]);
+                    cpui.CurrentClockSpeed                  = Convert.ToUInt32(mo["CurrentClockSpeed"]);
+                    cpui.DeviceId                           = Convert.ToString(mo["DeviceId"]);
+                    cpui.ExtClock                           = Convert.ToUInt32(mo["ExtClock"]);
+                    cpui.L2CacheSize                        = Convert.ToUInt32(mo["L2CacheSize"]);
+                    cpui.L2CacheSpeed                       = Convert.ToUInt32(mo["L2CacheSpeed"]);
+                    cpui.L3CacheSize                        = Convert.ToUInt32(mo["L3CacheSize"]);
+                    cpui.L3CacheSpeed                       = Convert.ToUInt32(mo["L3CacheSpeed"]);
+                    cpui.Manufacturer                       = Convert.ToString(mo["Manufacturer"]);
+                    cpui.Name                               = Convert.ToString(mo["Name"]);
+                    cpui.ProcessorId                        = Convert.ToString(mo["ProcessorId"]);
+                    cpui.SocketDesignation                  = Convert.ToString(mo["SocketDesignation"]);
                     computerSystem.CpuInfo = cpui;
                 }
 

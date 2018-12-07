@@ -129,166 +129,206 @@
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Disk Drives">
-                        <TreeView HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" ItemsSource="{Binding Path=System.DiskDriveCollection}">
-                            <TreeView.ItemTemplate>
-                                <HierarchicalDataTemplate ItemsSource="{Binding Path=DiskPartitions}" DataType="{x:Type model:DiskPartition}" >
-                                    <StackPanel>
-                                        <Label Content="{Binding Caption}"/>
-                                        <Expander Header="Details">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="0.5*"/>
-                                                    <ColumnDefinition Width="0.5*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <StackPanel Grid.Column="0">
-                                                    <Label Content="Availability"/>
-                                                    <Label Content="Status"/>
-                                                    <Label Content="Name"/>
-                                                    <Label Content="Manufacturer"/>
-                                                    <Label Content="Model"/>
-                                                    <Label Content="PnpDevice ID"/>
-                                                    <Label Content="Signature"/>
-                                                    <Label Content="Serial Number"/>
-                                                    <Label Content="Interface Type"/>
-                                                    <Label Content="Is Media Loaded"/>
-                                                    <Label Content="Media Type"/>
-                                                    <Label Content="Partition Count"/>
-                                                    <Label Content="Capabilities"/>
-                                                    <Label Content="Total Heads"/>
-                                                    <Label Content="Total Cylinders"/>
-                                                    <Label Content="Total Tracks"/>
-                                                    <Label Content="Total Sectors"/>
-                                                    <Label Content="Bytes Per Sector"/>
-                                                    <Label Content="Size"/>
-                                                    <Label Content="Default Bloc kSize"/>
-                                                    <Label Content="Max Bloc kSize"/>
-                                                    <Label Content="Min Block Size"/>
-                                                    <Label Content="Power Management Capabilities" Visibility="Collapsed" Style="{StaticResource ShowPowerCapabilitiesLabelStyle}"/>
-                                                    <Label Content="Config Manager Error Code"/>
-                                                    <Label Content="Does Need Cleaning"/>
-                                                    <Label Content="Error Description"/>
-                                                    <Label Content="Error Methodology"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <TreeView  Grid.Column="0" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" ItemsSource="{Binding Path=System.DiskDriveCollection}" SelectedItemChanged="TreeView_SelectedItemChanged">
+                                <TreeView.ItemTemplate>
+                                    <HierarchicalDataTemplate ItemsSource="{Binding Path=DiskPartitions}" DataType="{x:Type model:DiskPartition}" >
+                                        <StackPanel>
+                                            <Label Content="{Binding Caption}"/>
+                                        </StackPanel>
+                                        <HierarchicalDataTemplate.ItemTemplate>
+                                            <HierarchicalDataTemplate ItemsSource="{Binding Path=LogicalDisks}" DataType="{x:Type model:LogicalDisk}">
+                                                <StackPanel>
+                                                    <Label Content="{Binding Caption}"/>
                                                 </StackPanel>
-                                                <StackPanel Grid.Column="1">
-                                                    <Label Content="{Binding Availability}"/>
-                                                    <Label Content="{Binding Status}"/>
-                                                    <Label Content="{Binding Name}"/>
-                                                    <Label Content="{Binding Manufacturer}"/>
-                                                    <Label Content="{Binding Model}"/>
-                                                    <Label Content="{Binding PnpDeviceID}"/>
-                                                    <Label Content="{Binding Signature}"/>
-                                                    <Label Content="{Binding SerialNumber}"/>
-                                                    <Label Content="{Binding InterfaceType}"/>
-                                                    <Label Content="{Binding IsMediaLoaded}"/>
-                                                    <Label Content="{Binding MediaType}"/>
-                                                    <Label Content="{Binding PartitionCount}"/>
-                                                    <ListView ItemsSource="{Binding CapabilityDescriptionDictionary.Values}" IsEnabled="False">
-                                                        <ListView.ItemsPanel>
-                                                            <ItemsPanelTemplate>
-                                                                <StackPanel Orientation="Horizontal">
-                                                                </StackPanel>
-                                                            </ItemsPanelTemplate>
-                                                        </ListView.ItemsPanel>
-                                                    </ListView>
-                                                    <Label Content="{Binding TotalHeads}"/>
-                                                    <Label Content="{Binding TotalCylinders}"/>
-                                                    <Label Content="{Binding TotalTracks}"/>
-                                                    <Label Content="{Binding TotalSectors}"/>
-                                                    <Label Content="{Binding BytesPerSector}"/>
-                                                    <Label Content="{Binding Size}"/>
-                                                    <Label Content="{Binding DefaultBlockSize}"/>
-                                                    <Label Content="{Binding MaxBlockSize}"/>
-                                                    <Label Content="{Binding MinBlockSize}"/>
-                                                    <ListView ItemsSource="{Binding PowerManagementCapabilities}" Visibility="Collapsed" Style="{StaticResource ShowPowerCapabilitiesStyle}"/>
-                                                    <Label Content="{Binding ConfigManagerErrorCode}"/>
-                                                    <Label Content="{Binding DoesNeedCleaning}"/>
-                                                    <Label Content="{Binding ErrorDescription}"/>
-                                                    <Label Content="{Binding ErrorMethodology}"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Expander>
+                                                <HierarchicalDataTemplate.ItemTemplate>
+                                                    <DataTemplate DataType="{x:Type model:LogicalDisk}" >
+                                                        <StackPanel>
+                                                            <Label Content="{Binding Caption}"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </HierarchicalDataTemplate.ItemTemplate>
+                                            </HierarchicalDataTemplate>
+                                        </HierarchicalDataTemplate.ItemTemplate>
+                                    </HierarchicalDataTemplate>
+                                </TreeView.ItemTemplate>
+                            </TreeView>
+                            <Grid Grid.Column="1">
+                                <Grid DataContext="{Binding Path=SelectedDiskDrive}" Name="DiskDriveGrid" Visibility="Collapsed">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.5*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <Label Content="Availability"/>
+                                        <Label Content="Status"/>
+                                        <Label Content="Name"/>
+                                        <Label Content="Manufacturer"/>
+                                        <Label Content="Model"/>
+                                        <Label Content="PnpDevice ID"/>
+                                        <Label Content="Signature"/>
+                                        <Label Content="Serial Number"/>
+                                        <Label Content="Interface Type"/>
+                                        <Label Content="Is Media Loaded"/>
+                                        <Label Content="Media Type"/>
+                                        <Label Content="Partition Count"/>
+                                        <Label Content="Capabilities"/>
+                                        <Label Content="Total Heads"/>
+                                        <Label Content="Total Cylinders"/>
+                                        <Label Content="Total Tracks"/>
+                                        <Label Content="Total Sectors"/>
+                                        <Label Content="Bytes Per Sector"/>
+                                        <Label Content="Size"/>
+                                        <Label Content="Default Block Size"/>
+                                        <Label Content="Max Block Size"/>
+                                        <Label Content="Min Block Size"/>
+                                        <Label Content="Power Management Capabilities"/>
+                                        <Label Content="Config Manager Error Code"/>
+                                        <Label Content="Does Need Cleaning"/>
+                                        <Label Content="Error Description"/>
+                                        <Label Content="Error Methodology"/>
                                     </StackPanel>
-                                    <HierarchicalDataTemplate.ItemTemplate>
-                                        <HierarchicalDataTemplate ItemsSource="{Binding Path=LogicalDisks}" DataType="{x:Type model:LogicalDisk}">
-                                            <StackPanel>
-                                                <Label Content="{Binding Caption}"/>
-                                                <Expander Header="Details">
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.5*"/>
-                                                            <ColumnDefinition Width="0.5*"/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <StackPanel Grid.Column="0">
-                                                            <Label Content="Device Id"/>
-                                                            <Label Content="Name"/>
-                                                            <Label Content="Purpose"/>
-                                                            <Label Content="Type"/>
-                                                            <Label Content="Size"/>
-                                                            <Label Content="Starting Offset"/>
-                                                            <Label Content="Is Primary Partition"/>
-                                                            <Label Content="Is Boot Partition"/>
-                                                            <Label Content="Is Bootable"/>
-                                                            <Label Content="Index"/>
-                                                            <Label Content="Hidden Sector Count"/>
-                                                            <Label Content="Block Size"/>
-                                                            <Label Content="Block Count"/>
-                                                        </StackPanel>
-                                                        <StackPanel Grid.Column="1">
-                                                            <Label Content="{Binding DeviceId}"/>
-                                                            <Label Content="{Binding Name}"/>
-                                                            <Label Content="{Binding Purpose}"/>
-                                                            <Label Content="{Binding Type}"/>
-                                                            <Label Content="{Binding Size}"/>
-                                                            <Label Content="{Binding StartingOffset}"/>
-                                                            <Label Content="{Binding IsPrimaryPartition}"/>
-                                                            <Label Content="{Binding IsBootPartition}"/>
-                                                            <Label Content="{Binding IsBootable}"/>
-                                                            <Label Content="{Binding Index}"/>
-                                                            <Label Content="{Binding HiddenSectorCount}"/>
-                                                            <Label Content="{Binding BlockSize}"/>
-                                                            <Label Content="{Binding BlockCount}"/>
-                                                        </StackPanel>
-                                                    </Grid>
-                                                </Expander>
+
+                                    <StackPanel Grid.Column="1">
+                                        <Label Content="{Binding Availability}"/>
+                                        <Label Content="{Binding Status}"/>
+                                        <Label Content="{Binding Name}"/>
+                                        <Label Content="{Binding Manufacturer}"/>
+                                        <Label Content="{Binding Model}"/>
+                                        <Label Content="{Binding PnpDeviceID}"/>
+                                        <Label Content="{Binding Signature}"/>
+                                        <Label Content="{Binding SerialNumber}"/>
+                                        <Label Content="{Binding InterfaceType}"/>
+                                        <Label Content="{Binding IsMediaLoaded}"/>
+                                        <Label Content="{Binding MediaType}"/>
+                                        <Label Content="{Binding PartitionCount}"/>
+                                        <Label ToolTip="{Binding Capabilities}" Content="{Binding Capabilities}"/>
+                                        <Label Content="{Binding TotalHeads}"/>
+                                        <Label Content="{Binding TotalCylinders}"/>
+                                        <Label Content="{Binding TotalTracks}"/>
+                                        <Label Content="{Binding TotalSectors}"/>
+                                        <Label Content="{Binding BytesPerSector}"/>
+                                        <Label Content="{Binding Size}"/>
+                                        <Label Content="{Binding DefaultBlockSize}"/>
+                                        <Label Content="{Binding MaxBlockSize}"/>
+                                        <Label Content="{Binding MinBlockSize}"/>
+                                        <Label ToolTip="{Binding PowerManagementCapabilities}" Content="{Binding PowerManagementCapabilities}"/>
+                                        <Label Content="{Binding ConfigManagerErrorCode}"/>
+                                        <Label Content="{Binding DoesNeedCleaning}"/>
+                                        <Label Content="{Binding ErrorDescription}"/>
+                                        <Label Content="{Binding ErrorMethodology}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid DataContext="{Binding Path=SelectedDiskPartition}" Visibility="Collapsed" Name="DiskPartitionGrid">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.5*"/>
+                                                <ColumnDefinition Width="0.5*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <Label Content="Device Id"/>
+                                                <Label Content="Name"/>
+                                                <Label Content="Purpose"/>
+                                                <Label Content="Type"/>
+                                                <Label Content="Size"/>
+                                                <Label Content="Starting Offset"/>
+                                                <Label Content="Is Primary Partition"/>
+                                                <Label Content="Is Boot Partition"/>
+                                                <Label Content="Is Bootable"/>
+                                                <Label Content="Index"/>
+                                                <Label Content="Hidden Sector Count"/>
+                                                <Label Content="Block Size"/>
+                                                <Label Content="Block Count"/>
                                             </StackPanel>
-                                            <HierarchicalDataTemplate.ItemTemplate>
-                                                <DataTemplate DataType="{x:Type model:LogicalDisk}" >
-                                                    <StackPanel>
-                                                        <Label Content="{Binding Caption}"/>
-                                                        <Expander>
-                                                            <Grid>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="0.5*"/>
-                                                                    <ColumnDefinition Width="0.5*"/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <StackPanel Grid.Column="0">
-                                                                    <Label Content="Volume Name"/>
-                                                                    <Label Content="Device Id"/>
-                                                                    <Label Content="File System"/>
-                                                                    <Label Content="Free Space"/>
-                                                                    <Label Content="Size"/>
-                                                                    <Label Content="Type"/>
-                                                                    <Label Content="Volume Serial Number"/>
-                                                                </StackPanel>
-                                                                <StackPanel Grid.Column="1">
-                                                                    <Label Content="{Binding VolumeName}"/>
-                                                                    <Label Content="{Binding DeviceId}"/>
-                                                                    <Label Content="{Binding FileSystem}"/>
-                                                                    <Label Content="{Binding FreeSpace}"/>
-                                                                    <Label Content="{Binding Size}"/>
-                                                                    <Label Content="{Binding Type}"/>
-                                                                    <Label Content="{Binding VolumeSerialNumber}"/>
-                                                                </StackPanel>
-                                                            </Grid>
-                                                        </Expander>
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </HierarchicalDataTemplate.ItemTemplate>
-                                        </HierarchicalDataTemplate>
-                                    </HierarchicalDataTemplate.ItemTemplate>
-                                </HierarchicalDataTemplate>
-                            </TreeView.ItemTemplate>
-                        </TreeView>
+                                            <StackPanel Grid.Column="1">
+                                                <Label Content="{Binding DeviceId}"/>
+                                                <Label Content="{Binding Name}"/>
+                                                <Label Content="{Binding Purpose}"/>
+                                                <Label Content="{Binding Type}"/>
+                                                <Label Content="{Binding Size}"/>
+                                                <Label Content="{Binding StartingOffset}"/>
+                                                <Label Content="{Binding IsPrimaryPartition}"/>
+                                                <Label Content="{Binding IsBootPartition}"/>
+                                                <Label Content="{Binding IsBootable}"/>
+                                                <Label Content="{Binding Index}"/>
+                                                <Label Content="{Binding HiddenSectorCount}"/>
+                                                <Label Content="{Binding BlockSize}"/>
+                                                <Label Content="{Binding BlockCount}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                <Grid DataContext="{Binding Path=SelectedLogicalDisk}" Visibility="Collapsed" Name="LogicalDiskGrid">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.5*"/>
+                                            <ColumnDefinition Width="0.5*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0">
+                                            <Label Content="Volume Name"/>
+                                            <Label Content="Device Id"/>
+                                            <Label Content="File System"/>
+                                            <Label Content="Free Space"/>
+                                            <Label Content="Size"/>
+                                            <Label Content="Type"/>
+                                            <Label Content="Volume Serial Number"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1">
+                                            <Label Content="{Binding VolumeName}"/>
+                                            <Label Content="{Binding DeviceId}"/>
+                                            <Label Content="{Binding FileSystem}"/>
+                                            <Label Content="{Binding FreeSpace}"/>
+                                            <Label Content="{Binding Size}"/>
+                                            <Label Content="{Binding Type}"/>
+                                            <Label Content="{Binding VolumeSerialNumber}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="CPU">
+                        <Grid DataContext="{Binding Path=CpuInfo}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Label Content="Caption" />
+                                <Label Content="Name" />
+                                <Label Content="Manufacturer" />
+                                <Label Content="Number Of Cores" />
+                                <Label Content="Number Of Logical Processors" />
+                                <Label Content="Address Width" />
+                                <Label Content="Current Clock Speed" />
+                                <Label Content="Ext Clock" />
+                                <Label Content="L2 Cache Size" />
+                                <Label Content="L2 Cache Speed" />
+                                <Label Content="L3 Cache Size" />
+                                <Label Content="L3 Cache Speed" />
+                                <Label Content="Processor Id" />
+                                <Label Content="Socket Designation" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <Label Content="{Binding Path=Caption}" />
+                                <Label Content="{Binding Path=Name}" />
+                                <Label Content="{Binding Path=Manufacturer}" />
+                                <Label Content="{Binding Path=NumberOfCores}" />
+                                <Label Content="{Binding Path=NumberOfLogicalProcessors}" />
+                                <Label Content="{Binding Path=AddressWidth}" />
+                                <Label Content="{Binding Path=CurrentClockSpeed}" />
+                                <Label Content="{Binding Path=ExtClock}" />
+                                <Label Content="{Binding Path=L2CacheSize}" />
+                                <Label Content="{Binding Path=L2CacheSpeed}" />
+                                <Label Content="{Binding Path=L3CacheSize}" />
+                                <Label Content="{Binding Path=L3CacheSpeed}" />
+                                <Label Content="{Binding Path=ProcessorId}" />
+                                <Label Content="{Binding Path=SocketDesignation}" />
+                            </StackPanel>
+                        </Grid>
                     </GroupBox>
                 </StackPanel>
             </Grid>

@@ -21,6 +21,7 @@ using WinFo.Service.Configuration.Win7;
 using WinFo.Service.Usage;
 using WinFo.Service.Usage.Win7;
 using WinFo.Usage.Model;
+using WinFo.ViewModel;
 
 namespace WinFo
 {
@@ -33,6 +34,29 @@ namespace WinFo
         {
             InitializeComponent();
             
+        }
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            DiskDriveGrid.Visibility = Visibility.Collapsed;
+            DiskPartitionGrid.Visibility = Visibility.Collapsed;
+            LogicalDiskGrid.Visibility = Visibility.Collapsed;
+            if (e.NewValue is DiskDrive)
+            {
+                DiskDriveGrid.Visibility = Visibility.Visible;
+            }else if (e.NewValue is DiskPartition)
+            {
+                DiskPartitionGrid.Visibility = Visibility.Visible;
+            }else if (e.NewValue is LogicalDisk)
+            {
+                LogicalDiskGrid.Visibility = Visibility.Visible;
+            }
+
+            if (this.DataContext is MainViewModel mvm)
+            {
+                mvm.SelectedItem = e.NewValue;
+            }
+                
         }
     }
 }

@@ -22,6 +22,11 @@ namespace WinFo.ViewModel
         private bool _isSystemInformationBeingUpdated;
         private string _modelActivity;
         private ComputerSystem _system;
+        private object _selectedItem;
+        private DiskDriveViewModel _selectedDiskDrive;
+        private DiskPartitionViewModel _selectedDiskPartition;
+        private LogicalDiskViewModel _selectedLogicalDisk;
+        private CPUInfoViewModel _cpuInfo;
         #endregion
 
         #region properties
@@ -35,6 +40,70 @@ namespace WinFo.ViewModel
         /// </summary>
         public ViewModelCommand UpdateSystemInformationCommand { get; set; }
 
+        public object SelectedItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                _selectedItem = value;
+                RaisePropertyChanged("SelectedItem");
+                UpdateSelection();
+            }
+        }
+
+        public CPUInfoViewModel CpuInfo
+        {
+            get
+            {
+                return _cpuInfo;
+            }
+            set
+            {
+                _cpuInfo = value;
+                RaisePropertyChanged("CpuInfo");
+            }
+        }
+        public LogicalDiskViewModel SelectedLogicalDisk
+        {
+            get
+            {
+                return _selectedLogicalDisk;
+            }
+            set
+            {
+                _selectedLogicalDisk = value;
+                RaisePropertyChanged("SelectedLogicalDisk");
+            }
+        }
+
+        public DiskPartitionViewModel SelectedDiskPartition
+        {
+            get
+            {
+                return _selectedDiskPartition;
+            }
+            set
+            {
+                _selectedDiskPartition = value;
+                RaisePropertyChanged("SelectedDiskPartition");
+            }
+        }
+
+        public DiskDriveViewModel SelectedDiskDrive
+        {
+            get
+            {
+                return _selectedDiskDrive;
+            }
+            set
+            {
+                _selectedDiskDrive = value;
+                RaisePropertyChanged("SelectedDiskDrive");
+            }
+        }
         public ComputerSystem System
         {
             get
@@ -208,6 +277,22 @@ namespace WinFo.ViewModel
             return !IsSystemInformationBeingUpdated;
         }
 
+        private void UpdateSelection()
+        {
+            if (_selectedItem is DiskDrive diskDrive)
+            {
+                SelectedDiskDrive = new DiskDriveViewModel(diskDrive);
+            }else if (_selectedItem is DiskPartition diskPartition)
+            {
+                SelectedDiskPartition = new DiskPartitionViewModel(diskPartition);
+            } else if (_selectedItem is LogicalDisk logicalDisk)
+            {
+                SelectedLogicalDisk = new LogicalDiskViewModel(logicalDisk);
+            }
+
+            
+        }
+
         public async void UpdateSystemInformation(object parameter = null)
         {
 
@@ -224,6 +309,7 @@ namespace WinFo.ViewModel
                 return css.GetComputerSystem();
             });
 
+            CpuInfo = new CPUInfoViewModel(_system.CpuInfo);
 
             IsSystemInformationBeingUpdated = false;
             _modelActivity = "(Idle)";

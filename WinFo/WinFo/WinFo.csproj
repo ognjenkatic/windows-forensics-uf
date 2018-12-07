@@ -156,9 +156,13 @@
     <Compile Include="ViewModel\BIOSViewModel.cs" />
     <Compile Include="ViewModel\ComputerSessionViewModel.cs" />
     <Compile Include="ViewModel\ComputerSystemViewModel.cs" />
+    <Compile Include="ViewModel\CPUInfoViewModel.cs" />
+    <Compile Include="ViewModel\DiskDriveViewModel.cs" />
+    <Compile Include="ViewModel\DiskPartitionViewModel.cs" />
     <Compile Include="ViewModel\EnvironmentVariableViewModel.cs" />
     <Compile Include="ViewModel\InstalledProgramsViewModel.cs" />
     <Compile Include="ViewModel\IP4RoutingTableViewModel.cs" />
+    <Compile Include="ViewModel\LogicalDiskViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NetworkAdapterViewModel.cs" />
     <Compile Include="ViewModel\ProcessViewModel.cs" />
