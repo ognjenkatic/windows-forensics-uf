@@ -16,13 +16,41 @@ namespace WinFo.Service.Configuration.Win7
 
         private static string _COMPUTER_SYSTEM_INFORMATION_SEARCH_STRING = "SELECT * FROM Win32_Processor";
 
-        private static string _PHYSICAL_MEMORY_SEARCH_STRING = "SELECT Capacity, Speed FROM Win32_PhysicalMemory";
+        private static string _PHYSICAL_MEMORY_SEARCH_STRING = "SELECT DataWidth, BankLabel, DeviceLocator, MemoryType, PartNumber, Tag, Capacity, Speed FROM Win32_PhysicalMemory";
 
         private static string _COMPUTER_SYSTEM_SEARCH_STRING = "SELECT DNSHostName, Domain, DomainRole, Manufacturer, Model, PartOfDomain, Workgroup FROM Win32_ComputerSystem";
 
         private static string _DISK_DRIVE_TO_PARTITION_SEARCH_STRING = "SELECT Antecedent, Dependent FROM Win32_DiskDriveToDiskPartition";
 
         private static string _LOGICAL_DISK_TO_PARTITION_SEARCH_STRING = "SELECT * FROM Win32_LogicalDiskToPartition";
+
+        private static Dictionary<UInt16, string> _MEMORY_TYPE_DICTIONARY = new Dictionary<ushort, string>()
+        {
+            { 0, "Unknown" },
+            { 1, "Other" },
+            { 2, "DRAM" },
+            { 3, "Synchronous DRAM" },
+            { 4, "Cache DRAM" },
+            { 5, "EDO" },
+            { 6, "EDRAM" },
+            { 7, "VRAM" },
+            { 8, "SRAM" },
+            { 9, "RAM" },
+            { 10, "ROM" },
+            { 11, "Flash" },
+            { 12, "EEPROM" },
+            { 14, "EPROM" },
+            { 15, "CDRAM" },
+            { 16, "3DRAM" },
+            { 17, "SDRAM" },
+            { 18, "SGRAM" },
+            { 19, "RDRAM" },
+            { 20, "DDR" },
+            { 21, "DDR2" },
+            { 22, "DDR2 FB-DIMM" },
+            { 24, "DDR3" },
+            { 25, "FBD2" }
+        };
 
         private static Dictionary<UInt32, string> _DRIVE_TYPE_DICTIONARY = new Dictionary<UInt32, string>()
         {
@@ -188,7 +216,17 @@ namespace WinFo.Service.Configuration.Win7
                     PhysicalMemory pm = new PhysicalMemory();
                     pm.Capacity                             = Convert.ToUInt64(mo["Capacity"]);
                     pm.Speed                                = Convert.ToUInt32(mo["Speed"]);
+                    pm.DeviceLocator                        = Convert.ToString(mo["DeviceLocator"]);
 
+                    UInt16 memType = Convert.ToUInt16(mo["MemoryType"]);
+
+                    if (_MEMORY_TYPE_DICTIONARY.ContainsKey(memType))
+                        pm.MemoryType = _MEMORY_TYPE_DICTIONARY[memType];
+
+                    pm.BankLabel                            = Convert.ToString(mo["BankLabel"]);
+                    pm.PartNumber                           = Convert.ToString(mo["PartNumber"]);
+                    pm.DataWidth                            = Convert.ToUInt16(mo["DataWidth"]);
+                    pm.Tag                                  = Convert.ToString(mo["Tag"]);
                     computerSystem.PhysicalMemoryCollection.Add(pm);
                 }
 

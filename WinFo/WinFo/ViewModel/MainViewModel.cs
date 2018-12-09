@@ -27,6 +27,11 @@ namespace WinFo.ViewModel
         private DiskPartitionViewModel _selectedDiskPartition;
         private LogicalDiskViewModel _selectedLogicalDisk;
         private CPUInfoViewModel _cpuInfo;
+        private ulong _freePhysicalMemoryInt;
+        private string _memoryAllocation;
+        private ulong _totalPhysicalMemoryInt;
+        private ulong _usedPhysicalMemoryInt;
+        private int _physicalMemoryCount;
         #endregion
 
         #region properties
@@ -39,6 +44,87 @@ namespace WinFo.ViewModel
         /// The command which updates the system information
         /// </summary>
         public ViewModelCommand UpdateSystemInformationCommand { get; set; }
+
+        public ulong UsedPhysicalMemoryInt
+        {
+            get
+            {
+                return _usedPhysicalMemoryInt;
+            }
+            set
+            {
+                if(_usedPhysicalMemoryInt != value)
+                {
+                    _usedPhysicalMemoryInt = value;
+                    RaisePropertyChanged("UsedPhysicalMemoryInt");
+                }
+            }
+        }
+
+
+        public ulong FreePhysicalMemoryInt
+        {
+            get
+            {
+                return _freePhysicalMemoryInt;
+            }
+            set
+            {
+                if(_freePhysicalMemoryInt != value)
+                {
+                    _freePhysicalMemoryInt = value;
+                    RaisePropertyChanged("FreePhysicalMemoryInt");
+                }
+            }
+        }
+
+        public string MemoryAllocation
+        {
+            get
+            {
+                return _memoryAllocation;
+            }
+            set
+            {
+                if (_memoryAllocation != value)
+                {
+                    _memoryAllocation = value;
+                    RaisePropertyChanged("MemoryAllocation");
+                }
+            }
+
+        }
+        public ulong TotalPhysicalMemoryInt
+        {
+            get
+            {
+                return _totalPhysicalMemoryInt;
+            }
+            set
+            {
+                if(_totalPhysicalMemoryInt != value)
+                {
+                    _totalPhysicalMemoryInt = value;
+                    RaisePropertyChanged("TotalPhysicalMemoryInt");
+                }
+            }
+        }
+
+        public int PhysicalMemoryCount
+        {
+            get
+            {
+                return _physicalMemoryCount;
+            }
+            set
+            {
+                if(_physicalMemoryCount != value)
+                {
+                    _physicalMemoryCount = value;
+                    RaisePropertyChanged("PhysicalMemoryCount");
+                }
+            }
+        }
 
         public object SelectedItem
         {
@@ -313,6 +399,19 @@ namespace WinFo.ViewModel
 
             IsSystemInformationBeingUpdated = false;
             _modelActivity = "(Idle)";
+            PhysicalMemoryCount = System.PhysicalMemoryCollection.Count;
+            
+
+            ulong tpm = 0;
+            foreach(PhysicalMemory pm in System.PhysicalMemoryCollection)
+            {
+                tpm += pm.Capacity;
+            }
+
+            TotalPhysicalMemoryInt = tpm;
+            FreePhysicalMemoryInt = System.FreePhysicalMemory;
+            UsedPhysicalMemoryInt = TotalPhysicalMemoryInt - FreePhysicalMemoryInt;
+            MemoryAllocation = _usedPhysicalMemoryInt/1024/1024 +" / "+ _totalPhysicalMemoryInt / 1024 / 1024 + " MegaBytes";
             RaisePropertyChanged("ModelTarget");
             UpdateSystemInformationCommand.RaiseCanExecuteChanged();
         }

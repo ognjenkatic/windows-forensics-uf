@@ -1,0 +1,242 @@
+﻿<UserControl x:Class="WinFo.View.MySpinningLoader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WinFo.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="#FF833030" Opacity="1">
+    <UserControl.Resources>
+        <Storyboard x:Key="SpinningLoaderStoryboard" RepeatBehavior="Forever">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="label">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="10"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="50"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="90"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="20"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="70"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle3">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="50"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="30"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle4">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="20"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="90"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle5">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="28"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle6">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="70"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="10"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle7">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="70"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="40"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle8">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="10"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle9">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="52"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle10">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="10"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="75"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle11">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="20"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle12">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="80"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="16"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle13">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="66"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="33"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle14">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="10"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="55"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="rectangle15">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="66"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource SpinningLoaderStoryboard}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid Background="{DynamicResource BPBackgroundGradient}">
+        <Label x:Name="label" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13.333" Margin="0,140,0,0" Height="30" Width="150" Content="Loading data ..." Foreground="White" HorizontalContentAlignment="Center"/>
+        <StackPanel Height="100" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+            <Rectangle x:Name="rectangle" Height="10" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFD712E0" Offset="0.864"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle1" Height="90" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" OpacityMask="#FF916969" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF12BBE0" Offset="0.848"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle2" Height="70" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE0C412" Offset="0.837"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle3" Height="30" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF410044" Offset="0.585"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle4" Height="90" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE02E12" Offset="0.322"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle5" Height="28" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF068C93" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FF098D94" Offset="0.751"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle6" Height="10" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF12E05D" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFB8F5CE" Offset="0.746"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle7" Height="40" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE0A812" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFEED183" Offset="0.686"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle8" Height="60" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1225E0" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFABB2F4" Offset="0.751"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle9" Height="52" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF420EF1" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFBFAEFA" Offset="0.813"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle10" Height="75" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF9EE012" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFDCF3A9" Offset="0.767"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle11" Height="20" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF12E05D" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FF94F1B6" Offset="0.792"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle12" Height="16" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE0C412" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFEEDF81" Offset="0.754"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle13" Height="33" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE05D12" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFF0B28F" Offset="0.786"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle14" Height="55" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE01212" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFF29D9D" Offset="0.882"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="rectangle15" Height="66" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF12E09E" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFD2F9EC" Offset="0.898"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </StackPanel>
+        <Rectangle Stroke="Black" StrokeThickness="0" Height="2" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="300" Margin="0,102,0,0" Fill="White">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+    </Grid>
+
+</UserControl>

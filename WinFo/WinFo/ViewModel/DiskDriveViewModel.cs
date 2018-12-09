@@ -218,7 +218,11 @@ namespace WinFo.ViewModel
             }
             set
             {
-
+                if (_errorMethodology != value)
+                {
+                    _errorMethodology = value;
+                    RaisePropertyChanged("ErrorMethodology");
+                }
             }
         }
         public string InterfaceType

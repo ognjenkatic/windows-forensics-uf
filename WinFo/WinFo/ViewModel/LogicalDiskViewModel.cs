@@ -20,6 +20,57 @@ namespace WinFo.ViewModel
         private string _size;
         private string _volumeName;
         private string _volumeSerialNumber;
+        private ulong _freeSpaceInt;
+        private ulong _takenSpaceInt;
+        private ulong _sizeInt;
+        private string _memoryAllocation;
+
+        public ulong SizeInt
+        {
+            get
+            {
+                return _sizeInt;
+            }
+            set
+            {
+                if(_sizeInt!= value)
+                {
+                    _sizeInt = value;
+                    RaisePropertyChanged("SizeInt");
+                }
+            }
+        }
+        public ulong FreeSpaceInt
+        {
+            get
+            {
+                return _freeSpaceInt;
+            }
+            set
+            {
+                if(_freeSpaceInt != value)
+                {
+                    _freeSpaceInt = value;
+                    RaisePropertyChanged("FreeSpaceInt");
+                }
+            }
+        }
+
+        public ulong TakenSpaceInt
+        {
+            get
+            {
+                return _takenSpaceInt;
+            }
+            set
+            {
+                if(_takenSpaceInt != value)
+                {
+                    _takenSpaceInt = value;
+                    RaisePropertyChanged("TakenSpaceInt");
+                }
+            }
+        }
 
         public string Caption
         {
@@ -149,6 +200,21 @@ namespace WinFo.ViewModel
             }
         }
 
+        public string MemoryAllocation
+        {
+            get
+            {
+                return _memoryAllocation;
+            }
+            set
+            {
+                if(_memoryAllocation != value)
+                {
+                    _memoryAllocation = value;
+                    RaisePropertyChanged("MemoryAllocation");
+                }
+            }
+        }
         public LogicalDiskViewModel(LogicalDisk logicalDisk)
         {
             Caption = logicalDisk.VolumeName+"("+ logicalDisk.Caption+")";
@@ -159,6 +225,10 @@ namespace WinFo.ViewModel
             Size = logicalDisk.Size / 1024 / 1024 / 1024 + " GB";
             VolumeName = logicalDisk.VolumeName;
             VolumeSerialNumber = logicalDisk.VolumeSerialNumber;
+            FreeSpaceInt = logicalDisk.FreeSpace;
+            TakenSpaceInt = logicalDisk.Size - logicalDisk.FreeSpace;
+            SizeInt = logicalDisk.Size;
+            MemoryAllocation = (logicalDisk.Size - logicalDisk.FreeSpace) / 1024/1024/1024 + " / "+logicalDisk.Size / 1024/1024/1024 + " GigaBytes";
         }
     }
 }

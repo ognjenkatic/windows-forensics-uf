@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WinFo.User_Control
+namespace WinFo.View
 {
     /// <summary>
-    /// Interaction logic for DiskDriveUserControl.xaml
+    /// Interaction logic for MySpinningLoader.xaml
     /// </summary>
-    public partial class DiskDriveUserControl : UserControl
+    public partial class MySpinningLoader : UserControl
     {
-        public DiskDriveUserControl()
+        public MySpinningLoader()
         {
             InitializeComponent();
         }

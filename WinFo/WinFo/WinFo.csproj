@@ -148,9 +148,6 @@
     <Compile Include="Service\Usage\Win7\Win7WindowsServiceService.cs" />
     <Compile Include="Service\Usage\Win7\Win7WLANSessionService.cs" />
     <Compile Include="Service\Win7ServiceFactory.cs" />
-    <Compile Include="User Control\DiskDriveUserControl.xaml.cs">
-      <DependentUpon>DiskDriveUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\ARPTableViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BIOSViewModel.cs" />
@@ -199,6 +196,9 @@
     <Compile Include="View\IP4RoutingTableView.xaml.cs">
       <DependentUpon>IP4RoutingTableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MySpinningLoader.xaml.cs">
+      <DependentUpon>MySpinningLoader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NetworkAdapterView.xaml.cs">
       <DependentUpon>NetworkAdapterView.xaml</DependentUpon>
     </Compile>
@@ -241,7 +241,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="User Control\DiskDriveUserControl.xaml">
+    <Page Include="ResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -274,6 +274,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\IP4RoutingTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MySpinningLoader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -348,8 +352,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resource\" />
     <Folder Include="Service\Configuration\Win10\" />
     <Folder Include="Service\Usage\Win10\" />
+    <Folder Include="User Control\" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="IWshRuntimeLibrary">
