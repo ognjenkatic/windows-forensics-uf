@@ -4,13 +4,74 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinFo.ViewModel"
+        xmlns:view="clr-namespace:WinFo.View"
         mc:Ignorable="d"
-        Title="NetworkAdapterView" Height="450" Width="800">
+        Title="NetworkAdapterView" Height="450" Width="800" WindowState="Maximized" WindowStartupLocation="CenterScreen" Background="{DynamicResource BPBackgroundGradient}">
     <Window.DataContext>
         <local:NetworkAdapterViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="Bvc"/>
+    </Window.Resources>
     <Grid>
-        <DataGrid IsReadOnly="True" ItemsSource="{Binding Path=Adapters}" Margin="10"/>
+        <view:MySpinningLoader Visibility="{Binding Path=IsNetworkAdapterInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" />
+        <ListView ItemsSource="{Binding Path=Adapters}" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Expander Header="{Binding Path=Caption}" IsExpanded="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Content="Ip enabled"/>
+                            <Label Grid.Column="0" Grid.Row="1" Content="Dhcp Enabled"/>
+                            <Label Grid.Column="0" Grid.Row="2" Content="Dhcp Lease Obtained"/>
+                            <Label Grid.Column="0" Grid.Row="3" Content="Dhcp Lease Expires"/>
+                            <Label Grid.Column="0" Grid.Row="4" Content="Dhcp Server"/>
+                            <Label Grid.Column="0" Grid.Row="5" Content="Dns Domain"/>
+                            <Label Grid.Column="0" Grid.Row="6" Content="Dns HostName"/>
+                            <Label Grid.Column="0" Grid.Row="7" Content="Index"/>
+                            <Label Grid.Column="0" Grid.Row="8" Content="Mac Address"/>
+                            <Label Grid.Column="0" Grid.Row="9" Content="MTU"/>
+                            <Label Grid.Column="0" Grid.Row="10" Content="Service Name"/>
+                            <Label  Grid.Column="0" Grid.Row="11" Content="Default IP Gateways"/>
+                            <Label  Grid.Column="0" Grid.Row="12" Content="Ip Addresses"/>
+                            
+                            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=IpEnabled}"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=DhcpEnabled}"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=DhcpLeaseObtained}"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=DhcpLeaseExpires}"/>
+                            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=DhcpServer}"/>
+                            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=DnsDomain}"/>
+                            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=DnsHostName}"/>
+                            <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=Index}"/>
+                            <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding Path=MacAddress}"/>
+                            <TextBox Grid.Column="1" Grid.Row="9" Text="{Binding Path=Mtu}"/>
+                            <TextBox Grid.Column="1" Grid.Row="10" Text="{Binding Path=ServiceName}"/>
+                            <ListView  Grid.Column="1" Grid.Row="11" ItemsSource="{Binding Path=DefaultIPGateway}"/>
+                            <ListView  Grid.Column="1" Grid.Row="12" ItemsSource="{Binding Path=IpAddress}"/>
+                        </Grid>
+                    </Expander>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--<DataGrid IsReadOnly="True" ItemsSource="{Binding Path=Adapters}" Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black"/>-->
 
     </Grid>
 </Window>

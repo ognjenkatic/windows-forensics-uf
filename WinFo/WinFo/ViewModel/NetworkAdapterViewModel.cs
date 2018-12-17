@@ -15,8 +15,9 @@ namespace WinFo.ViewModel
     /// </summary
     public class NetworkAdapterViewModel : BaseViewModel
     {
+        private bool _isNetworkAdapterInformationBeingUpdated;
         private ObservableCollection<NetworkAdapter> _adapters = new ObservableCollection<NetworkAdapter>();
-
+        private ViewModelCommand UpdateNetworkAdapterInformationCommand;
         /// <summary>
         /// A collection of network adapters
         /// </summary>
@@ -32,18 +33,54 @@ namespace WinFo.ViewModel
             }
         }
 
-        public NetworkAdapterViewModel()
+        public bool IsNetworkAdapterInformationBeingUpdated
         {
-            IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
+            get
+            {
+                return _isNetworkAdapterInformationBeingUpdated;
+            }
+            set
+            {
+                if(_isNetworkAdapterInformationBeingUpdated != value)
+                {
+                    _isNetworkAdapterInformationBeingUpdated = value;
+                    RaisePropertyChanged("IsNetworkAdapterInformationBeingUpdated");
+                }
+            }
+        }
 
-            INetworkAdapterService inas = sf.CreateNetworkAdapterService();
+        public async void UpdateNetworkAdapterInformation(object parameter = null)
+        {
+            IsNetworkAdapterInformationBeingUpdated = true;
+            List<NetworkAdapter> nads = await Task.Run(() =>
+            {
+                IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
-            List<NetworkAdapter> nads = inas.GetNetworkAdapters();
+                INetworkAdapterService inas = sf.CreateNetworkAdapterService();
 
-            foreach(NetworkAdapter nad in nads)
+                return inas.GetNetworkAdapters();
+
+                
+            });
+
+            foreach (NetworkAdapter nad in nads)
             {
                 _adapters.Add(nad);
             }
+
+            IsNetworkAdapterInformationBeingUpdated = false;
+        }
+
+        public bool CanUpdateNetworkAdapterInformation(object parameter = null)
+        {
+            return !IsNetworkAdapterInformationBeingUpdated;
+        }
+
+        public NetworkAdapterViewModel()
+        {
+            UpdateNetworkAdapterInformationCommand = new ViewModelCommand(UpdateNetworkAdapterInformation, CanUpdateNetworkAdapterInformation);
+
+            UpdateNetworkAdapterInformation();
         }
     }
 }
