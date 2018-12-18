@@ -16,8 +16,7 @@ namespace WinFo.ViewModel
     public class ShareViewModel : BaseViewModel
     {
         private ObservableCollection<Share> _shares = new ObservableCollection<Share>();
-
-        private bool _isShareInformationBeingUpdated;
+        
 
         /// <summary>
         /// A collection of shares
@@ -33,25 +32,10 @@ namespace WinFo.ViewModel
                 _shares = value;
             }
         }
-
-        public bool IsShareInformationBeingUpdated
-        {
-            get
-            {
-                return _isShareInformationBeingUpdated;
-            }
-            set
-            {
-                if(_isShareInformationBeingUpdated != value)
-                {
-                    _isShareInformationBeingUpdated = value;
-                }
-            }
-        }
-
+        
         public async void UpdateShareInformation()
         {
-            IsShareInformationBeingUpdated = true;
+            IsModelInformationBeingUpdated = true;
             List<Share> shares = await Task.Run(() =>
             {
                 IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
@@ -64,7 +48,7 @@ namespace WinFo.ViewModel
             foreach (Share share in shares)
                 Shares.Add(share);
 
-            IsShareInformationBeingUpdated = false;
+            IsModelInformationBeingUpdated = false;
         }
         public ShareViewModel()
         {

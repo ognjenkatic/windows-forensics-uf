@@ -27,7 +27,7 @@
         </Style>
     </Window.Resources>
     <Grid >
-        <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsSystemInformationBeingUpdated, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}" />
+        <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}" />
         <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,-0.4" HorizontalAlignment="Left" Width="210" >
             <StackPanel Margin="10,10,11.6,12.6">
                 <StackPanel.Resources>

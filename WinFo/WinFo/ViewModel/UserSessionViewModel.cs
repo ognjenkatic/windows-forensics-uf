@@ -74,8 +74,7 @@ namespace WinFo.ViewModel
                  "23 Hrs" ,
                  "24+ Hrs" ,
             };
-
-        private bool _isUserSessionInformationBeingUpdated;
+        
         private ObservableCollection<UserSession> _userSessions;
         private SeriesCollection _logonLogoffSeriesCollection;
         private SeriesCollection _sessionDurationSeriesCollection;
@@ -107,22 +106,7 @@ namespace WinFo.ViewModel
                 }
             }
         }
-
-        public bool IsUserSessionInformationBeingUpdated
-        {
-            get
-            {
-                return _isUserSessionInformationBeingUpdated;
-            }
-            set
-            {
-                if(_isUserSessionInformationBeingUpdated != value)
-                {
-                    _isUserSessionInformationBeingUpdated = value;
-                    RaisePropertyChanged("IsUserSessionInformationBeingUpdated");
-                }
-            }
-        }
+        
         public SeriesCollection SessionDurationSeriesCollection
         {
             get
@@ -285,7 +269,7 @@ namespace WinFo.ViewModel
 
         public async void UpdateUserSessionInformation()
         {
-            IsUserSessionInformationBeingUpdated = true;
+            IsModelInformationBeingUpdated = true;
             List<UserSession> sessions = await Task.Run(() =>
              {
                  IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
@@ -419,7 +403,7 @@ namespace WinFo.ViewModel
                 }
             }
 
-            IsUserSessionInformationBeingUpdated = false;
+            IsModelInformationBeingUpdated = false;
         }
         public UserSessionViewModel()
         {

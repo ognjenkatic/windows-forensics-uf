@@ -14,6 +14,24 @@ namespace WinFo.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private bool _isModelInformationBeingUpdated;
+
+        public bool IsModelInformationBeingUpdated
+        {
+            get
+            {
+                return _isModelInformationBeingUpdated;
+            }
+            set
+            {
+                if(_isModelInformationBeingUpdated != value)
+                {
+                    _isModelInformationBeingUpdated = value;
+                    RaisePropertyChanged("IsModelInformationBeingUpdated");
+                }
+            }
+        }
+
         protected void RaisePropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));

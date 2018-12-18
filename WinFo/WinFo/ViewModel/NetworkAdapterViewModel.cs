@@ -15,7 +15,6 @@ namespace WinFo.ViewModel
     /// </summary
     public class NetworkAdapterViewModel : BaseViewModel
     {
-        private bool _isNetworkAdapterInformationBeingUpdated;
         private ObservableCollection<NetworkAdapter> _adapters = new ObservableCollection<NetworkAdapter>();
         private ViewModelCommand UpdateNetworkAdapterInformationCommand;
         /// <summary>
@@ -33,25 +32,9 @@ namespace WinFo.ViewModel
             }
         }
 
-        public bool IsNetworkAdapterInformationBeingUpdated
-        {
-            get
-            {
-                return _isNetworkAdapterInformationBeingUpdated;
-            }
-            set
-            {
-                if(_isNetworkAdapterInformationBeingUpdated != value)
-                {
-                    _isNetworkAdapterInformationBeingUpdated = value;
-                    RaisePropertyChanged("IsNetworkAdapterInformationBeingUpdated");
-                }
-            }
-        }
-
         public async void UpdateNetworkAdapterInformation(object parameter = null)
         {
-            IsNetworkAdapterInformationBeingUpdated = true;
+            IsModelInformationBeingUpdated = true;
             List<NetworkAdapter> nads = await Task.Run(() =>
             {
                 IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
@@ -68,12 +51,12 @@ namespace WinFo.ViewModel
                 _adapters.Add(nad);
             }
 
-            IsNetworkAdapterInformationBeingUpdated = false;
+            IsModelInformationBeingUpdated = false;
         }
 
         public bool CanUpdateNetworkAdapterInformation(object parameter = null)
         {
-            return !IsNetworkAdapterInformationBeingUpdated;
+            return !IsModelInformationBeingUpdated;
         }
 
         public NetworkAdapterViewModel()

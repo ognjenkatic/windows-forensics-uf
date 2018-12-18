@@ -14,7 +14,7 @@
         <BooleanToVisibilityConverter x:Key="Bvc"/>
     </Window.Resources>
     <Grid>
-        <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsNetworkAdapterInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" />
+        <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" />
         <DataGrid IsReadOnly="True" ItemsSource="{Binding Path=Shares}" Margin="10"/>
     </Grid>
 </Window>

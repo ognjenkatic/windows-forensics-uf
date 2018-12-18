@@ -19,7 +19,6 @@ namespace WinFo.ViewModel
     public class MainViewModel : BaseViewModel
     {
         #region fields
-        private bool _isSystemInformationBeingUpdated;
         private string _modelActivity;
         private ComputerSystem _system;
         private object _selectedItem;
@@ -202,23 +201,7 @@ namespace WinFo.ViewModel
                 RaisePropertyChanged("System");
             }
         }
-
-        public bool IsSystemInformationBeingUpdated
-        {
-            get
-            {
-                return _isSystemInformationBeingUpdated;
-            }
-            set
-            {
-                if (_isSystemInformationBeingUpdated != value)
-                {
-                    _isSystemInformationBeingUpdated = value;
-                    RaisePropertyChanged("IsSystemInformationBeingUpdated");
-                }
-            }
-        }
-
+        
         public string ModelTarget
         {
             get
@@ -360,7 +343,7 @@ namespace WinFo.ViewModel
 
         public bool CanUpdateSystemInformation(object parameter = null)
         {
-            return !IsSystemInformationBeingUpdated;
+            return !IsModelInformationBeingUpdated;
         }
 
         private void UpdateSelection()
@@ -382,7 +365,7 @@ namespace WinFo.ViewModel
         public async void UpdateSystemInformation(object parameter = null)
         {
 
-            IsSystemInformationBeingUpdated = true;
+            IsModelInformationBeingUpdated = true;
             _modelActivity = "(Fetching System Info)";
             RaisePropertyChanged("ModelTarget");
             UpdateSystemInformationCommand.RaiseCanExecuteChanged();
@@ -397,7 +380,7 @@ namespace WinFo.ViewModel
 
             CpuInfo = new CPUInfoViewModel(_system.CpuInfo);
 
-            IsSystemInformationBeingUpdated = false;
+            IsModelInformationBeingUpdated = false;
             _modelActivity = "(Idle)";
             PhysicalMemoryCount = System.PhysicalMemoryCollection.Count;
             

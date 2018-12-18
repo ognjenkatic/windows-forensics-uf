@@ -14,7 +14,7 @@
         <BooleanToVisibilityConverter x:Key="Bvc"/>
     </Window.Resources>
     <Grid>
-        <view:MySpinningLoader Visibility="{Binding Path=IsNetworkAdapterInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" />
+        <view:MySpinningLoader Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" />
         <ListView ItemsSource="{Binding Path=Adapters}" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>

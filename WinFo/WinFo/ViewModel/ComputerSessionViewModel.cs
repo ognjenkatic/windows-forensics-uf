@@ -16,7 +16,7 @@ namespace WinFo.ViewModel
     public class ComputerSessionViewModel : BaseViewModel
     {
         private ObservableCollection<ComputerSession> _computerSessions = new ObservableCollection<ComputerSession>();
-
+        
         /// <summary>
         /// A collection of computer sessions
         /// </summary>
