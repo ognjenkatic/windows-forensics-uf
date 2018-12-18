@@ -30,6 +30,9 @@
             <Style TargetType="Expander">
                 <Setter Property="Foreground" Value="White"/>
             </Style>
+            <Style TargetType="Window">
+                <Setter Property="Background" Value="{StaticResource BPBackgroundGradient}"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

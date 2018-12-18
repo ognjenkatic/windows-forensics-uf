@@ -16,57 +16,58 @@
     </Window.Resources>
     <Grid Background="{DynamicResource BPBackgroundGradient}">
         <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsUserSessionInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" />
-        <StackPanel>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*"/>
-                    <ColumnDefinition Width="0.5*"/>
-                    <ColumnDefinition Width="0.5*"/>
-                </Grid.ColumnDefinitions>
-                <Label Height="30" Content="User Logon/Logoff Interval Histogram" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"></Label>
-                <lvc:CartesianChart Margin="10,30,10,10" Grid.Row="0" Grid.Column="0"  Series="{Binding Path=LogonLogoffSeriesCollection}"  LegendLocation="None" MinHeight="250" MaxHeight="350">
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Time Interval" Labels="{Binding Path=Intervals}"/>
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisX>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Count" />
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisY>
-                </lvc:CartesianChart>
-                <Label Height="30" Content="User Session Duration Histogram" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1"></Label>
-                <lvc:CartesianChart Margin="10,30,10,10" Grid.Row="0" Grid.Column="1"  Series="{Binding Path=SessionDurationSeriesCollection}"  LegendLocation="None" MinHeight="250" MaxHeight="350">
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Hours" Labels="{Binding Path=HourIntervals}"/>
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisX>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Count"/>
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisY>
-                </lvc:CartesianChart>
-                <Label Height="30" Content="User Sessions Duration by Day" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2"></Label>
-                <lvc:CartesianChart Margin="10,30,10,10" Grid.Row="0" Grid.Column="2"  Series="{Binding Path=SessionDurationByWeekDaySeriesCollection}"  LegendLocation="None" MinHeight="250" MaxHeight="350">
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Day" Labels="{Binding Path=Days}"/>
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisX>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Hours" />
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisY>
-                </lvc:CartesianChart>
-            </Grid>
-
-            <Expander Header="List Of Sessions">
-                <DataGrid ItemsSource="{Binding Path=UserSessions}" Margin="10"></DataGrid>
-            </Expander>
-        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Height="30" Content="User Logon/Logoff Interval Histogram" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"></Label>
+                    <lvc:CartesianChart Margin="10,30,10,10" Grid.Row="0" Grid.Column="0"  Series="{Binding Path=LogonLogoffSeriesCollection}"  LegendLocation="None" MinHeight="250" MaxHeight="350">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:AxesCollection>
+                                <lvc:Axis Title="Time Interval" Labels="{Binding Path=Intervals}"/>
+                            </lvc:AxesCollection>
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:AxesCollection>
+                                <lvc:Axis Title="Count" />
+                            </lvc:AxesCollection>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                    <Label Height="30" Content="User Session Duration Histogram" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1"></Label>
+                    <lvc:CartesianChart Margin="10,30,10,10" Grid.Row="0" Grid.Column="1"  Series="{Binding Path=SessionDurationSeriesCollection}"  LegendLocation="None" MinHeight="250" MaxHeight="350">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:AxesCollection>
+                                <lvc:Axis Title="Hours" Labels="{Binding Path=HourIntervals}"/>
+                            </lvc:AxesCollection>
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:AxesCollection>
+                                <lvc:Axis Title="Count"/>
+                            </lvc:AxesCollection>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                    <Label Height="30" Content="User Sessions Duration by Day" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2"></Label>
+                    <lvc:CartesianChart Margin="10,30,10,10" Grid.Row="0" Grid.Column="2"  Series="{Binding Path=SessionDurationByWeekDaySeriesCollection}"  LegendLocation="None" MinHeight="250" MaxHeight="350">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:AxesCollection>
+                                <lvc:Axis Title="Day" Labels="{Binding Path=Days}"/>
+                            </lvc:AxesCollection>
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:AxesCollection>
+                                <lvc:Axis Title="Hours" />
+                            </lvc:AxesCollection>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                </Grid>
+                <Expander Header="List Of Sessions">
+                    <DataGrid ItemsSource="{Binding Path=UserSessions}" Margin="10" Background="White"></DataGrid>
+                </Expander>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

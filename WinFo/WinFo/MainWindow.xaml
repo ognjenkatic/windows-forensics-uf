@@ -7,7 +7,7 @@
         xmlns:model="clr-namespace:WinFo.Model.Configuration"
         xmlns:view="clr-namespace:WinFo.View"
         mc:Ignorable="d"
-        Title="{Binding Path=ModelTarget}"  Height="450" Width="800" WindowState="Maximized">
+        Title="{Binding Path=ModelTarget}"  Height="450" Width="800" WindowState="Maximized" Background="{DynamicResource BPBackgroundGradient}">
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
@@ -26,7 +26,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Background="{DynamicResource BPBackgroundGradient}">
+    <Grid >
         <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsSystemInformationBeingUpdated, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}" />
         <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,-0.4" HorizontalAlignment="Left" Width="210" >
             <StackPanel Margin="10,10,11.6,12.6">

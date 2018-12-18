@@ -18,8 +18,8 @@
         <ListView ItemsSource="{Binding Path=Adapters}" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Expander Header="{Binding Path=Caption}" IsExpanded="True">
-                        <Grid>
+                    <Expander Margin="10" Header="{Binding Path=Caption}" IsExpanded="True">
+                        <Grid Margin="20,0,0,0" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.5*"/>
                                 <ColumnDefinition Width="0.5*"/>
@@ -71,7 +71,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <!--<DataGrid IsReadOnly="True" ItemsSource="{Binding Path=Adapters}" Margin="10" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black"/>-->
 
     </Grid>
 </Window>

@@ -4,13 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinFo.ViewModel"
+        xmlns:view="clr-namespace:WinFo.View"
         mc:Ignorable="d"
-        Title="ShareView" Height="450" Width="800">
+        Title="ShareView" Height="450" Width="800" Background="{DynamicResource BPBackgroundGradient}" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.DataContext>
         <local:ShareViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="Bvc"/>
+    </Window.Resources>
     <Grid>
+        <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsNetworkAdapterInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" />
         <DataGrid IsReadOnly="True" ItemsSource="{Binding Path=Shares}" Margin="10"/>
-
     </Grid>
 </Window>
