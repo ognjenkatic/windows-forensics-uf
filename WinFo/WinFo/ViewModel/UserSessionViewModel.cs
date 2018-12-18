@@ -354,7 +354,7 @@ namespace WinFo.ViewModel
 
                             int median = 0;
                             //TO-DO fix displaying hours for outliers. Activity in some week days may not be representative if it is not repeated often enough
-                            if (day[i].Count > 1)
+                            if (day[i].Count > 3)
                                 median = day[i][(int)Math.Floor((double)(day[i].Count / 2))];
 
                             cs.Values.Add(median);

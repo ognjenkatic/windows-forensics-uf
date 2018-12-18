@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,8 +17,223 @@ namespace WinFo.ViewModel
     /// </summary>
     public class ComputerSessionViewModel : BaseViewModel
     {
-        private ObservableCollection<ComputerSession> _computerSessions = new ObservableCollection<ComputerSession>();
-        
+        #region fields
+        private ObservableCollection<ComputerSession> _computerSessions;
+
+        private string[] _days = new[]
+            {
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+
+            };
+
+        private string[] _intervals = new string[]
+            {
+                 "00:00 - 02:00" ,
+                 "02:00 - 04:00" ,
+                 "04:00 - 06:00" ,
+                 "06:00 - 08:00" ,
+                 "08:00 - 10:00" ,
+                 "10:00 - 12:00" ,
+                 "12:00 - 14:00" ,
+                 "14:00 - 16:00" ,
+                 "16:00 - 18:00" ,
+                 "18:00 - 20:00" ,
+                 "20:00 - 22:00" ,
+                 "22:00 - 24:00"
+            };
+
+        private string[] _hourIntervals = new string[]
+            {
+                 "1 Hr" ,
+                 "2 Hrs" ,
+                 "3 Hrs" ,
+                 "4 Hrs" ,
+                 "5 Hrs" ,
+                 "6 Hrs" ,
+                 "7 Hrs" ,
+                 "8 Hrs" ,
+                 "9 Hrs" ,
+                 "10 Hrs" ,
+                 "11 Hrs" ,
+                 "12 Hrs" ,
+                 "13 Hrs" ,
+                 "14 Hrs" ,
+                 "15 Hrs" ,
+                 "16 Hrs" ,
+                 "17 Hrs" ,
+                 "18 Hrs" ,
+                 "19 Hrs" ,
+                 "20 Hrs" ,
+                 "21 Hrs" ,
+                 "22 Hrs" ,
+                 "23 Hrs" ,
+                 "24+ Hrs" ,
+            };
+
+        private SeriesCollection _startupShutdownSeriesCollection;
+        private SeriesCollection _sessionDurationSeriesCollection;
+        private SeriesCollection _sessionDurationByWeekDaySeriesCollection;
+
+        private int[] _startupHoursCounts;
+        private int[] _shutdownHoursCounts;
+        private int[] _sessionDurationCounts;
+
+        private Dictionary<int, List<int>> _sessionDurationByDayOfWeek;
+
+        #endregion
+
+        #region properties
+        public SeriesCollection SessionDurationByWeekDaySeriesCollection
+        {
+            get
+            {
+                return _sessionDurationByWeekDaySeriesCollection;
+            }
+            set
+            {
+                if (_sessionDurationByWeekDaySeriesCollection != value)
+                {
+                    _sessionDurationByWeekDaySeriesCollection = value;
+                    RaisePropertyChanged("SessionDurationByWeekDaySeriesCollection");
+                }
+            }
+        }
+
+        public SeriesCollection SessionDurationSeriesCollection
+        {
+            get
+            {
+                return _sessionDurationSeriesCollection;
+            }
+            set
+            {
+                if (_sessionDurationSeriesCollection != value)
+                {
+                    _sessionDurationSeriesCollection = value;
+                    RaisePropertyChanged("SessionDurationSeriesCollection");
+                }
+            }
+        }
+
+        public SeriesCollection StartupShutdownSeriesCollection
+        {
+            get
+            {
+                return _startupShutdownSeriesCollection;
+            }
+            set
+            {
+                if (_startupShutdownSeriesCollection != value)
+                {
+                    _startupShutdownSeriesCollection = value;
+                    RaisePropertyChanged("StartupShutdownSeriesCollection");
+                }
+            }
+        }
+
+        public string[] HourIntervals
+        {
+            get
+            {
+                return _hourIntervals;
+            }
+            set
+            {
+                if (_hourIntervals != value)
+                {
+                    _hourIntervals = value;
+                    RaisePropertyChanged("HourIntervals");
+                }
+            }
+        }
+
+        public int[] SessionDurationCounts
+        {
+            get
+            {
+                return _sessionDurationCounts;
+            }
+            set
+            {
+                if (_sessionDurationCounts != value)
+                {
+                    _sessionDurationCounts = value;
+                    RaisePropertyChanged("SessionDurationCounts");
+                }
+            }
+        }
+
+
+        public string[] Days
+        {
+            get
+            {
+                return _days;
+            }
+            set
+            {
+                if (_days != value)
+                {
+                    _days = value;
+                    RaisePropertyChanged("Days");
+                }
+            }
+        }
+
+        public int[] StartupHoursCounts
+        {
+            get
+            {
+                return _startupHoursCounts;
+            }
+            set
+            {
+                if (_startupHoursCounts != value)
+                {
+                    _startupHoursCounts = value;
+                    RaisePropertyChanged("StartupHoursCounts");
+                }
+            }
+        }
+
+        public int[] ShutdownHoursCounts
+        {
+            get
+            {
+                return _shutdownHoursCounts;
+            }
+            set
+            {
+                if (_shutdownHoursCounts != value)
+                {
+                    _shutdownHoursCounts = value;
+                    RaisePropertyChanged("ShutdownHoursCounts");
+                }
+            }
+        }
+
+        public string[] Intervals
+        {
+            get
+            {
+                return _intervals;
+            }
+            set
+            {
+                if (_intervals != value)
+                {
+                    _intervals = value;
+                    RaisePropertyChanged("Intervals");
+                }
+            }
+        }
+        #endregion
         /// <summary>
         /// A collection of computer sessions
         /// </summary>
@@ -29,19 +246,125 @@ namespace WinFo.ViewModel
             set
             {
                 _computerSessions = value;
+                RaisePropertyChanged("ComputerSessions");
             }
         }
 
+        public async void UpdateComputerSessionInformation()
+        {
+            IsModelInformationBeingUpdated = true;
+
+            List<ComputerSession> sessions = await Task.Run(() =>
+            {
+                IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
+
+                IComputerSessionService css = sf.CreateComputerSessionService();
+
+                return css.GetComputerSessions();
+            });
+
+            if (sessions != null)
+            {
+                ComputerSessions = new ObservableCollection<ComputerSession>();
+
+                StartupShutdownSeriesCollection = new SeriesCollection();
+                SessionDurationSeriesCollection = new SeriesCollection();
+                SessionDurationByWeekDaySeriesCollection = new SeriesCollection();
+
+                StartupHoursCounts = new int[12];
+                ShutdownHoursCounts = new int[12];
+                SessionDurationCounts = new int[24];
+
+                _sessionDurationByDayOfWeek = new Dictionary<int, List<int>>();
+
+                for(int i = 0; i < 7; i++)
+                {
+                    _sessionDurationByDayOfWeek.Add(i, new List<int>());
+                }
+                foreach (ComputerSession session in sessions)
+                {
+                    ComputerSessions.Add(session);
+
+                    int day = (int)session.Beginning.DayOfWeek;
+
+                    int logonHour = session.Beginning.Hour;
+                    int logoffHour = session.End.Hour;
+
+                    int logonHourIndex = (int)Math.Ceiling(logonHour / 2.0) - 1;
+                    int logoffHourIndex = (int)Math.Ceiling(logoffHour / 2.0) - 1;
+
+                    logonHourIndex = logonHourIndex < 0 ? 0 : logonHourIndex;
+                    logoffHourIndex = logoffHourIndex < 0 ? 0 : logoffHourIndex;
+                    
+
+                    if (session.Duration.TotalHours < 23)
+                        SessionDurationCounts[(int)Math.Floor((double)session.Duration.Hours)]++;
+                    else
+                        SessionDurationCounts[23]++;
+
+                    StartupHoursCounts[logonHourIndex]++;
+                    ShutdownHoursCounts[logoffHourIndex]++;
+                    
+                    _sessionDurationByDayOfWeek[day].Add((int)Math.Ceiling(session.Duration.TotalHours));
+
+
+                }
+
+                ColumnSeries cs = new ColumnSeries();
+                cs.Title = "Hours";
+                cs.Values = new ChartValues<int>();
+
+                foreach(KeyValuePair<int,List<int>> day in _sessionDurationByDayOfWeek)
+                {
+                    day.Value.Sort();
+
+                    int median = 0;
+                    //TO-DO fix displaying hours for outliers. Activity in some week days may not be representative if it is not repeated often enough
+                    if (day.Value.Count > 3)
+                        median = day.Value[(int)Math.Floor((double)(day.Value.Count / 2))];
+
+                    cs.Values.Add(median);
+                }
+
+                SessionDurationByWeekDaySeriesCollection.Add(cs);
+
+                ColumnSeries cs_startup = new ColumnSeries();
+                cs_startup.Title = "Startups";
+                cs_startup.Values = new ChartValues<int>();
+                foreach (int day in StartupHoursCounts)
+                {
+                    cs_startup.Values.Add(day);
+                }
+
+                StartupShutdownSeriesCollection.Add(cs_startup);
+
+                ColumnSeries cs_shutdown = new ColumnSeries();
+                cs_shutdown.Title = "Shutdowns";
+                cs_shutdown.Values = new ChartValues<int>();
+                foreach (int day in ShutdownHoursCounts)
+                {
+                    cs_shutdown.Values.Add(day);
+                }
+
+                StartupShutdownSeriesCollection.Add(cs_shutdown);
+
+                ColumnSeries cs_sessions = new ColumnSeries();
+                cs_sessions.Title = "Sessions";
+
+                cs_sessions.Values = new ChartValues<int>();
+                foreach (int day in SessionDurationCounts)
+                {
+                    cs_sessions.Values.Add(day);
+                }
+
+                SessionDurationSeriesCollection.Add(cs_sessions);
+            }
+
+            IsModelInformationBeingUpdated = false;
+        }
         public ComputerSessionViewModel()
         {
-            IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
-
-            IComputerSessionService css = sf.CreateComputerSessionService();
-
-            foreach(ComputerSession session in css.GetComputerSessions())
-            {
-                _computerSessions.Add(session);
-            }
+            UpdateComputerSessionInformation();
         }
     }
 }
