@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WinFo.Model.Usage;
+using WinFo.ViewModel;
 
 namespace WinFo.View
 {
@@ -22,6 +24,15 @@ namespace WinFo.View
         public ProcessView()
         {
             InitializeComponent();
+        }
+
+        //TO-DO make it mvvm acceptable by tracking IsSelected 
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if(this.DataContext is ProcessTreeViewModel ptvm && e.NewValue is Process proc)
+            {
+                ptvm.SelectedProcess = proc;
+            }
         }
     }
 }

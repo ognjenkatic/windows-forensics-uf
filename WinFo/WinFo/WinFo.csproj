@@ -162,7 +162,7 @@
     <Compile Include="ViewModel\LogicalDiskViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NetworkAdapterViewModel.cs" />
-    <Compile Include="ViewModel\ProcessViewModel.cs" />
+    <Compile Include="ViewModel\ProcessTreeViewModel.cs" />
     <Compile Include="ViewModel\RecentlyUsedEntryViewModel.cs" />
     <Compile Include="ViewModel\StartupEntryViewModel.cs" />
     <Compile Include="ViewModel\ShareViewModel.cs" />
@@ -352,7 +352,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resource\" />
     <Folder Include="Service\Configuration\Win10\" />
     <Folder Include="Service\Usage\Win10\" />
     <Folder Include="User Control\" />
@@ -367,6 +366,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\images\net_plug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\images\memory.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

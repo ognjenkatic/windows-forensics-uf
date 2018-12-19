@@ -83,6 +83,7 @@ namespace WinFo.Service.Usage.Win7
                     Model.Usage.Process pr = new Model.Usage.Process();
 
                     pr.ReadAmount = Convert.ToUInt64(mo["ReadTransferCount"]);
+                    pr.SessionId = Convert.ToUInt32(mo["SessionId"]);
                     pr.WriteAmount = Convert.ToUInt64(mo["WriteTransferCount"]);
                     pr.Domain = Convert.ToString(ownerData["User"]);
                     pr.User = Convert.ToString(ownerData["Domain"]);
@@ -104,8 +105,10 @@ namespace WinFo.Service.Usage.Win7
 
                 Dictionary<uint, List<TCPConnection>> cd = GetPidToConnectionsDictionary();
 
-                foreach(Model.Usage.Process proc in processes)
+                for(int i=processes.Count-1;i>=0;i--)
                 {
+                    Model.Usage.Process proc = processes.ElementAt(i);
+
                     if (cd.ContainsKey(proc.Pid))
                     {
                         proc.TCPConnections.AddRange(cd[proc.Pid]);
@@ -116,10 +119,12 @@ namespace WinFo.Service.Usage.Win7
                         if (cproc.Pid == proc.ParentPid)
                         {
                             cproc.ChildProcesses.Add(proc);
+                            proc.IsOrphanProcess = false;
                             break;
                         }
                     }
                 }
+                
 
             } catch (Exception exc)
             {

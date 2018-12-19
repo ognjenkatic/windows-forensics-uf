@@ -11,6 +11,5 @@
     </Window.DataContext>
     <Grid>
         <DataGrid IsReadOnly="True" ItemsSource="{Binding Path=IP4Routes}" Margin="10"/>
-
     </Grid>
 </Window>
