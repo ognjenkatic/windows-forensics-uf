@@ -40,7 +40,17 @@ namespace WinFo.Model.Configuration
         public string SmBIOSBIOSVersion { get => _smBIOSBIOSVersion; set => _smBIOSBIOSVersion = value; }
         public ushort SmBIOSMajorVersion { get => _smBIOSMajorVersion; set => _smBIOSMajorVersion = value; }
         public ushort SmBIOSMinorVersion { get => _smBIOSMinorVersion; set => _smBIOSMinorVersion = value; }
-
+        public string CapabilitiesPrettyPrint
+        {
+            get
+            {
+                StringBuilder caps = new StringBuilder();
+                foreach (string str in Capabilities)
+                    caps.Append(str+" ,");
+                caps[caps.Length - 1] = '.';
+                return caps.ToString();
+            }
+        }
         #endregion
     }
 }

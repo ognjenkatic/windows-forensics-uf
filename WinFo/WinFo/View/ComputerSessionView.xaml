@@ -8,7 +8,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="ComputerSessionView" Height="450" Width="800"
-        Background="{StaticResource BPBackgroundGradient}">
+        Background="{StaticResource BPBackgroundGradient}" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.DataContext>
         <local:ComputerSessionViewModel/>
     </Window.DataContext>

@@ -373,5 +373,11 @@
   <ItemGroup>
     <Resource Include="Resource\images\memory.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\images\c_memory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\images\c_net_plug.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -64,7 +64,7 @@ namespace WinFo.Model.Usage
         {
             get
             {
-                int sum = _tcpConnections.Count;
+                int sum = 0;
                 foreach (Process child in _childProcesses)
                     sum += child.AssociatedConnectionsCount;
                 return sum;

@@ -28,97 +28,136 @@
         </Grid.RowDefinitions>
         <!--<DataGrid Margin="10" IsReadOnly="True" ItemsSource="{Binding Path=Processes}"/>-->
         <view:MySpinningLoader Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2"  Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" />
-        <lvc:CartesianChart Grid.Row="0" Grid.Column="0" Margin="10"  Series="{Binding Path=ProcessesMemoryUsageSeriesCollection}"  LegendLocation="None" >
-            <lvc:CartesianChart.AxisX>
-                <lvc:AxesCollection>
-                    <lvc:Axis Title="Process Name" Labels="{Binding Path=TopTenProcessByPhysicalMemory.Keys}"/>
-                </lvc:AxesCollection>
-            </lvc:CartesianChart.AxisX>
-            <lvc:CartesianChart.AxisY>
-                <lvc:AxesCollection>
-                    <lvc:Axis Title="Count" />
-                </lvc:AxesCollection>
-            </lvc:CartesianChart.AxisY>
-        </lvc:CartesianChart>
+        <TabControl Grid.Row="0" Grid.Column="0" Margin="5" Background="Transparent">
+            <TabItem Header="Memory Usage">
+                <lvc:CartesianChart   Series="{Binding Path=ProcessesMemoryUsageSeriesCollection}"  LegendLocation="None" >
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:AxesCollection>
+                            <lvc:Axis Title="Process Name And Pid" Labels="{Binding Path=ProcessNames}"/>
+                        </lvc:AxesCollection>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:AxesCollection>
+                            <lvc:Axis Title="Memory Used (MB)" />
+                        </lvc:AxesCollection>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </TabItem>
+            <TabItem Header="Data Written">
+                <lvc:CartesianChart   Series="{Binding Path=ProcessesDataWrittenSeriesCollection}"  LegendLocation="None" >
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:AxesCollection>
+                            <lvc:Axis Title="Process Name And Pid" Labels="{Binding Path=ByDataWrittenProcessNames}"/>
+                        </lvc:AxesCollection>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:AxesCollection>
+                            <lvc:Axis Title="Data Written (MB)" />
+                        </lvc:AxesCollection>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </TabItem>
+            <TabItem Header="Data Read">
+                <lvc:CartesianChart   Series="{Binding Path=ProcessesDataReadSeriesCollection}"  LegendLocation="None" >
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:AxesCollection>
+                            <lvc:Axis Title="Process Name And Pid" Labels="{Binding Path=ByDataReadProcessNames}"/>
+                        </lvc:AxesCollection>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:AxesCollection>
+                            <lvc:Axis Title="Data Read (MB)" />
+                        </lvc:AxesCollection>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </TabItem>
+        </TabControl>
+        
         <TreeView Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" ItemsSource="{Binding Path=Processes}"  Background="{x:Null}" SelectedItemChanged="TreeView_SelectedItemChanged">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Path=ChildProcesses}" DataType="{x:Type model:Process}" >
                     <StackPanel Orientation="Horizontal">
                         <Label Content="{Binding Path=ProcessName}" ToolTip="{Binding ProcessName}" Width="100" />
-                        <Image ToolTip="Associated connections" Height="16" Width="16" Source="/Resource/images/net_plug.png"/>
+                        <Image ToolTip="TCP Connections" Height="16" Width="16" Source="/Resource/images/net_plug.png"/>
+                        <Label Content="{Binding Path=TCPConnections.Count}" Width="30" ToolTip="{Binding Path=TCPConnections.Count}"/>
+                        <Image ToolTip="Associated connections" Height="16" Width="16" Source="/Resource/images/c_net_plug.png"/>
                         <Label Content="{Binding Path=AssociatedConnectionsCount}" Width="30" ToolTip="{Binding Path=AssociatedConnectionsCount}"/>
-                        <Image ToolTip="Associated memory" Height="16" Width="16" Source="/Resource/images/memory.png"/>
-                        <Label Content="{Binding Path=AssociatedPhysicalMemoryPrettyPrint}" ToolTip="{Binding Path=AssociatedPhysicalMemoryPrettyPrint}"/>
+                        <Image ToolTip="Physical Memory" Height="16" Width="16" Source="/Resource/images/memory.png"/>
+                        <Label Content="{Binding Path=PhysicalMemoryPrettyPrint}" Width="50" ToolTip="{Binding Path=PhysicalMemoryPrettyPrint}"/>
+                        <Image ToolTip="Associated Physical Memory" Height="16" Width="16" Source="/Resource/images/c_memory.png"/>
+                        <Label Content="{Binding Path=AssociatedPhysicalMemoryPrettyPrint}" Width="50" ToolTip="{Binding Path=AssociatedPhysicalMemoryPrettyPrint}"/>
 
                     </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-        <Grid Grid.Row="0" Grid.RowSpan="2"  Visibility="{Binding Path=IsProcessSelected, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" Grid.Column="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*"/>
-                    <ColumnDefinition Width="0.5*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBox Grid.Column="0" Grid.Row="0" Text="Process Name"/>
-                <TextBox Grid.Column="0" Grid.Row="1" Text="PID"/>
-                <TextBox Grid.Column="0" Grid.Row="2" Text="Parent Process PID"/>
-                <TextBox Grid.Column="0" Grid.Row="3" Text="File Name"/>
-                <TextBox Grid.Column="0" Grid.Row="4" Text="Physical Memory"/>
-                <TextBox Grid.Column="0" Grid.Row="5" Text="Peak Physical Memory"/>
-                <TextBox Grid.Column="0" Grid.Row="6" Text="Paged Memory"/>
-                <TextBox Grid.Column="0" Grid.Row="7" Text="Peak Paged Memory"/>
-                <TextBox Grid.Column="0" Grid.Row="8" Text="Command Line"/>
-                <TextBox Grid.Column="0" Grid.Row="9" Text="Domain"/>
-                <TextBox Grid.Column="0" Grid.Row="10" Text="Data Read"/>
-                <TextBox Grid.Column="0" Grid.Row="11" Text="Data Written"/>
-                <TextBox Grid.Column="0" Grid.Row="12" Text="Read Operation Count"/>
-                <TextBox Grid.Column="0" Grid.Row="13" Text="Write Operation Count"/>
-                <TextBox Grid.Column="0" Grid.Row="14" Text="User"/>
-                <TextBox Grid.Column="0" Grid.Row="15" Text="Start Time"/>
-                <TextBox Grid.Column="0" Grid.Row="16" Text="Session ID"/>
-                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedProcess.ProcessName}" />
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedProcess.Pid}"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedProcess.ParentPid}"/>
-                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedProcess.FileName}" ToolTip="{Binding Path=SelectedProcess.FileName}"/>
-                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=SelectedProcess.PhysicalMemoryPrettyPrint, Mode=OneWay}"/>
-                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=SelectedProcess.PeakPhysicalMemoryPrettyPrint, Mode=OneWay}"/>
-                <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=SelectedProcess.PagedMemoryPrettyPrint, Mode=OneWay}"/>
-                <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=SelectedProcess.PeakPagedMemoryPrettyPrint, Mode=OneWay}"/>
-                <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding Path=SelectedProcess.CommandLine}" ToolTip="{Binding Path=SelectedProcess.CommandLine}"/>
-                <TextBox Grid.Column="1" Grid.Row="9" Text="{Binding Path=SelectedProcess.Domain}"/>
-                <TextBox Grid.Column="1" Grid.Row="10" Text="{Binding Path=SelectedProcess.ReadAmountPrettyPrint, Mode=OneWay}"/>
-                <TextBox Grid.Column="1" Grid.Row="11" Text="{Binding Path=SelectedProcess.WriteAmountPrettyPrint, Mode=OneWay}"/>
-                <TextBox Grid.Column="1" Grid.Row="12" Text="{Binding Path=SelectedProcess.ReadCount}"/>
-                <TextBox Grid.Column="1" Grid.Row="13" Text="{Binding Path=SelectedProcess.WriteCount}"/>
-                <TextBox Grid.Column="1" Grid.Row="14" Text="{Binding Path=SelectedProcess.User}"/>
-                <TextBox Grid.Column="1" Grid.Row="15" Text="{Binding Path=SelectedProcess.StartTime}"/>
-                <TextBox Grid.Column="1" Grid.Row="16" Text="{Binding Path=SelectedProcess.SessionId}"/>
-               
-                <Label HorizontalContentAlignment="Center" Content="TCP Connection listing" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="17"/>
-                <DataGrid Margin="10" IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="0" ItemsSource="{Binding SelectedProcess.TCPConnections}" Grid.Row="18"/>
+        <ScrollViewer Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <Grid  Visibility="{Binding Path=IsProcessSelected, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Process Name"/>
+                    <Label Grid.Column="0" Grid.Row="1" Content="PID"/>
+                    <Label Grid.Column="0" Grid.Row="2" Content="Parent Process PID"/>
+                    <Label Grid.Column="0" Grid.Row="3" Content="File Name"/>
+                    <Label Grid.Column="0" Grid.Row="4" Content="Physical Memory"/>
+                    <Label Grid.Column="0" Grid.Row="5" Content="Peak Physical Memory"/>
+                    <Label Grid.Column="0" Grid.Row="6" Content="Paged Memory"/>
+                    <Label Grid.Column="0" Grid.Row="7" Content="Peak Paged Memory"/>
+                    <Label Grid.Column="0" Grid.Row="8" Content="Command Line"/>
+                    <Label Grid.Column="0" Grid.Row="9" Content="Domain"/>
+                    <Label Grid.Column="0" Grid.Row="10" Content="Data Read"/>
+                    <Label Grid.Column="0" Grid.Row="11" Content="Data Written"/>
+                    <Label Grid.Column="0" Grid.Row="12" Content="Read Operation Count"/>
+                    <Label Grid.Column="0" Grid.Row="13" Content="Write Operation Count"/>
+                    <Label Grid.Column="0" Grid.Row="14" Content="User"/>
+                    <Label Grid.Column="0" Grid.Row="15" Content="Start Time"/>
+                    <Label Grid.Column="0" Grid.Row="16" Content="Session ID"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedProcess.ProcessName}" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedProcess.Pid}"/>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedProcess.ParentPid}"/>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedProcess.FileName}" ToolTip="{Binding Path=SelectedProcess.FileName}"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=SelectedProcess.PhysicalMemoryPrettyPrint, Mode=OneWay}"/>
+                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=SelectedProcess.PeakPhysicalMemoryPrettyPrint, Mode=OneWay}"/>
+                    <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=SelectedProcess.PagedMemoryPrettyPrint, Mode=OneWay}"/>
+                    <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=SelectedProcess.PeakPagedMemoryPrettyPrint, Mode=OneWay}"/>
+                    <TextBox Grid.Column="1" Grid.Row="8" Height="Auto" TextWrapping="Wrap" Text="{Binding Path=SelectedProcess.CommandLine}" ToolTip="{Binding Path=SelectedProcess.CommandLine}"/>
+                    <TextBox Grid.Column="1" Grid.Row="9" Text="{Binding Path=SelectedProcess.Domain}"/>
+                    <TextBox Grid.Column="1" Grid.Row="10" Text="{Binding Path=SelectedProcess.ReadAmountPrettyPrint, Mode=OneWay}"/>
+                    <TextBox Grid.Column="1" Grid.Row="11" Text="{Binding Path=SelectedProcess.WriteAmountPrettyPrint, Mode=OneWay}"/>
+                    <TextBox Grid.Column="1" Grid.Row="12" Text="{Binding Path=SelectedProcess.ReadCount}"/>
+                    <TextBox Grid.Column="1" Grid.Row="13" Text="{Binding Path=SelectedProcess.WriteCount}"/>
+                    <TextBox Grid.Column="1" Grid.Row="14" Text="{Binding Path=SelectedProcess.User}"/>
+                    <TextBox Grid.Column="1" Grid.Row="15" Text="{Binding Path=SelectedProcess.StartTime}"/>
+                    <TextBox Grid.Column="1" Grid.Row="16" Text="{Binding Path=SelectedProcess.SessionId}"/>
+
+                    <Label HorizontalContentAlignment="Center" Content="TCP Connection listing" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="17"/>
+                    <DataGrid Margin="10" IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="0" ItemsSource="{Binding SelectedProcess.TCPConnections}" Grid.Row="18"/>
+                </Grid>
             </Grid>
-        </Grid>
+        </ScrollViewer>
     </Grid>
 </Window>

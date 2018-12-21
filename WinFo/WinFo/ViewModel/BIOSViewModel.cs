@@ -15,17 +15,45 @@ namespace WinFo.ViewModel
     /// </summary>
     public class BIOSViewModel : BaseViewModel
     {
-        private ObservableCollection<BIOS> _bios = new ObservableCollection<BIOS>();
+        private BIOS _bios;
 
-        public ObservableCollection<BIOS> Bios { get => _bios; set => _bios = value; }
+        public BIOS Bios
+        {
+            get
+            {
+                return _bios;
+            }
+            set
+            {
+                if(_bios != value)
+                {
+                    _bios = value;
+                    RaisePropertyChanged("Bios");
+                }
+            }
+        }
+
+
+
+        public async void UpdateBiosInformation()
+        {
+            IsModelInformationBeingUpdated = true;
+
+            Bios = await Task.Run(() =>
+            {
+                IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
+
+                IBIOSService bs = sf.CreateBIOSService();
+
+                return bs.GetBIOS();
+            });
+
+            IsModelInformationBeingUpdated = false;
+        }
 
         public BIOSViewModel()
         {
-            IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
-
-            IBIOSService bs = sf.CreateBIOSService();
-
-            _bios.Add(bs.GetBIOS());
+            UpdateBiosInformation();
         }
     }
 }
