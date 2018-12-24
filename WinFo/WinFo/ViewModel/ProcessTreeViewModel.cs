@@ -18,6 +18,9 @@ namespace WinFo.ViewModel
     public class ProcessTreeViewModel : BaseViewModel
     {
         private ObservableCollection<Process> _processes = new ObservableCollection<Process>();
+        private List<Process> _processesFlat = new List<Process>();
+
+        private string _selectedPID;
         private Process _selectedProcess;
         private SeriesCollection _processesMemoryUsageSeriesCollection = new SeriesCollection();
         private SeriesCollection _processesDataWrittenSeriesCollection = new SeriesCollection();
@@ -168,8 +171,37 @@ namespace WinFo.ViewModel
                 }
             }
         }
-        
 
+        public string SelectedPID
+        {
+            get
+            {
+                return _selectedPID;
+            }
+            set
+            {
+                if(_selectedPID != value)
+                {
+                    _selectedPID = value;
+                    RaisePropertyChanged("SelectedPID");
+                    TryFetchProcessByPID();
+                }
+            }
+        }
+
+        private void TryFetchProcessByPID()
+        {
+            uint pid = 0;
+            if (UInt32.TryParse(_selectedPID, out pid)){
+
+                foreach(Process proc in  _processesFlat.Where(o => o.Pid == pid))
+                {
+                    SelectedProcess = proc;
+                    break;
+                }
+            };
+
+        }
         public async void UpdateProcessTreeInformation()
         {
             IsModelInformationBeingUpdated = true;
@@ -184,8 +216,11 @@ namespace WinFo.ViewModel
             processList = processList.OrderByDescending(o => o.PhysicalMemory).ToList();
 
             foreach (Process proc in processList)
+            {
+                _processesFlat.Add(proc);
                 if (proc.IsOrphanProcess)
                     Processes.Add(proc);
+            }
 
             for (int i = 0; i < 5; i++)
                 TopFiveProcessByPhysicalMemory.Add(processList.ElementAt(i).ProcessName+" - "+processList.ElementAt(i).Pid, processList.ElementAt(i).PhysicalMemory);

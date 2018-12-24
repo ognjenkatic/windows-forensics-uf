@@ -72,8 +72,11 @@
                 </lvc:CartesianChart>
             </TabItem>
         </TabControl>
-        
-        <TreeView Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" ItemsSource="{Binding Path=Processes}"  Background="{x:Null}" SelectedItemChanged="TreeView_SelectedItemChanged">
+        <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Height="30" VerticalAlignment="Top">
+            <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="Enter PID" />
+            <TextBox VerticalAlignment="Center" Margin="10,0,0,0" Width="50" Background="Gray" Text="{Binding SelectedPID,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Center" />
+        </StackPanel>
+        <TreeView Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10,50,10,10" VerticalAlignment="Stretch" ItemsSource="{Binding Path=Processes}"  Background="{x:Null}" SelectedItemChanged="TreeView_SelectedItemChanged">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Path=ChildProcesses}" DataType="{x:Type model:Process}" >
                     <StackPanel Orientation="Horizontal">
