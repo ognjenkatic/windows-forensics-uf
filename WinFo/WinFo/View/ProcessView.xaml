@@ -28,50 +28,49 @@
         </Grid.RowDefinitions>
         <!--<DataGrid Margin="10" IsReadOnly="True" ItemsSource="{Binding Path=Processes}"/>-->
         <view:MySpinningLoader Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2"  Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" />
-        <TabControl Grid.Row="0" Grid.Column="0" Margin="5" Background="Transparent">
-            <TabItem Header="Memory Usage">
-                <lvc:CartesianChart   Series="{Binding Path=ProcessesMemoryUsageSeriesCollection}"  LegendLocation="None" >
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Process Name And Pid" Labels="{Binding Path=ProcessNames}"/>
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisX>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Memory Used (MB)" />
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisY>
-                </lvc:CartesianChart>
-            </TabItem>
-            <TabItem Header="Data Written">
-                <lvc:CartesianChart   Series="{Binding Path=ProcessesDataWrittenSeriesCollection}"  LegendLocation="None" >
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Process Name And Pid" Labels="{Binding Path=ByDataWrittenProcessNames}"/>
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisX>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Data Written (MB)" />
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisY>
-                </lvc:CartesianChart>
-            </TabItem>
-            <TabItem Header="Data Read">
-                <lvc:CartesianChart   Series="{Binding Path=ProcessesDataReadSeriesCollection}"  LegendLocation="None" >
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Process Name And Pid" Labels="{Binding Path=ByDataReadProcessNames}"/>
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisX>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:AxesCollection>
-                            <lvc:Axis Title="Data Read (MB)" />
-                        </lvc:AxesCollection>
-                    </lvc:CartesianChart.AxisY>
-                </lvc:CartesianChart>
-            </TabItem>
-        </TabControl>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.33*"/>
+                <ColumnDefinition Width="0.33*"/>
+                <ColumnDefinition Width="0.33*"/>
+            </Grid.ColumnDefinitions>
+            <lvc:CartesianChart Grid.Column="0"   Series="{Binding Path=ProcessesMemoryUsageSeriesCollection}"  LegendLocation="None" >
+                <lvc:CartesianChart.AxisX>
+                    <lvc:AxesCollection>
+                        <lvc:Axis Title="Process Name And Pid" Labels="{Binding Path=ByPhysicalMemoryProcessNames}"/>
+                    </lvc:AxesCollection>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:AxesCollection>
+                        <lvc:Axis Title="Memory Used (MB)" />
+                    </lvc:AxesCollection>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+            <lvc:CartesianChart  Grid.Column="1" Series="{Binding Path=ProcessesDataWrittenSeriesCollection}"  LegendLocation="None" >
+                <lvc:CartesianChart.AxisX>
+                    <lvc:AxesCollection>
+                        <lvc:Axis Title="Process Name And Pid" Labels="{Binding Path=ByDataWrittenProcessNames}"/>
+                    </lvc:AxesCollection>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:AxesCollection>
+                        <lvc:Axis Title="Data Written (MB)" />
+                    </lvc:AxesCollection>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+            <lvc:CartesianChart Grid.Column="2"   Series="{Binding Path=ProcessesDataReadSeriesCollection}"  LegendLocation="None" >
+                <lvc:CartesianChart.AxisX>
+                    <lvc:AxesCollection>
+                        <lvc:Axis Title="Process Name And Pid" Labels="{Binding Path=ByDataReadProcessNames}"/>
+                    </lvc:AxesCollection>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:AxesCollection>
+                        <lvc:Axis Title="Data Read (MB)" />
+                    </lvc:AxesCollection>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </Grid>
         <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Height="30" VerticalAlignment="Top">
             <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="Enter PID" />
             <TextBox VerticalAlignment="Center" Margin="10,0,0,0" Width="50" Background="Gray" Text="{Binding SelectedPID,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Center" />
@@ -94,7 +93,7 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-        <ScrollViewer Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <Grid  Visibility="{Binding Path=IsProcessSelected, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" >
                 <Grid>
                     <Grid.ColumnDefinitions>

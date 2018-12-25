@@ -17,48 +17,58 @@ namespace WinFo.ViewModel
     /// </summary>
     public class ProcessTreeViewModel : BaseViewModel
     {
-        private ObservableCollection<Process> _processes = new ObservableCollection<Process>();
-        private List<Process> _processesFlat = new List<Process>();
+        #region fields
+        private ObservableCollection<Process> _processes                = null;
+        private List<Process> _processesFlat                            = null;
 
-        private string _selectedPID;
-        private Process _selectedProcess;
-        private SeriesCollection _processesMemoryUsageSeriesCollection = new SeriesCollection();
-        private SeriesCollection _processesDataWrittenSeriesCollection = new SeriesCollection();
-        private SeriesCollection _processesDataReadSeriesCollection = new SeriesCollection();
-        private Dictionary<string, ulong> _topFiveProcessByPhysicalMemory = new Dictionary<string, ulong>();
-        private Dictionary<string, ulong> _topFiveProcessByDataWritten = new Dictionary<string, ulong>();
-        private Dictionary<string, ulong> _topFiveProcessByDataRead = new Dictionary<string, ulong>();
+        private string _selectedPID                                     = "0";
+        private Process _selectedProcess                                = null;
+        private SeriesCollection _processesMemoryUsageSeriesCollection  = null;
+        private SeriesCollection _processesDataWrittenSeriesCollection  = null;
+        private SeriesCollection _processesDataReadSeriesCollection     = null;
 
-        private string[] _byDataWrittenProcessNames;
-        private string[] _byDataReadProcessNames;
+        private Dictionary<string, ulong> _topFiveProcessByPhysicalMemory   = null;
+        private Dictionary<string, ulong> _topFiveProcessByDataWritten      = null;
+        private Dictionary<string, ulong> _topFiveProcessByDataRead         = null;
 
-        private string[] _processNames;
+        private string[] _byDataWrittenProcessNames                         = null;
+        private string[] _byDataReadProcessNames                            = null;
+        private string[] _byPhysicalMemoryProcessNames                      = null;
+        #endregion
 
-        public string[] ProcessNames
+        #region properties
+        public ObservableCollection<Process> Processes
         {
             get
             {
-                return _processNames;
+                return _processes;
             }
             set
             {
-                if(_processNames != value)
+                if(_processes != value)
                 {
-                    _processNames = value;
-                    RaisePropertyChanged("ProcessNames");
+                    _processes = value;
+                    RaisePropertyChanged("Processes");
                 }
             }
         }
-        public ObservableCollection<Process> Processes { get => _processes; set => _processes = value; }
 
-        public bool IsProcessSelected
+        public string SelectedPID
         {
             get
             {
-                return _selectedProcess != null;
+                return _selectedPID;
+            }
+            set
+            {
+                if (_selectedPID != value)
+                {
+                    _selectedPID = value;
+                    RaisePropertyChanged("SelectedPID");
+                    ParseSelectedProcessPID();
+                }
             }
         }
-
         public Process SelectedProcess
         {
             get
@@ -67,7 +77,7 @@ namespace WinFo.ViewModel
             }
             set
             {
-                if(_selectedProcess != value)
+                if (_selectedProcess != value)
                 {
                     _selectedProcess = value;
                     RaisePropertyChanged("SelectedProcess");
@@ -76,19 +86,11 @@ namespace WinFo.ViewModel
             }
         }
 
-        public Dictionary<string, ulong> TopFiveProcessByPhysicalMemory
+        public bool IsProcessSelected
         {
             get
             {
-                return _topFiveProcessByPhysicalMemory;
-            }
-            set
-            {
-                if(_topFiveProcessByPhysicalMemory != value)
-                {
-                    _topFiveProcessByPhysicalMemory = value;
-                    RaisePropertyChanged("TopTenProcessByPhysicalMemory");
-                }
+                return _selectedProcess != null;
             }
         }
 
@@ -107,7 +109,6 @@ namespace WinFo.ViewModel
                 }
             }
         }
-
         public SeriesCollection ProcessesDataReadSeriesCollection
         {
             get
@@ -123,7 +124,6 @@ namespace WinFo.ViewModel
                 }
             }
         }
-
         public SeriesCollection ProcessesMemoryUsageSeriesCollection
         {
             get
@@ -139,7 +139,7 @@ namespace WinFo.ViewModel
                 }
             }
         }
-
+        
         public string[] ByDataWrittenProcessNames
         {
             get
@@ -155,7 +155,6 @@ namespace WinFo.ViewModel
                 }
             }
         }
-
         public string[] ByDataReadProcessNames
         {
             get
@@ -171,25 +170,39 @@ namespace WinFo.ViewModel
                 }
             }
         }
-
-        public string SelectedPID
+        public string[] ByPhysicalMemoryProcessNames
         {
             get
             {
-                return _selectedPID;
+                return _byPhysicalMemoryProcessNames;
             }
             set
             {
-                if(_selectedPID != value)
+                if (_byPhysicalMemoryProcessNames != value)
                 {
-                    _selectedPID = value;
-                    RaisePropertyChanged("SelectedPID");
-                    TryFetchProcessByPID();
+                    _byPhysicalMemoryProcessNames = value;
+                    RaisePropertyChanged("ByPhysicalMemoryProcessNames");
                 }
             }
         }
+        #endregion
+        #region constructor
+        public ProcessTreeViewModel()
+        {
+            _processesFlat = new List<Process>();
+            _topFiveProcessByDataRead = new Dictionary<string, ulong>();
+            _topFiveProcessByDataWritten = new Dictionary<string, ulong>();
+            _topFiveProcessByPhysicalMemory = new Dictionary<string, ulong>();
+            _processes = new ObservableCollection<Process>();
 
-        private void TryFetchProcessByPID()
+            _processesDataReadSeriesCollection = new SeriesCollection();
+            _processesDataWrittenSeriesCollection = new SeriesCollection();
+            _processesMemoryUsageSeriesCollection = new SeriesCollection();
+
+            UpdateProcessTreeInformation();
+        }
+        #endregion
+        private void ParseSelectedProcessPID()
         {
             uint pid = 0;
             if (UInt32.TryParse(_selectedPID, out pid)){
@@ -202,6 +215,21 @@ namespace WinFo.ViewModel
             };
 
         }
+        
+        private ColumnSeries CreateColumnSeries(string title, Dictionary<string,ulong> dataDictionary)
+        {
+            ColumnSeries cs = new ColumnSeries();
+            cs.Title = title;
+            cs.Values = new ChartValues<long>();
+
+            foreach (KeyValuePair<string, ulong> kvp in dataDictionary)
+            {
+                cs.Values.Add((long)kvp.Value / 1024 / 1024);
+            }
+
+            return cs;
+        }
+
         public async void UpdateProcessTreeInformation()
         {
             IsModelInformationBeingUpdated = true;
@@ -213,70 +241,54 @@ namespace WinFo.ViewModel
                 return ps.GetProcesses();
             });
 
-            processList = processList.OrderByDescending(o => o.PhysicalMemory).ToList();
-
-            foreach (Process proc in processList)
+            if (processList != null && processList.Count > 0)
             {
-                _processesFlat.Add(proc);
-                if (proc.IsOrphanProcess)
-                    Processes.Add(proc);
+                _processesFlat.Clear();
+                _topFiveProcessByDataRead.Clear();
+                _topFiveProcessByDataWritten.Clear();
+                _topFiveProcessByPhysicalMemory.Clear();
+                _processes.Clear();
+                SelectedProcess = null;
+                RaisePropertyChanged("IsProcessSelected");
+
+                ProcessesDataReadSeriesCollection.Clear();
+                ProcessesMemoryUsageSeriesCollection.Clear();
+                ProcessesDataWrittenSeriesCollection.Clear();
+
+                processList = processList.OrderByDescending(o => o.PhysicalMemory).ToList();
+
+                foreach (Process proc in processList)
+                {
+                    _processesFlat.Add(proc);
+                    if (proc.IsOrphanProcess)
+                        Processes.Add(proc);
+                }
+
+                for (int i = 0; i < 5; i++)
+                    _topFiveProcessByPhysicalMemory.Add(processList.ElementAt(i).ProcessName + " - " + processList.ElementAt(i).Pid, processList.ElementAt(i).PhysicalMemory);
+
+                processList = processList.OrderByDescending(o => o.WriteAmount).ToList();
+
+                for (int i = 0; i < 5; i++)
+                    _topFiveProcessByDataWritten.Add(processList.ElementAt(i).ProcessName + " - " + processList.ElementAt(i).Pid, processList.ElementAt(i).WriteAmount);
+
+                processList = processList.OrderByDescending(o => o.ReadAmount).ToList();
+
+                for (int i = 0; i < 5; i++)
+                    _topFiveProcessByDataRead.Add(processList.ElementAt(i).ProcessName + " - " + processList.ElementAt(i).Pid, processList.ElementAt(i).ReadAmount);
+
+                ByPhysicalMemoryProcessNames = _topFiveProcessByPhysicalMemory.Keys.ToArray();
+                ByDataWrittenProcessNames = _topFiveProcessByDataWritten.Keys.ToArray();
+                ByDataReadProcessNames = _topFiveProcessByDataRead.Keys.ToArray();
+
+                ProcessesDataReadSeriesCollection.Add(CreateColumnSeries("Data Read (MB) ", _topFiveProcessByDataRead));
+                ProcessesMemoryUsageSeriesCollection.Add(CreateColumnSeries("Memory used (MB) ", _topFiveProcessByPhysicalMemory));
+                ProcessesDataWrittenSeriesCollection.Add(CreateColumnSeries("Data Written (MB) ", _topFiveProcessByDataWritten));
             }
-
-            for (int i = 0; i < 5; i++)
-                TopFiveProcessByPhysicalMemory.Add(processList.ElementAt(i).ProcessName+" - "+processList.ElementAt(i).Pid, processList.ElementAt(i).PhysicalMemory);
-
-            ColumnSeries cs = new ColumnSeries();
-            cs.Title = "Memory used (MB) ";
-            cs.Values = new ChartValues<long>();
-
-            foreach (KeyValuePair<string, ulong> kvp in TopFiveProcessByPhysicalMemory)
-            {
-                cs.Values.Add((long)kvp.Value / 1024 / 1024);
-            }
-
-            processList = processList.OrderByDescending(o => o.WriteAmount).ToList();
-
-            for(int i=0;i<5;i++)
-                _topFiveProcessByDataWritten.Add(processList.ElementAt(i).ProcessName + " - " + processList.ElementAt(i).Pid, processList.ElementAt(i).WriteAmount);
-
-            processList = processList.OrderByDescending(o => o.ReadAmount).ToList();
-
-            for(int i=0;i<5;i++)
-                _topFiveProcessByDataRead.Add(processList.ElementAt(i).ProcessName + " - " + processList.ElementAt(i).Pid, processList.ElementAt(i).ReadAmount);
-
-
-            ColumnSeries cs1 = new ColumnSeries();
-            cs1.Title = "Data Written (MB) ";
-            cs1.Values = new ChartValues<long>();
-
-            foreach (KeyValuePair<string, ulong> kvp in _topFiveProcessByDataWritten)
-            {
-                cs1.Values.Add((long)kvp.Value / 1024 / 1024);
-            }
-
-            ColumnSeries cs2 = new ColumnSeries();
-            cs2.Title = "Data Read (MB) ";
-            cs2.Values = new ChartValues<long>();
-
-            foreach (KeyValuePair<string, ulong> kvp in _topFiveProcessByDataRead)
-            {
-                cs2.Values.Add((long)kvp.Value / 1024 / 1024);
-            }
-
-            ProcessNames = TopFiveProcessByPhysicalMemory.Keys.ToArray();
-            ByDataWrittenProcessNames = _topFiveProcessByDataWritten.Keys.ToArray();
-            ByDataReadProcessNames = _topFiveProcessByDataRead.Keys.ToArray();
-
-            ProcessesDataReadSeriesCollection.Add(cs2);
-            ProcessesMemoryUsageSeriesCollection.Add(cs);
-            ProcessesDataWrittenSeriesCollection.Add(cs1);
 
             IsModelInformationBeingUpdated = false;
         }
-        public ProcessTreeViewModel()
-        {
-            UpdateProcessTreeInformation();
-        }
+        
 
         
     }

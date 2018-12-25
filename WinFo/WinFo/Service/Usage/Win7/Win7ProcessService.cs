@@ -71,65 +71,69 @@ namespace WinFo.Service.Usage.Win7
         {
             List<Model.Usage.Process> processes = new List<Model.Usage.Process>();
 
-            try
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(_PROCESS_SEARCH_STRING);
+            ManagementObjectCollection moc = mos.Get();
+
+            foreach (ManagementObject mo in moc)
             {
-                ManagementObjectSearcher mos = new ManagementObjectSearcher(_PROCESS_SEARCH_STRING);
-                ManagementObjectCollection moc = mos.Get();
+                ManagementBaseObject ownerData = null;
 
-                foreach(ManagementObject mo in moc)
+                try
                 {
-                    ManagementBaseObject ownerData = mo.InvokeMethod("GetOwner", null, null);
-                    
-                    Model.Usage.Process pr = new Model.Usage.Process();
-
-                    pr.ReadAmount = Convert.ToUInt64(mo["ReadTransferCount"]);
-                    pr.SessionId = Convert.ToUInt32(mo["SessionId"]);
-                    pr.WriteAmount = Convert.ToUInt64(mo["WriteTransferCount"]);
-                    pr.Domain = Convert.ToString(ownerData["User"]);
-                    pr.User = Convert.ToString(ownerData["Domain"]);
-                    pr.CommandLine = Convert.ToString(mo["CommandLine"]);
-                    pr.ReadCount = Convert.ToUInt64(mo["ReadOperationCount"]);
-                    pr.WriteCount = Convert.ToUInt64(mo["WriteOperationCount"]);
-                    pr.ParentPid = Convert.ToUInt32(mo["ParentProcessId"]);
-                    pr.Pid = Convert.ToUInt32(mo["ProcessId"]);
-                    pr.StartTime = ManagementDateTimeConverter.ToDateTime(Convert.ToString(mo["CreationDate"]));
-                    pr.PhysicalMemory = Convert.ToUInt64(mo["WorkingSetSize"]);
-                    pr.PagedMemorySize = Convert.ToUInt64(mo["PageFileUsage"]);
-                    pr.FileName = Convert.ToString(mo["ExecutablePath"]);
-                    pr.PeakPhysicalMemory = Convert.ToUInt64(mo["PeakWorkingSetSize"]);
-                    pr.PeakPagedMemorySize = Convert.ToUInt64(mo["PeakPageFileUsage"]);
-                    pr.ProcessName = Convert.ToString(mo["Name"]);
-
-                    processes.Add(pr);
+                    ownerData = mo.InvokeMethod("GetOwner", null, null);
+                }
+                catch (Exception exc)
+                {
+                    MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
                 }
 
-                Dictionary<uint, List<TCPConnection>> cd = GetPidToConnectionsDictionary();
+                Model.Usage.Process pr = new Model.Usage.Process();
 
-                for(int i=processes.Count-1;i>=0;i--)
-                {
-                    Model.Usage.Process proc = processes.ElementAt(i);
+                pr.ReadAmount = Convert.ToUInt64(mo["ReadTransferCount"]);
+                pr.SessionId = Convert.ToUInt32(mo["SessionId"]);
+                pr.WriteAmount = Convert.ToUInt64(mo["WriteTransferCount"]);
+                pr.Domain = ownerData == null ? "Unknown" :  Convert.ToString(ownerData["User"]);
+                pr.User = ownerData == null ? "Unknown" : Convert.ToString(ownerData["Domain"]);
+                pr.CommandLine = Convert.ToString(mo["CommandLine"]);
+                pr.ReadCount = Convert.ToUInt64(mo["ReadOperationCount"]);
+                pr.WriteCount = Convert.ToUInt64(mo["WriteOperationCount"]);
+                pr.ParentPid = Convert.ToUInt32(mo["ParentProcessId"]);
+                pr.Pid = Convert.ToUInt32(mo["ProcessId"]);
+                pr.StartTime = ManagementDateTimeConverter.ToDateTime(Convert.ToString(mo["CreationDate"]));
+                pr.PhysicalMemory = Convert.ToUInt64(mo["WorkingSetSize"]);
+                pr.PagedMemorySize = Convert.ToUInt64(mo["PageFileUsage"]);
+                pr.FileName = Convert.ToString(mo["ExecutablePath"]);
+                pr.PeakPhysicalMemory = Convert.ToUInt64(mo["PeakWorkingSetSize"]);
+                pr.PeakPagedMemorySize = Convert.ToUInt64(mo["PeakPageFileUsage"]);
+                pr.ProcessName = Convert.ToString(mo["Name"]);
 
-                    if (cd.ContainsKey(proc.Pid))
-                    {
-                        proc.TCPConnections.AddRange(cd[proc.Pid]);
-                    }
-
-                    foreach (Model.Usage.Process cproc in processes)
-                    {
-                        if (cproc.Pid == proc.ParentPid)
-                        {
-                            cproc.ChildProcesses.Add(proc);
-                            proc.IsOrphanProcess = false;
-                            break;
-                        }
-                    }
-                }
-                
-
-            } catch (Exception exc)
-            {
-                MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
+                processes.Add(pr);
             }
+
+            Dictionary<uint, List<TCPConnection>> cd = GetPidToConnectionsDictionary();
+
+            for (int i = processes.Count - 1; i >= 0; i--)
+            {
+                Model.Usage.Process proc = processes.ElementAt(i);
+
+                if (cd.ContainsKey(proc.Pid))
+                {
+                    proc.TCPConnections.AddRange(cd[proc.Pid]);
+                }
+
+                foreach (Model.Usage.Process cproc in processes)
+                {
+                    if (cproc.Pid == proc.ParentPid)
+                    {
+                        cproc.ChildProcesses.Add(proc);
+                        proc.IsOrphanProcess = false;
+                        break;
+                    }
+                }
+            }
+
+
+            
 
             return processes;
 
