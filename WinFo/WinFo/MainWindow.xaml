@@ -52,6 +52,7 @@
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="WLAN Sessions" Content="WLAN Sessions"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="Installed Programs" Content="Installed Programs"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="USB Device History" Content="USB Device History"/>
+                <Button Command="{Binding LoadWindowCommand}" CommandParameter="Users And Groups" Content="Users And Groups"/>
 
             </StackPanel>
         </ScrollViewer>

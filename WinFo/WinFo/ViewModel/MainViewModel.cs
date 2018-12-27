@@ -326,6 +326,12 @@ namespace WinFo.ViewModel
                             udhv.ShowDialog();
                             break;
                         }
+                    case ("Users And Groups"):
+                        {
+                            GroupUserView guv = new GroupUserView();
+                            guv.ShowDialog();
+                            break;
+                        }
                 }
             }
             

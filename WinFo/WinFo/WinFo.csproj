@@ -157,6 +157,7 @@
     <Compile Include="ViewModel\DiskDriveViewModel.cs" />
     <Compile Include="ViewModel\DiskPartitionViewModel.cs" />
     <Compile Include="ViewModel\EnvironmentVariableViewModel.cs" />
+    <Compile Include="ViewModel\GroupUserViewModel.cs" />
     <Compile Include="ViewModel\InstalledProgramsViewModel.cs" />
     <Compile Include="ViewModel\IP4RoutingTableViewModel.cs" />
     <Compile Include="ViewModel\LogicalDiskViewModel.cs" />

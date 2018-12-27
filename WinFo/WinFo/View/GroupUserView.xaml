@@ -4,9 +4,72 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinFo.View"
+        xmlns:model="clr-namespace:WinFo.Model.Usage"
+        xmlns:vm="clr-namespace:WinFo.ViewModel"
         mc:Ignorable="d"
-        Title="GroupUserView" Height="450" Width="800">
+        Title="GroupUserView" Height="450" Width="800"
+        Background="{StaticResource BPBackgroundGradient}" WindowState="Maximized">
+    <Window.DataContext>
+        <vm:GroupUserViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <TreeView Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" ItemsSource="{Binding Path=GroupUserData}"  Background="{x:Null}" SelectedItemChanged="TreeView_SelectedItemChanged">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=Value}">
+                    <StackPanel>
+                        <Label Content="{Binding Key.Name}"/>
+                    </StackPanel>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Path=Value}" DataType="{x:Type model:User}">
+                            <StackPanel>
+                                <Label Content="{Binding Path=UserName}"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <Grid DataContext="{Binding SelectedGroup}" Grid.Column="1" Margin="10" Name="GroupGrid" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Description"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Sid"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Name"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Is Local Account"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Description}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Sid}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Name}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=IsLocalAccount}"/>
+        </Grid>
+        <Grid DataContext="{Binding SelectedUser}" Grid.Column="1" Margin="10" Name="UserGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="User Name"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="SID"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Domain"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=UserName}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Sid}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Domain}"/>
+        </Grid>
     </Grid>
 </Window>

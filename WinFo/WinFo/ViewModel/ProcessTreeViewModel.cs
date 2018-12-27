@@ -218,16 +218,18 @@ namespace WinFo.ViewModel
         
         private ColumnSeries CreateColumnSeries(string title, Dictionary<string,ulong> dataDictionary)
         {
-            ColumnSeries cs = new ColumnSeries();
-            cs.Title = title;
-            cs.Values = new ChartValues<long>();
+            ColumnSeries columnSeries = new ColumnSeries
+            {
+                Title = title,
+                Values = new ChartValues<long>()
+            };
 
             foreach (KeyValuePair<string, ulong> kvp in dataDictionary)
             {
-                cs.Values.Add((long)kvp.Value / 1024 / 1024);
+                columnSeries.Values.Add((long)kvp.Value / 1024 / 1024);
             }
 
-            return cs;
+            return columnSeries;
         }
 
         public async void UpdateProcessTreeInformation()
@@ -249,7 +251,7 @@ namespace WinFo.ViewModel
                 _topFiveProcessByPhysicalMemory.Clear();
                 _processes.Clear();
                 SelectedProcess = null;
-                RaisePropertyChanged("IsProcessSelected");
+                
 
                 ProcessesDataReadSeriesCollection.Clear();
                 ProcessesMemoryUsageSeriesCollection.Clear();
