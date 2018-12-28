@@ -123,7 +123,7 @@ namespace WinFo.Service.Usage.Win7
 
                 foreach (Model.Usage.Process cproc in processes)
                 {
-                    if (cproc.Pid == proc.ParentPid)
+                    if (cproc.Pid == proc.ParentPid && proc.StartTime > cproc.StartTime)
                     {
                         cproc.ChildProcesses.Add(proc);
                         proc.IsOrphanProcess = false;

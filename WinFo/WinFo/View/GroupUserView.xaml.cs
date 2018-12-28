@@ -35,7 +35,7 @@ namespace WinFo.View
             {
                 UserGrid.Visibility = Visibility.Visible;
             }
-            else if (e.NewValue is UserGroup)
+            else if (e.NewValue is KeyValuePair<UserGroup, List<User>>)
             {
                 GroupGrid.Visibility = Visibility.Visible;
             }

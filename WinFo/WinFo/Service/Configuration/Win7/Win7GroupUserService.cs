@@ -56,7 +56,15 @@ namespace WinFo.Service.Configuration.Win7
                         user.UserName               = mr["Name"].ToString();
                         user.Sid                    = mr["SID"].ToString();
                         user.Domain                 = mr["Domain"].ToString();
-
+                        user.FullName               = mr["FullName"].ToString();
+                        user.IsDisabled             = Convert.ToBoolean(mr["Disabled"]);
+                        user.IsLocalAccount         = Convert.ToBoolean(mr["LocalAccount"]);
+                        user.IsLockedOut            = Convert.ToBoolean(mr["Lockout"]);
+                        user.PasswordChangeable     = Convert.ToBoolean(mr["PasswordChangeable"]);
+                        user.PasswordExpires        = Convert.ToBoolean(mr["PasswordExpires"]);
+                        user.PasswordRequired       = Convert.ToBoolean(mr["PasswordRequired"]);
+                        user.Status                 = Convert.ToString(mr["Status"]);
+                       
                         if (!groupUserDictionary.ContainsKey(userGroup))
                             groupUserDictionary.Add(userGroup, new List<User>());
 
