@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinFo.Model.Configuration;
+using WinFo.Service.Utility;
 
 namespace WinFo.ViewModel
 {
@@ -558,7 +559,7 @@ namespace WinFo.ViewModel
             IsPowerManagementSupported = diskDrive.IsPowerManagementSupported;
             SerialNumber = diskDrive.SerialNumber;
             Signature = diskDrive.Signature;
-            Size = diskDrive.Size / 1024 / 1024 / 1024 + " GB";
+            Size = MemoryDisplayFormatter.Format(diskDrive.Size);
             Status = diskDrive.Status;
             TotalCylinders = diskDrive.TotalCylinders;
             TotalHeads = diskDrive.TotalHeads;

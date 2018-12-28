@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinFo.Model.Configuration;
+using WinFo.Service.Utility;
 
 namespace WinFo.ViewModel
 {
@@ -221,14 +222,15 @@ namespace WinFo.ViewModel
             DeviceId = logicalDisk.DeviceId;
             FileSystem = logicalDisk.FileSystem;
             Type = logicalDisk.Type;
-            FreeSpace = logicalDisk.FreeSpace / 1024 / 1024 / 1024 + " GB";
-            Size = logicalDisk.Size / 1024 / 1024 / 1024 + " GB";
+            FreeSpace = MemoryDisplayFormatter.Format(logicalDisk.FreeSpace);
+            Size = MemoryDisplayFormatter.Format(logicalDisk.Size);
             VolumeName = logicalDisk.VolumeName;
             VolumeSerialNumber = logicalDisk.VolumeSerialNumber;
             FreeSpaceInt = logicalDisk.FreeSpace;
             TakenSpaceInt = logicalDisk.Size - logicalDisk.FreeSpace;
             SizeInt = logicalDisk.Size;
-            MemoryAllocation = (logicalDisk.Size - logicalDisk.FreeSpace) / 1024/1024/1024 + " / "+logicalDisk.Size / 1024/1024/1024 + " GigaBytes";
+            MemoryAllocation = MemoryDisplayFormatter.Format((logicalDisk.Size - logicalDisk.FreeSpace))+
+                " / "+ MemoryDisplayFormatter.Format(logicalDisk.Size);
         }
     }
 }

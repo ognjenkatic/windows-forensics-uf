@@ -147,6 +147,7 @@
     <Compile Include="Service\Usage\Win7\IPHelperExtendedTCPTableWrapper.cs" />
     <Compile Include="Service\Usage\Win7\Win7WindowsServiceService.cs" />
     <Compile Include="Service\Usage\Win7\Win7WLANSessionService.cs" />
+    <Compile Include="Service\Utility\MemoryDisplayFormatter.cs" />
     <Compile Include="Service\Win7ServiceFactory.cs" />
     <Compile Include="ViewModel\ARPTableViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -353,9 +354,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CustomControl\" />
     <Folder Include="Service\Configuration\Win10\" />
     <Folder Include="Service\Usage\Win10\" />
-    <Folder Include="User Control\" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="IWshRuntimeLibrary">

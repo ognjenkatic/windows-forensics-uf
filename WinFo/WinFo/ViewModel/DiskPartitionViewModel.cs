@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinFo.Model.Configuration;
+using WinFo.Service.Utility;
 
 namespace WinFo.ViewModel
 {
@@ -265,7 +266,7 @@ namespace WinFo.ViewModel
             IsPrimaryPartition =  diskPartition.IsPrimaryPartition;
             Name =  diskPartition.Name;
             Purpose = diskPartition.Purpose;
-            Size = diskPartition.Size/1024/1024/1024 +" GB";
+            Size = MemoryDisplayFormatter.Format(diskPartition.Size);
             StartingOffset = diskPartition.StartingOffset;
             Type = diskPartition.Type;
         }
