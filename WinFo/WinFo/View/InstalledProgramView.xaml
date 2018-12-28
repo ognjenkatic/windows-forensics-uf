@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinFo.ViewModel"
         mc:Ignorable="d"
-        Title="InstalledProgramView" Height="450" Width="800">
+        Title="InstalledProgramView" Height="450" Width="800"
+        Background="{StaticResource BPBackgroundGradient}">
     <Window.DataContext>
         <local:InstalledProgramsViewModel/>
     </Window.DataContext>
     <Grid>
-        <DataGrid Margin="10" IsReadOnly="True" ItemsSource="{Binding Path=InstalledPrograms}"/>
+        <DataGrid Margin="10" IsReadOnly="True" ItemsSource="{Binding Path=InstalledPrograms}">
+        </DataGrid>
     </Grid>
 </Window>

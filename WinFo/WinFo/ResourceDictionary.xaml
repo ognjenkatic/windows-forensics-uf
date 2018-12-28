@@ -13,4 +13,5 @@
                       Color="#FF320F0F" />
     <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"
                       Color="White" />
+    <SolidColorBrush x:Key="SoftForeground" Color="#FFD5D5D5"/>
 </ResourceDictionary>

@@ -11,14 +11,14 @@
                 <Setter Property="Height" Value="Auto"/>
             </Style>
             <Style TargetType="Label">
-                <Setter Property="Foreground" Value="#FFD5D5D5"/>
+                <Setter Property="Foreground" Value="{StaticResource SoftForeground}"/>
                 <Setter Property="Height" Value="20"/>
                 <Setter Property="Padding" Value="1"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>
             </Style>
             <Style TargetType="GroupBox">
                 <Setter Property="BorderThickness" Value="0,0.2,0,0" />
-                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Foreground" Value="{StaticResource SoftForeground}"/>
             </Style>
             <Style TargetType="TreeView">
                 <Setter Property="BorderThickness" Value="0,0,0,0"/>
@@ -26,17 +26,26 @@
             <Style TargetType="TextBox">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="Foreground" Value="#FFD5D5D5"/>
+                <Setter Property="Foreground" Value="{StaticResource SoftForeground}"/>
                 <Setter Property="Height" Value="20"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>
             </Style>
             <Style TargetType="ListView">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Foreground" Value="{StaticResource SoftForeground}"/>
             </Style>
             <Style TargetType="Expander">
-                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Foreground" Value="{StaticResource SoftForeground}"/>
+            </Style>
+            <Style TargetType="DataGrid">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="RowBackground" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource SoftForeground}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+            <Style TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="Transparent"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>
