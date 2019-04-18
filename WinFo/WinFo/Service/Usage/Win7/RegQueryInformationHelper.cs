@@ -27,7 +27,7 @@ namespace WinFo.Service.Usage.Win7
             int lpcbSecurityDescriptor,
             out long lpftLastWriteTime);
 
-        public DateTime GetLastWritten(RegistryKey registryKey)
+        public static DateTime GetLastWritten(RegistryKey registryKey)
         {
             DateTime lastWrite = DateTime.MinValue;
             try

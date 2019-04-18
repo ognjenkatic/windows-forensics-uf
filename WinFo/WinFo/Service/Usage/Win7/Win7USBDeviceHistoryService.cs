@@ -62,8 +62,7 @@ namespace WinFo.Service.Usage.Win7
                             
 
                             
-                            RegQueryInformationHelper rqih = new RegQueryInformationHelper();
-                            entry.LastSeen = rqih.GetLastWritten(instanceKey);
+                            entry.LastSeen = RegQueryInformationHelper.GetLastWritten(instanceKey);
 
                             if (!history.Contains(entry))
                             {

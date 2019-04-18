@@ -60,11 +60,6 @@ namespace WinFo.Service
             return new Win7StartupEntryService();
         }
 
-        public IRecentlyUsedService CreateRecentlyUsedService()
-        {
-            return new Win7RecentlyUsedService();
-        }
-
         public IUpdateService CreateUpdateService()
         {
             return new Win7UpdateService();
@@ -103,6 +98,21 @@ namespace WinFo.Service
         public IUSBDeviceHistoryService CreateUSBDeviceHistoryService()
         {
             return new Win7USBDeviceHistoryService();
+        }
+
+        public IMainWindowCacheService CreateMainWindowCacheService()
+        {
+            return new Win7MainWindowCacheService();
+        }
+
+        public IRecentlyOpenedFileService CreateRecentlyOpenedFileService()
+        {
+            return new Win7RecentlyOpenedFileService();
+        }
+
+        public IRecentRunBarService CreateRecentRunBarService()
+        {
+            return new Win7RunBarService();
         }
     }
 }

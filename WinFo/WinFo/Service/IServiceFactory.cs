@@ -31,8 +31,6 @@ namespace WinFo.Service
 
         IStartupEntryService CreateStartupEntryService();
 
-        IRecentlyUsedService CreateRecentlyUsedService();
-
         IUpdateService CreateUpdateService();
 
         IProcessService CreateProcessService();
@@ -48,6 +46,12 @@ namespace WinFo.Service
         IInstalledProgramService CreateInstalledProgramService();
 
         IUSBDeviceHistoryService CreateUSBDeviceHistoryService();
+
+        IMainWindowCacheService CreateMainWindowCacheService();
+
+        IRecentlyOpenedFileService CreateRecentlyOpenedFileService();
+
+        IRecentRunBarService CreateRecentRunBarService();
 
     }
 }

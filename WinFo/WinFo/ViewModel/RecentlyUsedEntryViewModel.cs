@@ -16,36 +16,39 @@ namespace WinFo.ViewModel
     public class RecentlyUsedEntryViewModel : BaseViewModel
     {
         #region fields
-        private ObservableCollection<RecentlyUsedEntry> _recentRunBarEntries = new ObservableCollection<RecentlyUsedEntry>();
-        private ObservableCollection<RecentlyUsedEntry> _recentWindowEntries = new ObservableCollection<RecentlyUsedEntry>();
-        private ObservableCollection<RecentlyUsedEntry> _recentlyOpenedFilesEntries = new ObservableCollection<RecentlyUsedEntry>();
+        private ObservableCollection<RunBarEntry> _recentRunBarEntries = new ObservableCollection<RunBarEntry>();
+        private ObservableCollection<MainWindowCacheEntry> _recentWindowEntries = new ObservableCollection<MainWindowCacheEntry>();
+        private ObservableCollection<OpenedFileEntry> _recentlyOpenedFilesEntries = new ObservableCollection<OpenedFileEntry>();
 
 
         #endregion
 
         #region properties
-        public ObservableCollection<RecentlyUsedEntry> RecentRunBarEntries { get => _recentRunBarEntries; set => _recentRunBarEntries = value; }
-        public ObservableCollection<RecentlyUsedEntry> RecentWindowEntries { get => _recentWindowEntries; set => _recentWindowEntries = value; }
-        public ObservableCollection<RecentlyUsedEntry> RecentlyOpenedFilesEntries { get => _recentlyOpenedFilesEntries; set => _recentlyOpenedFilesEntries = value; }
+        public ObservableCollection<RunBarEntry> RecentRunBarEntries { get => _recentRunBarEntries; set => _recentRunBarEntries = value; }
+        public ObservableCollection<MainWindowCacheEntry> RecentWindowEntries { get => _recentWindowEntries; set => _recentWindowEntries = value; }
+        public ObservableCollection<OpenedFileEntry> RecentlyOpenedFilesEntries { get => _recentlyOpenedFilesEntries; set => _recentlyOpenedFilesEntries = value; }
         #endregion
 
         public RecentlyUsedEntryViewModel()
         {
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
-            IRecentlyUsedService rus = sf.CreateRecentlyUsedService();
+            IRecentRunBarService rus = sf.CreateRecentRunBarService();
 
-            foreach(RecentlyUsedEntry entry in rus.GetRecentlyOpenedFiles())
+            IMainWindowCacheService mwcs = sf.CreateMainWindowCacheService();
+            IRecentlyOpenedFileService rofs = sf.CreateRecentlyOpenedFileService();
+
+            foreach(OpenedFileEntry entry in rofs.GetRecentlyOpenedFiles())
             {
                 _recentlyOpenedFilesEntries.Add(entry);
             }
 
-            foreach (RecentlyUsedEntry entry in rus.GetRecentlRunBarEntries())
+            foreach (RunBarEntry entry in rus.GetRecentlRunBarEntries())
             {
                 _recentRunBarEntries.Add(entry);
             }
 
-            foreach (RecentlyUsedEntry entry in rus.GetMainWindowCache())
+            foreach (MainWindowCacheEntry entry in mwcs.GetMainWindowCache())
             {
                 _recentWindowEntries.Add(entry);
             }

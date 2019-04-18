@@ -97,6 +97,9 @@
     <Compile Include="Model\Configuration\Update.cs" />
     <Compile Include="Model\Usage\ARPEntry.cs" />
     <Compile Include="Model\Usage\InstalledProgram.cs" />
+    <Compile Include="Model\Usage\MainWindowCacheEntry.cs" />
+    <Compile Include="Model\Usage\OpenedFileEntry.cs" />
+    <Compile Include="Model\Usage\RunBarEntry.cs" />
     <Compile Include="Model\Usage\USBDeviceHistoryEntry.cs" />
     <Compile Include="Model\Usage\WindowsService.cs" />
     <Compile Include="Model\Usage\TCPConnection.cs" />
@@ -129,8 +132,10 @@
     <Compile Include="Service\Usage\IARPTableService.cs" />
     <Compile Include="Service\Usage\IComputerSessionService.cs" />
     <Compile Include="Service\Usage\IInstalledProgramService.cs" />
+    <Compile Include="Service\Usage\IMainWindowCacheService.cs" />
     <Compile Include="Service\Usage\IProcessService.cs" />
-    <Compile Include="Service\Usage\IRecentlyUsedService.cs" />
+    <Compile Include="Service\Usage\IRecentlyOpenedFileService.cs" />
+    <Compile Include="Service\Usage\IRecentRunBarService.cs" />
     <Compile Include="Service\Usage\IUSBDeviceHistoryService.cs" />
     <Compile Include="Service\Usage\IWindowsServiceService.cs" />
     <Compile Include="Service\Usage\IUserSessionService.cs" />
@@ -139,9 +144,11 @@
     <Compile Include="Service\Usage\Win7\Win7ARPTableService.cs" />
     <Compile Include="Service\Usage\Win7\IPHelperNetTableWrapper.cs" />
     <Compile Include="Service\Usage\Win7\Win7InstalledProgramService.cs" />
+    <Compile Include="Service\Usage\Win7\Win7MainWindowCacheService.cs" />
     <Compile Include="Service\Usage\Win7\Win7ProcessService.cs" />
-    <Compile Include="Service\Usage\Win7\Win7RecentlyUsedService.cs" />
+    <Compile Include="Service\Usage\Win7\Win7RecentlyOpenedFileService.cs" />
     <Compile Include="Service\Usage\Win7\Win7ComputerSessionService.cs" />
+    <Compile Include="Service\Usage\Win7\Win7RunBarService.cs" />
     <Compile Include="Service\Usage\Win7\Win7USBDeviceHistoryService.cs" />
     <Compile Include="Service\Usage\Win7\Win7UserSessionService.cs" />
     <Compile Include="Service\Usage\Win7\IPHelperExtendedTCPTableWrapper.cs" />
