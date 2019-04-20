@@ -43,8 +43,7 @@ namespace WinFo.Service.Usage.Win7
                                 ofe.Name = Path.GetFileName(lnk.TargetPath);
                                 ofe.Path = lnk.TargetPath;
                                 ofe.Shortcut = file;
-
-                                Console.WriteLine($"FN:{lnk.FullName}, ARG:{lnk.Arguments},DSC:{lnk.Description},HKEY:{lnk.Hotkey},WD:{lnk.WorkingDirectory}");
+                                
                                 if (System.IO.File.Exists(lnk.TargetPath)) {
                                     ofe.Accessed = System.IO.File.GetLastAccessTime(lnk.TargetPath);
                                     ofe.Created = System.IO.File.GetCreationTime(lnk.TargetPath);
@@ -54,7 +53,7 @@ namespace WinFo.Service.Usage.Win7
                                 } else
                                 {
                                     ofe.Exists = false;
-                                    ofe.Accessed = ofe.Created = DateTime.MinValue;
+                                    ofe.Accessed = ofe.Created = System.IO.File.GetCreationTime(lnk.FullName);
                                     ofe.Name = lnk.FullName;
                                     ofe.Path = lnk.WorkingDirectory;
                                     MyDebugger.Instance.LogMessage($"Recently used file {ofe.Name} is not available, was at {ofe.Path}.", DebugVerbocity.Informational);
@@ -62,9 +61,6 @@ namespace WinFo.Service.Usage.Win7
 
                                 recentlyOpenedFiles.Add(ofe);
                             }
-                        } else
-                        {
-                            MyDebugger.Instance.LogMessage($"Non link file {file} found.", DebugVerbocity.Informational);
                         }
                     }
                     catch (Exception exc)
