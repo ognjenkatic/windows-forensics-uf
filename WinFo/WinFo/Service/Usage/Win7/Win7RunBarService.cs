@@ -13,7 +13,6 @@ namespace WinFo.Service.Usage.Win7
     {
         #region fields
         private static string _RECENTLY_RUN_PATH = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU";
-        private static string _RECENTLY_RUN_SEARCH_STRING = "SELECT * FROM Win32_Service";
         #endregion
 
         /// <summary>
@@ -39,6 +38,8 @@ namespace WinFo.Service.Usage.Win7
                     // FIX This is missleading. All run bar entries will have the same last write date because all of the data is associated with the same subkey
                     rbe.LastWrite = RegQueryInformationHelper.GetLastWritten(runHistoryRegistryKey);
                     recentRunEntries.Add(rbe);
+
+                    
                 }
             }
             catch (Exception exc)
@@ -46,6 +47,7 @@ namespace WinFo.Service.Usage.Win7
                 MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
             }
 
+            MyDebugger.Instance.LogMessage($"Loaded {recentRunEntries.Count} recently run entries.", DebugVerbocity.Informational);
             return recentRunEntries;
         }
     }

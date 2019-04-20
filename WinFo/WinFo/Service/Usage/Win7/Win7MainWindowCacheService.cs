@@ -43,6 +43,7 @@ namespace WinFo.Service.Usage.Win7
                 MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
             }
 
+            MyDebugger.Instance.LogMessage($"Loaded {mainCacheEntries.Count} window cache entries.", DebugVerbocity.Informational);
             return mainCacheEntries;
         }
     }

@@ -49,14 +49,12 @@ namespace WinFo.Service.Usage.Win7
                                     ofe.Created = System.IO.File.GetCreationTime(lnk.TargetPath);
                                     ofe.Creator = System.IO.File.GetAccessControl(lnk.TargetPath).GetOwner(typeof(System.Security.Principal.NTAccount)).ToString();
                                     ofe.Exists = true;
-                                    MyDebugger.Instance.LogMessage($"Recently used file {ofe.Name} is available at {ofe.Path}.", DebugVerbocity.Informational);
                                 } else
                                 {
                                     ofe.Exists = false;
                                     ofe.Accessed = ofe.Created = System.IO.File.GetCreationTime(lnk.FullName);
                                     ofe.Name = lnk.FullName;
                                     ofe.Path = lnk.WorkingDirectory;
-                                    MyDebugger.Instance.LogMessage($"Recently used file {ofe.Name} is not available, was at {ofe.Path}.", DebugVerbocity.Informational);
                                 }
 
                                 recentlyOpenedFiles.Add(ofe);
@@ -75,6 +73,7 @@ namespace WinFo.Service.Usage.Win7
                 MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
             }
 
+            MyDebugger.Instance.LogMessage($"Loaded {recentlyOpenedFiles.Count} recently opened file entries.", DebugVerbocity.Informational);
             return recentlyOpenedFiles;
         }
     }
