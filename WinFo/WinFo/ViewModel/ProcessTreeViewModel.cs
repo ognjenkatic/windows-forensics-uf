@@ -235,14 +235,15 @@ namespace WinFo.ViewModel
         public async void UpdateProcessTreeInformation()
         {
             IsModelInformationBeingUpdated = true;
+            ModelInformationUpdateProgress = "Fetching process data...";
             List<Process> processList = await Task.Run(() =>
             {
                 IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
                 IProcessService ps = sf.CreateProcessService();
-
                 return ps.GetProcesses();
             });
 
+            ModelInformationUpdateProgress = $"Loaded information about {processList.Count} processes!";
             if (processList != null && processList.Count > 0)
             {
                 _processesFlat.Clear();

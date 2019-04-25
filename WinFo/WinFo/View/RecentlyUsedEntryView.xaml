@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinFo.ViewModel"
+        xmlns:view="clr-namespace:WinFo.View"
         mc:Ignorable="d"
         Title="RecentlyUsedEntryView" Height="450" Width="800"
         Background="{StaticResource BPBackgroundGradient}"
@@ -11,7 +12,11 @@
     <Window.DataContext>
         <local:RecentlyUsedEntryViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="Bvc"/>
+    </Window.Resources>
     <Grid>
+        <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}"/>
         <ScrollViewer VerticalScrollBarVisibility="Visible">
             <StackPanel>
                 <Label Content="Recently opened files"/> 

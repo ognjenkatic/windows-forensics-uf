@@ -85,7 +85,7 @@
         </EventTrigger>
     </UserControl.Triggers>
     <Grid Background="{DynamicResource BPBackgroundGradient}">
-        <Label x:Name="label" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13.333" Margin="0,140,0,0" Height="30" Width="150" Content="Loading data ..." Foreground="White" HorizontalContentAlignment="Center"/>
+        <Label x:Name="label" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13.333" Margin="0,140,0,0" Height="30"  Content="{Binding ModelInformationUpdateProgress}" Foreground="White" HorizontalContentAlignment="Center"/>
         <StackPanel Height="100" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
             <Rectangle x:Name="rectangle" Height="10" Stroke="Black" Width="10" Margin="0,0,2,0" VerticalAlignment="Bottom" StrokeThickness="0">
                 <Rectangle.Fill>

@@ -16,6 +16,23 @@ namespace WinFo.ViewModel
 
         private bool _isModelInformationBeingUpdated;
 
+        private string _modelInformationUpdateProgress = "Loading!";
+
+        public string ModelInformationUpdateProgress
+        {
+            get
+            {
+                return _modelInformationUpdateProgress;
+            }
+            set
+            {
+                if (_modelInformationUpdateProgress != value)
+                {
+                    _modelInformationUpdateProgress = value;
+                    RaisePropertyChanged("ModelInformationUpdateProgress");
+                }
+            }
+        }
         public bool IsModelInformationBeingUpdated
         {
             get

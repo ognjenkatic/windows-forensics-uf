@@ -104,7 +104,6 @@
     <Compile Include="Model\Usage\WindowsService.cs" />
     <Compile Include="Model\Usage\TCPConnection.cs" />
     <Compile Include="Model\Usage\Process.cs" />
-    <Compile Include="Model\Usage\RecentlyUsedEntry.cs" />
     <Compile Include="Model\Usage\User.cs" />
     <Compile Include="Model\Usage\UserGroup.cs" />
     <Compile Include="Model\Usage\WLANSession.cs" />

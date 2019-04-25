@@ -31,11 +31,14 @@ namespace WinFo.Service.Usage.Win7
 
                 foreach (string valueName in valueNames)
                 {
-                    MainWindowCacheEntry mwce = new MainWindowCacheEntry();
-                    mwce.Name = valueName;
-                    mwce.Value = windowHistoryRegistryKey.GetValue(valueName).ToString();
-
-                    mainCacheEntries.Add(mwce);
+                    int fapIndex = valueName.IndexOf(".FriendlyAppName");
+                    if (fapIndex > 0)
+                    {
+                        MainWindowCacheEntry mwce = new MainWindowCacheEntry();
+                        mwce.Title = windowHistoryRegistryKey.GetValue(valueName).ToString();
+                        mwce.Path = valueName.Remove(fapIndex);
+                        mainCacheEntries.Add(mwce);
+                    }
                 }
             }
             catch (Exception exc)

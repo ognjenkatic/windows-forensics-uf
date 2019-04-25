@@ -29,29 +29,58 @@ namespace WinFo.ViewModel
         public ObservableCollection<OpenedFileEntry> RecentlyOpenedFilesEntries { get => _recentlyOpenedFilesEntries; set => _recentlyOpenedFilesEntries = value; }
         #endregion
 
-        public RecentlyUsedEntryViewModel()
+        public async void UpdateRecentlyUsedEntryViewModel()
         {
+            IsModelInformationBeingUpdated = true;
+
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
             IRecentRunBarService rus = sf.CreateRecentRunBarService();
-
             IMainWindowCacheService mwcs = sf.CreateMainWindowCacheService();
             IRecentlyOpenedFileService rofs = sf.CreateRecentlyOpenedFileService();
 
-            foreach(OpenedFileEntry entry in rofs.GetRecentlyOpenedFiles())
+            ModelInformationUpdateProgress = "Fetching opened file history...";
+
+            List<OpenedFileEntry> openedFileList = await Task.Run(() =>
+            {
+                return rofs.GetRecentlyOpenedFiles();
+            });
+
+            foreach (OpenedFileEntry entry in openedFileList)
             {
                 _recentlyOpenedFilesEntries.Add(entry);
             }
 
-            foreach (RunBarEntry entry in rus.GetRecentlRunBarEntries())
+            ModelInformationUpdateProgress = "Fetching run bar history...";
+
+            List<RunBarEntry> runBarList = await Task.Run(() =>
+            {
+                return rus.GetRecentlRunBarEntries();
+            });
+
+            foreach (RunBarEntry entry in runBarList)
             {
                 _recentRunBarEntries.Add(entry);
             }
 
-            foreach (MainWindowCacheEntry entry in mwcs.GetMainWindowCache())
+            ModelInformationUpdateProgress = "Fetching main window cache history...";
+
+            List<MainWindowCacheEntry> cacheList = await Task.Run(() =>
+            {
+                return mwcs.GetMainWindowCache();
+            });
+
+            foreach (MainWindowCacheEntry entry in cacheList)
             {
                 _recentWindowEntries.Add(entry);
             }
+
+            IsModelInformationBeingUpdated = false;
+        }
+
+        public RecentlyUsedEntryViewModel()
+        {
+            UpdateRecentlyUsedEntryViewModel();
         }
     }
 }
