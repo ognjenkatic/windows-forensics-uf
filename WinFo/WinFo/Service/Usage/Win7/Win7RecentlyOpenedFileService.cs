@@ -33,6 +33,10 @@ namespace WinFo.Service.Usage.Win7
                 {
                     try
                     {
+                        if (file.Contains("iso"))
+                        {
+                            Console.WriteLine("iso found " + file);
+                        }
                         if (file.EndsWith("lnk"))
                         {
                             IWshShell shell = new WshShell();

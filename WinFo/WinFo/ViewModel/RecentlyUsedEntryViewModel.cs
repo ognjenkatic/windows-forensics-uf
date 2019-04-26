@@ -19,7 +19,7 @@ namespace WinFo.ViewModel
         private ObservableCollection<RunBarEntry> _recentRunBarEntries = new ObservableCollection<RunBarEntry>();
         private ObservableCollection<MainWindowCacheEntry> _recentWindowEntries = new ObservableCollection<MainWindowCacheEntry>();
         private ObservableCollection<OpenedFileEntry> _recentlyOpenedFilesEntries = new ObservableCollection<OpenedFileEntry>();
-
+        private ObservableCollection<RecentDocument> _recentDocumentEntries = new ObservableCollection<RecentDocument>();
 
         #endregion
 
@@ -27,6 +27,7 @@ namespace WinFo.ViewModel
         public ObservableCollection<RunBarEntry> RecentRunBarEntries { get => _recentRunBarEntries; set => _recentRunBarEntries = value; }
         public ObservableCollection<MainWindowCacheEntry> RecentWindowEntries { get => _recentWindowEntries; set => _recentWindowEntries = value; }
         public ObservableCollection<OpenedFileEntry> RecentlyOpenedFilesEntries { get => _recentlyOpenedFilesEntries; set => _recentlyOpenedFilesEntries = value; }
+        public ObservableCollection<RecentDocument> RecentDocumentEntries { get => _recentDocumentEntries; set => _recentDocumentEntries = value; }
         #endregion
 
         public async void UpdateRecentlyUsedEntryViewModel()
@@ -38,6 +39,7 @@ namespace WinFo.ViewModel
             IRecentRunBarService rus = sf.CreateRecentRunBarService();
             IMainWindowCacheService mwcs = sf.CreateMainWindowCacheService();
             IRecentlyOpenedFileService rofs = sf.CreateRecentlyOpenedFileService();
+            IRecentDocumentService rds = sf.CreateRecentDocumentService();
 
             ModelInformationUpdateProgress = "Fetching opened file history...";
 
@@ -70,9 +72,24 @@ namespace WinFo.ViewModel
                 return mwcs.GetMainWindowCache();
             });
 
+
             foreach (MainWindowCacheEntry entry in cacheList)
             {
                 _recentWindowEntries.Add(entry);
+
+            }
+
+
+            ModelInformationUpdateProgress = "Fetching recent documents...";
+
+            List<RecentDocument> recentDocumentList = await Task.Run(() =>
+            {
+                return rds.GetRecentDocuments();
+            });
+
+            foreach (RecentDocument document in recentDocumentList)
+            {
+                _recentDocumentEntries.Add(document);
             }
 
             IsModelInformationBeingUpdated = false;

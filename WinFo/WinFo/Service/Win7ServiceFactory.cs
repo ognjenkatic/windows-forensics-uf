@@ -114,5 +114,10 @@ namespace WinFo.Service
         {
             return new Win7RunBarService();
         }
+
+        public IRecentDocumentService CreateRecentDocumentService()
+        {
+            return new Win7RecentDocumentService();
+        }
     }
 }

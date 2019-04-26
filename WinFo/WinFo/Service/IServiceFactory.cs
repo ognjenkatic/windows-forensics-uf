@@ -53,5 +53,7 @@ namespace WinFo.Service
 
         IRecentRunBarService CreateRecentRunBarService();
 
+        IRecentDocumentService CreateRecentDocumentService();
+
     }
 }

@@ -21,10 +21,13 @@
             <StackPanel>
                 <Label Content="Recently opened files"/> 
                 <DataGrid Margin="10" ItemsSource="{Binding Path=RecentlyOpenedFilesEntries}" IsReadOnly="True"/>
+                <Label Content="Recent documents"/>
+                <DataGrid Margin="10" ItemsSource="{Binding Path=RecentDocumentEntries}" IsReadOnly="True"/>
                 <Label Content="Recent Run Bar Entries"/>
                 <DataGrid Margin="10" ItemsSource="{Binding Path=RecentRunBarEntries}" IsReadOnly="True"/>
                 <Label Content="Recent window title cache"/>
                 <DataGrid Margin="10" ItemsSource="{Binding Path=RecentWindowEntries}" IsReadOnly="True"/>
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>

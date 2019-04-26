@@ -99,6 +99,7 @@
     <Compile Include="Model\Usage\InstalledProgram.cs" />
     <Compile Include="Model\Usage\MainWindowCacheEntry.cs" />
     <Compile Include="Model\Usage\OpenedFileEntry.cs" />
+    <Compile Include="Model\Usage\RecentDocument.cs" />
     <Compile Include="Model\Usage\RunBarEntry.cs" />
     <Compile Include="Model\Usage\USBDeviceHistoryEntry.cs" />
     <Compile Include="Model\Usage\WindowsService.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Service\Usage\IInstalledProgramService.cs" />
     <Compile Include="Service\Usage\IMainWindowCacheService.cs" />
     <Compile Include="Service\Usage\IProcessService.cs" />
+    <Compile Include="Service\Usage\IRecentDocumentService.cs" />
     <Compile Include="Service\Usage\IRecentlyOpenedFileService.cs" />
     <Compile Include="Service\Usage\IRecentRunBarService.cs" />
     <Compile Include="Service\Usage\IUSBDeviceHistoryService.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="Service\Usage\Win7\Win7InstalledProgramService.cs" />
     <Compile Include="Service\Usage\Win7\Win7MainWindowCacheService.cs" />
     <Compile Include="Service\Usage\Win7\Win7ProcessService.cs" />
+    <Compile Include="Service\Usage\Win7\Win7RecentDocumentService.cs" />
     <Compile Include="Service\Usage\Win7\Win7RecentlyOpenedFileService.cs" />
     <Compile Include="Service\Usage\Win7\Win7ComputerSessionService.cs" />
     <Compile Include="Service\Usage\Win7\Win7RunBarService.cs" />
