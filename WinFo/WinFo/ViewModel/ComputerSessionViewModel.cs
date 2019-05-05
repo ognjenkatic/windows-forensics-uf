@@ -18,7 +18,7 @@ namespace WinFo.ViewModel
     public class ComputerSessionViewModel : BaseViewModel
     {
         #region fields
-        private ObservableCollection<ComputerSession> _computerSessions;
+        private List<ComputerSession> _computerSessions;
 
         private string[] _days = new[]
             {
@@ -237,7 +237,7 @@ namespace WinFo.ViewModel
         /// <summary>
         /// A collection of computer sessions
         /// </summary>
-        public ObservableCollection<ComputerSession> ComputerSessions
+        public List<ComputerSession> ComputerSessions
         {
             get
             {
@@ -246,7 +246,6 @@ namespace WinFo.ViewModel
             set
             {
                 _computerSessions = value;
-                RaisePropertyChanged("ComputerSessions");
             }
         }
 
@@ -254,18 +253,21 @@ namespace WinFo.ViewModel
         {
             IsModelInformationBeingUpdated = true;
 
-            List<ComputerSession> sessions = await Task.Run(() =>
+            IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
+
+            IComputerSessionService css = sf.CreateComputerSessionService();
+
+            css.UpdateProgress += UpdateModelInformation;
+
+            ComputerSessions = await Task.Run(() =>
             {
-                IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
-
-                IComputerSessionService css = sf.CreateComputerSessionService();
-
                 return css.GetComputerSessions();
             });
 
-            if (sessions != null)
+            RaisePropertyChanged("ComputerSessions");
+
+            if (ComputerSessions != null && ComputerSessions.Count >0)
             {
-                ComputerSessions = new ObservableCollection<ComputerSession>();
 
                 StartupShutdownSeriesCollection = new SeriesCollection();
                 SessionDurationSeriesCollection = new SeriesCollection();
@@ -281,10 +283,8 @@ namespace WinFo.ViewModel
                 {
                     _sessionDurationByDayOfWeek.Add(i, new List<int>());
                 }
-                foreach (ComputerSession session in sessions)
+                foreach (ComputerSession session in ComputerSessions)
                 {
-                    ComputerSessions.Add(session);
-
                     int day = (int)session.Beginning.DayOfWeek;
 
                     int logonHour = session.Beginning.Hour;

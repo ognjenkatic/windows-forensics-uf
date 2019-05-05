@@ -270,12 +270,13 @@ namespace WinFo.ViewModel
         public async void UpdateUserSessionInformation()
         {
             IsModelInformationBeingUpdated = true;
+            IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
+            IUserSessionService iuss = sf.CreateUserSessionService();
+
+            iuss.UpdateProgress += UpdateModelInformation;
+
             List<UserSession> sessions = await Task.Run(() =>
              {
-                 IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
-
-                 IUserSessionService iuss = sf.CreateUserSessionService();
-
                  return iuss.GetUserSessions();
              });
 
@@ -339,26 +340,23 @@ namespace WinFo.ViewModel
 
                 }
 
-                foreach (KeyValuePair<string, Dictionary<int, List<int>>> userdata in _userSessionDurationByDayOfWeek)
+               foreach (KeyValuePair<string, Dictionary<int, List<int>>> userdata in _userSessionDurationByDayOfWeek)
                 {
                     ColumnSeries cs = new ColumnSeries();
                     cs.Title = "Hours - "+userdata.Key;
 
                     cs.Values = new ChartValues<int>();
 
-                    foreach (Dictionary<int, List<int>> day in _userSessionDurationByDayOfWeek.Values)
+                    foreach (KeyValuePair<int, List<int>> day in userdata.Value)
                     {
-                        for (int i = 0; i < day.Values.Count; i++)
-                        {
-                            day[i].Sort();
+                        day.Value.Sort();
 
-                            int median = 0;
-                            //TO-DO fix displaying hours for outliers. Activity in some week days may not be representative if it is not repeated often enough
-                            if (day[i].Count > 3)
-                                median = day[i][(int)Math.Floor((double)(day[i].Count / 2))];
+                        int median = 0;
+                        //TO-DO fix displaying hours for outliers. Activity in some week days may not be representative if it is not repeated often enough
+                        if (day.Value.Count > 3)
+                            median = day.Value[(int)Math.Floor((double)(day.Value.Count / 2))];
 
-                            cs.Values.Add(median);
-                        }
+                        cs.Values.Add(median);
                     }
 
                     SessionDurationByWeekDaySeriesCollection.Add(cs);

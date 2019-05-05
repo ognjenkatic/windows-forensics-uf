@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinFo.Model.Usage;
+using WinFo.Service.Utility;
 
 namespace WinFo.Service.Usage
 {
-    public interface IRecentDocumentService
+    public interface IRecentDocumentService : IVerboseService
     {
         List<RecentDocument> GetRecentDocuments();
     }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinFo.Model.Usage;
 using WinFo.Service.MyDebug;
+using WinFo.Service.Utility;
 
 namespace WinFo.Service.Usage.Win7
 {
@@ -14,6 +15,8 @@ namespace WinFo.Service.Usage.Win7
     {
         #region fields
         private static string _RECENTLY_OPENED_PATH = @"%USERPROFILE%\\AppData\\Roaming\\Microsoft\\Windows\Recent";
+
+        public event UpdateProgressDelegate UpdateProgress;
         #endregion
 
         /// <summary>
@@ -24,6 +27,7 @@ namespace WinFo.Service.Usage.Win7
         {
             List<OpenedFileEntry> recentlyOpenedFiles = new List<OpenedFileEntry>();
 
+            int counter = 0;
             try
             {
                 string recentFolderPath = Environment.ExpandEnvironmentVariables(_RECENTLY_OPENED_PATH);
@@ -33,12 +37,10 @@ namespace WinFo.Service.Usage.Win7
                 {
                     try
                     {
-                        if (file.Contains("iso"))
-                        {
-                            Console.WriteLine("iso found " + file);
-                        }
+                        
                         if (file.EndsWith("lnk"))
                         {
+                            UpdateProgress($"Searching for recently opened file entries, found so far: {++counter}");
                             IWshShell shell = new WshShell();
                             if (shell.CreateShortcut(file) is IWshShortcut lnk)
                             {
@@ -77,7 +79,9 @@ namespace WinFo.Service.Usage.Win7
                 MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
             }
 
-            MyDebugger.Instance.LogMessage($"Loaded {recentlyOpenedFiles.Count} recently opened file entries.", DebugVerbocity.Informational);
+            string logMessage = $"Loaded {recentlyOpenedFiles.Count} recently opened entries.";
+            MyDebugger.Instance.LogMessage(logMessage, DebugVerbocity.Informational);
+            UpdateProgress(logMessage);
             return recentlyOpenedFiles;
         }
     }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WinFo.Model.Usage;
 using WinFo.Service;
 using WinFo.Service.Usage;
+using WinFo.Service.Utility;
 
 namespace WinFo.ViewModel
 {
@@ -16,20 +17,20 @@ namespace WinFo.ViewModel
     public class RecentlyUsedEntryViewModel : BaseViewModel
     {
         #region fields
-        private ObservableCollection<RunBarEntry> _recentRunBarEntries = new ObservableCollection<RunBarEntry>();
-        private ObservableCollection<MainWindowCacheEntry> _recentWindowEntries = new ObservableCollection<MainWindowCacheEntry>();
-        private ObservableCollection<OpenedFileEntry> _recentlyOpenedFilesEntries = new ObservableCollection<OpenedFileEntry>();
-        private ObservableCollection<RecentDocument> _recentDocumentEntries = new ObservableCollection<RecentDocument>();
+        private List<RunBarEntry> _recentRunBarEntries = new List<RunBarEntry>();
+        private List<MainWindowCacheEntry> _recentWindowEntries = new List<MainWindowCacheEntry>();
+        private List<OpenedFileEntry> _recentlyOpenedFilesEntries = new List<OpenedFileEntry>();
+        private List<RecentDocument> _recentDocumentEntries = new List<RecentDocument>();
 
         #endregion
 
         #region properties
-        public ObservableCollection<RunBarEntry> RecentRunBarEntries { get => _recentRunBarEntries; set => _recentRunBarEntries = value; }
-        public ObservableCollection<MainWindowCacheEntry> RecentWindowEntries { get => _recentWindowEntries; set => _recentWindowEntries = value; }
-        public ObservableCollection<OpenedFileEntry> RecentlyOpenedFilesEntries { get => _recentlyOpenedFilesEntries; set => _recentlyOpenedFilesEntries = value; }
-        public ObservableCollection<RecentDocument> RecentDocumentEntries { get => _recentDocumentEntries; set => _recentDocumentEntries = value; }
+        public List<RunBarEntry> RecentRunBarEntries { get => _recentRunBarEntries; set => _recentRunBarEntries = value; }
+        public List<MainWindowCacheEntry> RecentWindowEntries { get => _recentWindowEntries; set => _recentWindowEntries = value; }
+        public List<OpenedFileEntry> RecentlyOpenedFilesEntries { get => _recentlyOpenedFilesEntries; set => _recentlyOpenedFilesEntries = value; }
+        public List<RecentDocument> RecentDocumentEntries { get => _recentDocumentEntries; set => _recentDocumentEntries = value; }
         #endregion
-
+        
         public async void UpdateRecentlyUsedEntryViewModel()
         {
             IsModelInformationBeingUpdated = true;
@@ -41,56 +42,45 @@ namespace WinFo.ViewModel
             IRecentlyOpenedFileService rofs = sf.CreateRecentlyOpenedFileService();
             IRecentDocumentService rds = sf.CreateRecentDocumentService();
 
-            ModelInformationUpdateProgress = "Fetching opened file history...";
-
-            List<OpenedFileEntry> openedFileList = await Task.Run(() =>
+            rds.UpdateProgress += UpdateModelInformation;
+            rofs.UpdateProgress += UpdateModelInformation;
+            
+            ModelInformationUpdateProgress = "Searching for recently opened files...";
+            
+            RecentlyOpenedFilesEntries = await Task.Run(() =>
             {
                 return rofs.GetRecentlyOpenedFiles();
             });
+            
+            RaisePropertyChanged("RecentlyOpenedFilesEntries");
 
-            foreach (OpenedFileEntry entry in openedFileList)
-            {
-                _recentlyOpenedFilesEntries.Add(entry);
-            }
+            ModelInformationUpdateProgress = "Searching for recent run bar entries...";
 
-            ModelInformationUpdateProgress = "Fetching run bar history...";
-
-            List<RunBarEntry> runBarList = await Task.Run(() =>
+            RecentRunBarEntries = await Task.Run(() =>
             {
                 return rus.GetRecentlRunBarEntries();
             });
 
-            foreach (RunBarEntry entry in runBarList)
-            {
-                _recentRunBarEntries.Add(entry);
-            }
+            RaisePropertyChanged("RecentRunBarEntries");
 
-            ModelInformationUpdateProgress = "Fetching main window cache history...";
+            ModelInformationUpdateProgress = "Searching for main window cache entries...";
 
-            List<MainWindowCacheEntry> cacheList = await Task.Run(() =>
+            RecentWindowEntries = await Task.Run(() =>
             {
                 return mwcs.GetMainWindowCache();
             });
 
+            RaisePropertyChanged("RecentWindowEntries");
+            
 
-            foreach (MainWindowCacheEntry entry in cacheList)
-            {
-                _recentWindowEntries.Add(entry);
+            ModelInformationUpdateProgress = "Searching for recent documents entries...";
 
-            }
-
-
-            ModelInformationUpdateProgress = "Fetching recent documents...";
-
-            List<RecentDocument> recentDocumentList = await Task.Run(() =>
+            RecentDocumentEntries = await Task.Run(() =>
             {
                 return rds.GetRecentDocuments();
             });
 
-            foreach (RecentDocument document in recentDocumentList)
-            {
-                _recentDocumentEntries.Add(document);
-            }
+            RaisePropertyChanged("RecentDocumentEntries");
 
             IsModelInformationBeingUpdated = false;
         }

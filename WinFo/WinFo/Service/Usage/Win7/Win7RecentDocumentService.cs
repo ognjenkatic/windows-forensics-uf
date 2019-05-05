@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinFo.Model.Usage;
 using WinFo.Service.MyDebug;
+using WinFo.Service.Utility;
 
 namespace WinFo.Service.Usage.Win7
 {
@@ -14,6 +15,8 @@ namespace WinFo.Service.Usage.Win7
     {
         #region fields
         private static string _RECENT_DOCUMENTS = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs";
+        
+        public event UpdateProgressDelegate UpdateProgress;
         #endregion
 
         /// <summary>
@@ -32,6 +35,7 @@ namespace WinFo.Service.Usage.Win7
 
                 foreach (string subkeyName in subkeys)
                 {
+                    UpdateProgress("Working on key "+subkeyName);
                     RegistryKey subkey = recentDocumentsRegistryKey.OpenSubKey(subkeyName);
 
                     string[] documentEntries = subkey.GetValueNames();

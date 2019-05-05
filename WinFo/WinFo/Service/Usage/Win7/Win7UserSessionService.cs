@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinFo.Service.MyDebug;
+using WinFo.Service.Utility;
 using WinFo.Usage.Model;
 
 namespace WinFo.Service.Usage.Win7
@@ -27,6 +28,8 @@ namespace WinFo.Service.Usage.Win7
         private static string _USER_SESSION_LOG_NAME = "Security";
 
         private int _shutdown_counter = 0;
+
+        public event UpdateProgressDelegate UpdateProgress;
 
         #endregion
 
@@ -81,9 +84,11 @@ namespace WinFo.Service.Usage.Win7
                 EventLog eventLog = new EventLog();
                 eventLog.Log = _USER_SESSION_LOG_NAME;
 
+                int counter = 0;
                 // iterate over events and add the ones of interest to the dictionary
                 foreach (EventLogEntry ele in eventLog.Entries)
                 {
+                    UpdateProgress($"Searching for user session entries, processed {++counter}/{eventLog.Entries.Count} events found ({Math.Round(100.0 * counter / eventLog.Entries.Count)}%).");
                     // extract the event id part of instance id
                     int eventId = (UInt16)ele.InstanceId;
 
@@ -103,8 +108,10 @@ namespace WinFo.Service.Usage.Win7
 
                             int logonTypeId = Convert.ToInt32(ele.ReplacementStrings[8]);
 
+                            // TO-DO - make this statement less hackey. It filters out the uninteresting usernames of UMFD and DWM
                             if (logonTypeId != _INTERACTIVE_LOGON_TYPE_CODE && logonTypeId != _REMOTE_INTERFACTIVE_LOGON_TYPE_CODE ||
-                                sessionsDictionary.ContainsKey(identifier) || (username != null && ele.ReplacementStrings[5] != username))
+                                sessionsDictionary.ContainsKey(identifier) || (username != null && ele.ReplacementStrings[5] != username) || ele.ReplacementStrings[5].StartsWith("DWM") 
+                                || ele.ReplacementStrings[5].StartsWith("UMFD"))
                                 continue;
                             else
                             {
@@ -112,7 +119,6 @@ namespace WinFo.Service.Usage.Win7
                                 us.LogonID = ele.ReplacementStrings[7];
                                 us.Username = ele.ReplacementStrings[5];
                                 us.Beginning = ele.TimeGenerated;
-
                                 if (logonTypeId == _INTERACTIVE_LOGON_TYPE_CODE)
                                     us.Type = SessionType.LocalUser;
                                 else if (logonTypeId == _REMOTE_INTERFACTIVE_LOGON_TYPE_CODE)
@@ -140,6 +146,10 @@ namespace WinFo.Service.Usage.Win7
             {
                 MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
             }
+
+            string logMessage = $"Loaded {validSessions.Count} user sessions.";
+            MyDebugger.Instance.LogMessage(logMessage, DebugVerbocity.Informational);
+            UpdateProgress(logMessage);
 
             return validSessions;
         }

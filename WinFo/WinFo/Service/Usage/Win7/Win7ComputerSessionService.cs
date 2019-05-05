@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinFo.Service.MyDebug;
+using WinFo.Service.Utility;
 using WinFo.Usage.Model;
 
 namespace WinFo.Service.Usage.Win7
@@ -22,6 +23,7 @@ namespace WinFo.Service.Usage.Win7
         
         private static string _COMPUTER_SESSION_LOG_NAME = "System";
 
+        public event UpdateProgressDelegate UpdateProgress;
         #endregion
 
         /// <summary>
@@ -39,8 +41,10 @@ namespace WinFo.Service.Usage.Win7
                 EventLogEntry startev = null;
                 EventLogEntry endev = null;
 
+                int counter = 0;
                 foreach (EventLogEntry ele in el.Entries)
                 {
+                    UpdateProgress($"Searching for computer session entries, processed {++counter}/{el.Entries.Count} events found ({Math.Round(100.0*counter/el.Entries.Count)}%).");
                     int eventId = (UInt16)ele.InstanceId;
 
                     if (eventId == _STARTUP_INDICATOR_EVENT_ID)
@@ -70,6 +74,9 @@ namespace WinFo.Service.Usage.Win7
                 MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
             }
 
+            string logMessage = $"Loaded {sessions.Count} computer sessions.";
+            MyDebugger.Instance.LogMessage(logMessage, DebugVerbocity.Informational);
+            UpdateProgress(logMessage);
             return sessions;
         }
     }

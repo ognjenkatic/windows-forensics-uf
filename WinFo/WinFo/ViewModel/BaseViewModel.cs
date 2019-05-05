@@ -49,6 +49,11 @@ namespace WinFo.ViewModel
             }
         }
 
+        protected void UpdateModelInformation(string information)
+        {
+            ModelInformationUpdateProgress = information;
+        }
+
         protected void RaisePropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
