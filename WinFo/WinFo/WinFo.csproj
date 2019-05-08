@@ -156,6 +156,7 @@
     <Compile Include="Service\Usage\IWindowsServiceService.cs" />
     <Compile Include="Service\Usage\IUserSessionService.cs" />
     <Compile Include="Service\Usage\IWLANSessionService.cs" />
+    <Compile Include="Service\Usage\Win10\Win10ComputerSessionService.cs" />
     <Compile Include="Service\Usage\Win7\RegQueryInformationHelper.cs" />
     <Compile Include="Service\Usage\Win7\Win7ARPTableService.cs" />
     <Compile Include="Service\Usage\Win7\IPHelperNetTableWrapper.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Service\Utility\MemoryDisplayFormatter.cs" />
     <Compile Include="Service\Utility\ProgressDelegate.cs" />
     <Compile Include="Service\Utility\IVerboseService.cs" />
+    <Compile Include="Service\Win10ServiceFactory.cs" />
     <Compile Include="Service\Win7ServiceFactory.cs" />
     <Compile Include="ViewModel\ARPTableViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -382,7 +384,6 @@
   <ItemGroup>
     <Folder Include="CustomControl\" />
     <Folder Include="Service\Configuration\Win10\" />
-    <Folder Include="Service\Usage\Win10\" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="IWshRuntimeLibrary">

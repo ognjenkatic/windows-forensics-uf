@@ -66,7 +66,14 @@
                     </lvc:CartesianChart>
                 </Grid>
                 <Expander Header="Computer Sessions">
-                    <DataGrid ItemsSource="{Binding Path=ComputerSessions}" Margin="10"></DataGrid>
+                    <DataGrid ItemsSource="{Binding Path=ComputerSessions}" Margin="10" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Machine name" Binding="{Binding MachineName}"/>
+                            <DataGridTextColumn Header="Beginning" Binding="{Binding Beginning}"/>
+                            <DataGridTextColumn Header="End"  Binding="{Binding End}"/>
+                            <DataGridTextColumn Header="Duration" Binding="{Binding Duration, StringFormat=dd\\:hh\\:mm\\:ss}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Expander>
             </StackPanel>
         </ScrollViewer>
