@@ -298,10 +298,16 @@ namespace WinFo.ViewModel
                 {
                     UserSessions.Add(session);
 
+                    //TO-DO clean up and optimize
                     int day = (int)session.Beginning.DayOfWeek;
 
                     int logonHour = session.Beginning.Hour;
                     int logoffHour = session.End.Hour;
+
+                    int durationDays = (int)Math.Floor((session.Beginning.Hour + (session.Beginning.Minute / 60) + session.Duration.TotalHours) / 24);
+
+                    int firstDayDuration = (logoffHour < logonHour || session.Duration.TotalHours >= 24) ? firstDayDuration = 24 - logonHour : 0;
+                    int leftoverDayDuration = (int)Math.Floor((session.Duration.TotalHours - firstDayDuration) % 24);
 
                     int logonHourIndex = (int)Math.Ceiling(logonHour / 2.0) - 1;
                     int logoffHourIndex = (int)Math.Ceiling(logoffHour / 2.0) - 1;
@@ -322,7 +328,13 @@ namespace WinFo.ViewModel
                         UserSessionDurationCounts.Add(session.Username, new int[24]);
 
                     if (!_userSessionDurationByDayOfWeek.ContainsKey(session.Username))
+                    {
                         _userSessionDurationByDayOfWeek.Add(session.Username, new Dictionary<int, List<int>>());
+                        for(int i = 0; i < 7; i++)
+                        {
+                            _userSessionDurationByDayOfWeek[session.Username].Add(i, new List<int>());
+                        }
+                    }
 
                     if (session.Duration.TotalHours < 23)
                         UserSessionDurationCounts[session.Username][(int)Math.Floor((double)session.Duration.Hours)]++;
@@ -332,11 +344,17 @@ namespace WinFo.ViewModel
                     UserLoginHoursCounts[session.Username][logonHourIndex]++;
                     UserLogoffHoursCounts[session.Username][logoffHourIndex]++;
 
-                    if (!_userSessionDurationByDayOfWeek[session.Username].ContainsKey(day))
-                        _userSessionDurationByDayOfWeek[session.Username].Add(day, new List<int>());
 
-                    _userSessionDurationByDayOfWeek[session.Username][day].Add((int)Math.Ceiling(session.Duration.TotalHours));
+                    for (int i = 0; i < durationDays; i++)
+                    {
+                        if (i == 0)
+                            _userSessionDurationByDayOfWeek[session.Username][(day + i) % 7].Add(firstDayDuration);
+                        else
+                            _userSessionDurationByDayOfWeek[session.Username][(day + i) % 7].Add(24);
+                    }
 
+                   
+                    _userSessionDurationByDayOfWeek[session.Username][(day + durationDays) % 7].Add(leftoverDayDuration);
 
                 }
 
@@ -353,7 +371,7 @@ namespace WinFo.ViewModel
 
                         int median = 0;
                         //TO-DO fix displaying hours for outliers. Activity in some week days may not be representative if it is not repeated often enough
-                        if (day.Value.Count > 3)
+                        if (day.Value.Count > 0)
                             median = day.Value[(int)Math.Floor((double)(day.Value.Count / 2))];
 
                         cs.Values.Add(median);

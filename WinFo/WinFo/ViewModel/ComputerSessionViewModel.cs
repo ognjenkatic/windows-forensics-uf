@@ -287,8 +287,15 @@ namespace WinFo.ViewModel
                 {
                     int day = (int)session.Beginning.DayOfWeek;
 
+
+                    //TO-DO clean up and optimize
                     int logonHour = session.Beginning.Hour;
                     int logoffHour = session.End.Hour;
+
+                    int durationDays = (int)Math.Floor((session.Beginning.Hour + (session.Beginning.Minute/60)+session.Duration.TotalHours )/ 24);
+                   
+                    int firstDayDuration = (logoffHour < logonHour || session.Duration.TotalHours >= 24) ? firstDayDuration = 24 - logonHour: 0;
+                    int leftoverDayDuration = (int)Math.Floor((session.Duration.TotalHours-firstDayDuration) % 24);
 
                     int logonHourIndex = (int)Math.Ceiling(logonHour / 2.0) - 1;
                     int logoffHourIndex = (int)Math.Ceiling(logoffHour / 2.0) - 1;
@@ -305,8 +312,15 @@ namespace WinFo.ViewModel
                     StartupHoursCounts[logonHourIndex]++;
                     ShutdownHoursCounts[logoffHourIndex]++;
                     
-                    _sessionDurationByDayOfWeek[day].Add((int)Math.Ceiling(session.Duration.TotalHours));
+                    for(int i = 0; i < durationDays; i++)
+                    {
+                        if (i==0)
+                            _sessionDurationByDayOfWeek[(day + i)%7].Add(firstDayDuration);
+                        else
+                            _sessionDurationByDayOfWeek[(day + i)%7].Add(24);
+                    }
 
+                    _sessionDurationByDayOfWeek[(day + durationDays)%7].Add(leftoverDayDuration);
 
                 }
 
@@ -320,9 +334,9 @@ namespace WinFo.ViewModel
 
                     int median = 0;
                     //TO-DO fix displaying hours for outliers. Activity in some week days may not be representative if it is not repeated often enough
-                    if (day.Value.Count > 3)
+                    if (day.Value.Count > 0)
                         median = day.Value[(int)Math.Floor((double)(day.Value.Count / 2))];
-
+                    
                     cs.Values.Add(median);
                 }
 
