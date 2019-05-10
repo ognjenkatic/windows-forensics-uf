@@ -15,20 +15,32 @@ namespace WinFo.ViewModel
     /// </summary>
     public class InstalledProgramsViewModel : BaseViewModel
     {
-        private ObservableCollection<InstalledProgram> _installedPrograms = new ObservableCollection<InstalledProgram>();
+        private List<InstalledProgram> _installedPrograms = new List<InstalledProgram>();
 
-        public ObservableCollection<InstalledProgram> InstalledPrograms { get => _installedPrograms; set => _installedPrograms = value; }
+        public List<InstalledProgram> InstalledPrograms { get => _installedPrograms; set => _installedPrograms = value; }
 
-        public InstalledProgramsViewModel()
+        public async void AsyncUpdateInstalledProgramsInformation()
         {
+            IsModelInformationBeingUpdated = true;
+
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
             IInstalledProgramService ips = sf.CreateInstalledProgramService();
 
-            foreach(InstalledProgram ip in ips.GetInstalledPrograms())
+            ModelInformationUpdateProgress = "Loading installed programs information...";
+
+            InstalledPrograms = await Task.Run(() =>
             {
-                _installedPrograms.Add(ip);
-            }
+                return ips.GetInstalledPrograms();
+            });
+
+            RaisePropertyChanged("InstalledPrograms");
+
+            IsModelInformationBeingUpdated = false;
+        }
+        public InstalledProgramsViewModel()
+        {
+            AsyncUpdateInstalledProgramsInformation();
         }
     }
 }

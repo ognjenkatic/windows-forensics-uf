@@ -11,7 +11,7 @@ namespace WinFo.ViewModel
 {
     public class GroupUserViewModel : BaseViewModel
     {
-        private Dictionary<UserGroup, List<User>> _groupUserData;
+        private Dictionary<UserGroup, List<User>> _groupUserData = new Dictionary<UserGroup, List<User>>();
 
         private User _selectedUser;
 
@@ -77,10 +77,12 @@ namespace WinFo.ViewModel
             }
         }
 
-        private async void UpdateGroupUserInformation()
+        private async void AsyncUpdateGroupUserInformation()
         {
             IsModelInformationBeingUpdated = true;
-            
+
+            ModelInformationUpdateProgress = "Loading user and group information...";
+
             GroupUserData = await Task.Run(() =>
             {
                 IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
@@ -95,8 +97,7 @@ namespace WinFo.ViewModel
 
         public GroupUserViewModel()
         {
-            GroupUserData = new Dictionary<UserGroup, List<User>>();
-            UpdateGroupUserInformation();
+            AsyncUpdateGroupUserInformation();
         }
     }
 }

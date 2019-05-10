@@ -199,7 +199,7 @@ namespace WinFo.ViewModel
             _processesDataWrittenSeriesCollection = new SeriesCollection();
             _processesMemoryUsageSeriesCollection = new SeriesCollection();
 
-            UpdateProcessTreeInformation();
+            AsyncUpdateProcessTreeInformation();
         }
         #endregion
         private void ParseSelectedProcessPID()
@@ -232,7 +232,7 @@ namespace WinFo.ViewModel
             return columnSeries;
         }
 
-        public async void UpdateProcessTreeInformation()
+        public async void AsyncUpdateProcessTreeInformation()
         {
             IsModelInformationBeingUpdated = true;
             ModelInformationUpdateProgress = "Fetching process data...";

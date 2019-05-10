@@ -15,20 +15,34 @@ namespace WinFo.ViewModel
     /// </summary>
     public class ARPTableViewModel : BaseViewModel
     {
-        private ObservableCollection<ARPEntry> _arpEntries = new ObservableCollection<ARPEntry>();
+        private List<ARPEntry> _arpEntries = new List<ARPEntry>();
 
-        public ObservableCollection<ARPEntry> ArpEntries { get => _arpEntries; set => _arpEntries = value; }
+        public List<ARPEntry> ArpEntries { get => _arpEntries; set => _arpEntries = value; }
 
-        public ARPTableViewModel()
+
+        public async void AsyncUpdateArpTableInformation()
         {
+            IsModelInformationBeingUpdated = true;
+            
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
             IARPTableService ats = sf.CreateARPTableService();
 
-            foreach(ARPEntry ae in ats.GetARPEntries())
+            ModelInformationUpdateProgress = "Loading ARP data...";
+
+            ArpEntries = await Task.Run(() =>
             {
-                _arpEntries.Add(ae);
-            }
+                return ats.GetARPEntries();
+            });
+
+            RaisePropertyChanged("ArpEntries");
+
+            IsModelInformationBeingUpdated = false;
+
+        }
+        public ARPTableViewModel()
+        {
+            AsyncUpdateArpTableInformation();
         }
     }
 }

@@ -14,9 +14,6 @@
     <Window.DataContext>
         <local:ProcessTreeViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="Bvc"/>
-    </Window.Resources>
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>

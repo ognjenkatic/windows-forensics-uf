@@ -10,9 +10,6 @@
     <Window.DataContext>
         <local:ShareViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="Bvc"/>
-    </Window.Resources>
     <Grid>
         <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" />
         <DataGrid IsReadOnly="True" ItemsSource="{Binding Path=Shares}" Margin="10"/>

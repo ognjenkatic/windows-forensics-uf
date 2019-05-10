@@ -181,7 +181,6 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BIOSViewModel.cs" />
     <Compile Include="ViewModel\ComputerSessionViewModel.cs" />
-    <Compile Include="ViewModel\ComputerSystemViewModel.cs" />
     <Compile Include="ViewModel\CPUInfoViewModel.cs" />
     <Compile Include="ViewModel\DiskDriveViewModel.cs" />
     <Compile Include="ViewModel\DiskPartitionViewModel.cs" />

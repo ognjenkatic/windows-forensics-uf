@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinFo.ViewModel"
+        xmlns:view="clr-namespace:WinFo.View"
         mc:Ignorable="d"
         Title="IP4RoutingTableView" Height="450" Width="800"
         Background="{StaticResource BPBackgroundGradient}"
@@ -12,6 +13,7 @@
         <local:IP4RoutingTableViewModel/>
     </Window.DataContext>
     <Grid>
+        <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}"/>
         <DataGrid IsReadOnly="True" ItemsSource="{Binding Path=IP4Routes}" Margin="10"/>
     </Grid>
 </Window>

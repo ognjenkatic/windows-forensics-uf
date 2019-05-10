@@ -31,7 +31,7 @@ namespace WinFo.ViewModel
         public List<RecentDocument> RecentDocumentEntries { get => _recentDocumentEntries; set => _recentDocumentEntries = value; }
         #endregion
         
-        public async void UpdateRecentlyUsedEntryViewModel()
+        public async void AsyncUpdateRecentlyUsedEntryViewModel()
         {
             IsModelInformationBeingUpdated = true;
 
@@ -87,7 +87,7 @@ namespace WinFo.ViewModel
 
         public RecentlyUsedEntryViewModel()
         {
-            UpdateRecentlyUsedEntryViewModel();
+            AsyncUpdateRecentlyUsedEntryViewModel();
         }
     }
 }

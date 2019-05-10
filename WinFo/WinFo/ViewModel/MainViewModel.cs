@@ -368,7 +368,7 @@ namespace WinFo.ViewModel
             
         }
 
-        public async void UpdateSystemInformation(object parameter = null)
+        public async void AsyncUpdateSystemInformation(object parameter = null)
         {
 
             IsModelInformationBeingUpdated = true;
@@ -409,9 +409,9 @@ namespace WinFo.ViewModel
         {
             LoadWindowCommand = new ViewModelCommand(LoadWindow, CanLoadWindow);
 
-            UpdateSystemInformationCommand = new ViewModelCommand(UpdateSystemInformation, CanUpdateSystemInformation);
+            UpdateSystemInformationCommand = new ViewModelCommand(AsyncUpdateSystemInformation, CanUpdateSystemInformation);
 
-            UpdateSystemInformation();
+            AsyncUpdateSystemInformation();
         }
 
     }

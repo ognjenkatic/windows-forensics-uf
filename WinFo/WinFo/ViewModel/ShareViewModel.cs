@@ -33,7 +33,7 @@ namespace WinFo.ViewModel
             }
         }
         
-        public async void UpdateShareInformation()
+        public async void AsyncUpdateShareInformation()
         {
             IsModelInformationBeingUpdated = true;
             List<Share> shares = await Task.Run(() =>
@@ -52,7 +52,7 @@ namespace WinFo.ViewModel
         }
         public ShareViewModel()
         {
-            UpdateShareInformation();
+            AsyncUpdateShareInformation();
         }
     }
 }

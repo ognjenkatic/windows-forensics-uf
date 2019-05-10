@@ -15,12 +15,12 @@ namespace WinFo.ViewModel
     /// </summary
     public class IP4RoutingTableViewModel : BaseViewModel
     {
-        private ObservableCollection<IP4Route> _ip4Routes = new ObservableCollection<IP4Route>();
+        private List<IP4Route> _ip4Routes = new List<IP4Route>();
 
         /// <summary>
         /// A collection of IP4 routes
         /// </summary>
-        public ObservableCollection<IP4Route> IP4Routes
+        public List<IP4Route> IP4Routes
         {
             get
             {
@@ -32,18 +32,28 @@ namespace WinFo.ViewModel
             }
         }
 
-        public IP4RoutingTableViewModel()
+        public async void AsyncUpdateIp4RoutingTableInformation()
         {
+            IsModelInformationBeingUpdated = true;
+
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
             IIP4RoutingTableService ip4rt = sf.CreateIP4RoutingTableService();
 
-            List<IP4Route> routes = ip4rt.GetRoutes();
+            ModelInformationUpdateProgress = "Loading Ip4 routing data...";
 
-            foreach (IP4Route route in routes)
+            IP4Routes = await Task.Run(() =>
             {
-                _ip4Routes.Add(route);
-            }
+                return ip4rt.GetRoutes();
+            });
+
+            RaisePropertyChanged("IP4Routes");
+
+            IsModelInformationBeingUpdated = false;
+        }
+        public IP4RoutingTableViewModel()
+        {
+            AsyncUpdateIp4RoutingTableInformation();
         }
     }
 }

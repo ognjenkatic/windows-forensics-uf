@@ -35,10 +35,11 @@ namespace WinFo.ViewModel
 
 
 
-        public async void UpdateBiosInformation()
+        public async void AsyncUpdateBiosInformation()
         {
             IsModelInformationBeingUpdated = true;
 
+            ModelInformationUpdateProgress = "Loading BIOS data...";
             Bios = await Task.Run(() =>
             {
                 IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
@@ -53,7 +54,7 @@ namespace WinFo.ViewModel
 
         public BIOSViewModel()
         {
-            UpdateBiosInformation();
+            AsyncUpdateBiosInformation();
         }
     }
 }

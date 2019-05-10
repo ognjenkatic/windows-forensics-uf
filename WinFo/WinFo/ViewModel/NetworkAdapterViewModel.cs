@@ -32,7 +32,7 @@ namespace WinFo.ViewModel
             }
         }
 
-        public async void UpdateNetworkAdapterInformation(object parameter = null)
+        public async void AsyncUpdateNetworkAdapterInformation(object parameter = null)
         {
             IsModelInformationBeingUpdated = true;
             List<NetworkAdapter> nads = await Task.Run(() =>
@@ -61,9 +61,9 @@ namespace WinFo.ViewModel
 
         public NetworkAdapterViewModel()
         {
-            UpdateNetworkAdapterInformationCommand = new ViewModelCommand(UpdateNetworkAdapterInformation, CanUpdateNetworkAdapterInformation);
+            UpdateNetworkAdapterInformationCommand = new ViewModelCommand(AsyncUpdateNetworkAdapterInformation, CanUpdateNetworkAdapterInformation);
 
-            UpdateNetworkAdapterInformation();
+            AsyncUpdateNetworkAdapterInformation();
         }
     }
 }

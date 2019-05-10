@@ -11,9 +11,6 @@
     <Window.DataContext>
         <local:UserSessionViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="Bvc"/>
-    </Window.Resources>
     <Grid Background="{DynamicResource BPBackgroundGradient}">
         <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}" />
         <ScrollViewer VerticalScrollBarVisibility="Auto">

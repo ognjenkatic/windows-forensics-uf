@@ -16,7 +16,7 @@ namespace WinFo.ViewModel
     public class EnvironmentVariableViewModel : BaseViewModel
     {
         #region fields
-        private ObservableCollection<EnvironmentVariable> _environmentVariables = new ObservableCollection<EnvironmentVariable>();
+        private List<EnvironmentVariable> _environmentVariables = new List<EnvironmentVariable>();
         #endregion
 
         #region methods
@@ -24,7 +24,7 @@ namespace WinFo.ViewModel
         /// <summary>
         /// A colelction of environment variables
         /// </summary>
-        public ObservableCollection<EnvironmentVariable> EnvironmentVariables
+        public List<EnvironmentVariable> EnvironmentVariables
         {
             get
             {
@@ -38,18 +38,30 @@ namespace WinFo.ViewModel
 
         #endregion
 
-        public EnvironmentVariableViewModel()
+        public async void AsyncUpdateEnvironmentVariableInformation()
         {
+            IsModelInformationBeingUpdated = true;
+
+            
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
             IEnvironmentVariableService evs = sf.CreateEnvironmentVariableService();
 
-            List<EnvironmentVariable> environmentVariables = evs.GetEnvironmentVariables();
+            ModelInformationUpdateProgress = "Loading environment variable information...";
 
-            foreach(EnvironmentVariable ev in environmentVariables)
+            EnvironmentVariables = await Task.Run(() =>
             {
-                _environmentVariables.Add(ev);
-            }
+                return evs.GetEnvironmentVariables();
+            });
+
+            RaisePropertyChanged("EnvironmentVariables");
+
+            IsModelInformationBeingUpdated = false;
+            
+        }
+        public EnvironmentVariableViewModel()
+        {
+            AsyncUpdateEnvironmentVariableInformation();
         }
     }
 }

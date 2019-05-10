@@ -12,9 +12,6 @@
     <Window.DataContext>
         <local:RecentlyUsedEntryViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="Bvc"/>
-    </Window.Resources>
     <Grid>
         <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}"/>
         <ScrollViewer VerticalScrollBarVisibility="Visible">

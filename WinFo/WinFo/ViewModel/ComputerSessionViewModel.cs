@@ -249,7 +249,7 @@ namespace WinFo.ViewModel
             }
         }
 
-        public async void UpdateComputerSessionInformation()
+        public async void AsyncUpdateComputerSessionInformation()
         {
             IsModelInformationBeingUpdated = true;
 
@@ -258,6 +258,8 @@ namespace WinFo.ViewModel
             IComputerSessionService css = sf.CreateComputerSessionService();
 
             css.UpdateProgress += UpdateModelInformation;
+
+            ModelInformationUpdateProgress = "Loading computer session data...";
 
             ComputerSessions = await Task.Run(() =>
             {
@@ -378,7 +380,7 @@ namespace WinFo.ViewModel
         }
         public ComputerSessionViewModel()
         {
-            UpdateComputerSessionInformation();
+            AsyncUpdateComputerSessionInformation();
         }
     }
 }

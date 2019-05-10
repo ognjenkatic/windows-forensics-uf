@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinFo.ViewModel"
         xmlns:model="clr-namespace:WinFo.Model.Usage"
+        xmlns:view="clr-namespace:WinFo.View"
         mc:Ignorable="d"
         Title="ARPTableView" Height="450" Width="800"
         Background="{StaticResource BPBackgroundGradient}" WindowState="Maximized" WindowStartupLocation="CenterScreen" >
@@ -12,7 +13,7 @@
         <local:ARPTableViewModel/>
     </Window.DataContext>
     <Grid>
+        <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}"/>
         <DataGrid Margin="10" IsReadOnly="True" ItemsSource="{Binding Path=ArpEntries}"  />
-
     </Grid>
 </Window>
