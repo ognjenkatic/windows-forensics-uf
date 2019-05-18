@@ -15,20 +15,33 @@ namespace WinFo.ViewModel
     /// </summary>
     public class WLANSessionViewModel : BaseViewModel
     {
-        private ObservableCollection<WLANSession> sessions = new ObservableCollection<WLANSession>();
+        private List<WLANSession> sessions = new List<WLANSession>();
 
-        public ObservableCollection<WLANSession> Sessions { get => sessions; set => sessions = value; }
+        public List<WLANSession> Sessions { get => sessions; set => sessions = value; }
 
-        public WLANSessionViewModel()
+        public async void AsyncUpdateWLANSessionInformation()
         {
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
             IWLANSessionService wss = sf.CreateWLANSessionService();
 
-            foreach(WLANSession session in wss.GetWLANSessions())
+            IsModelInformationBeingUpdated = true;
+
+            ModelInformationUpdateProgress = "Loading WLAN session data...";
+
+            Sessions = await Task.Run(() =>
             {
-                sessions.Add(session);
-            }
+                return wss.GetWLANSessions();
+            });
+
+            RaisePropertyChanged("Sessions");
+
+            IsModelInformationBeingUpdated = false;
+        }
+
+        public WLANSessionViewModel()
+        {
+            AsyncUpdateWLANSessionInformation();
         }
     }
 }

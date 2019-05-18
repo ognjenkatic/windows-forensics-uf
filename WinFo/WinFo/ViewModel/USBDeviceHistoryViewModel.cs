@@ -13,20 +13,35 @@ namespace WinFo.ViewModel
     /// <summary>
     /// View model for the usb history information
     /// </summary>
-    public class USBDeviceHistoryViewModel
+    public class USBDeviceHistoryViewModel : BaseViewModel
     {
-        private ObservableCollection<USBDeviceHistoryEntry> _history = new ObservableCollection<USBDeviceHistoryEntry>();
+        private List<USBDeviceHistoryEntry> _history = new List<USBDeviceHistoryEntry>();
 
-        public ObservableCollection<USBDeviceHistoryEntry> History { get => _history; set => _history = value; }
+        public List<USBDeviceHistoryEntry> History { get => _history; set => _history = value; }
 
-        public USBDeviceHistoryViewModel()
+        public async void AsyncUpdateUSBDeviceHistoryInformation()
         {
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
             IUSBDeviceHistoryService dhs = sf.CreateUSBDeviceHistoryService();
 
-            foreach (USBDeviceHistoryEntry entry in dhs.GetUSBDeviceHistory())
-                _history.Add(entry);
+            IsModelInformationBeingUpdated = true;
+
+            ModelInformationUpdateProgress = "Loading USB History data...";
+
+            History = await Task.Run(() =>
+            {
+                return dhs.GetUSBDeviceHistory();
+            });
+
+            RaisePropertyChanged("History");
+
+            IsModelInformationBeingUpdated = false;
+        }
+
+        public USBDeviceHistoryViewModel()
+        {
+            AsyncUpdateUSBDeviceHistoryInformation();
         }
     }
 }

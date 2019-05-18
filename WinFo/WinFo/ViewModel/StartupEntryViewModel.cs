@@ -13,10 +13,10 @@ namespace WinFo.ViewModel
     /// <summary>
     /// The view model for the startup entries
     /// </summary>
-    public class StartupEntryViewModel
+    public class StartupEntryViewModel : BaseViewModel
     {
         #region fields
-        private ObservableCollection<StartupEntry> _startupEntries = new ObservableCollection<StartupEntry>();
+        private List<StartupEntry> _startupEntries = new List<StartupEntry>();
 
         #endregion
 
@@ -24,7 +24,7 @@ namespace WinFo.ViewModel
         /// <summary>
         /// A collection of startup entries
         /// </summary>
-        public ObservableCollection<StartupEntry> StartupEntries
+        public List<StartupEntry> StartupEntries
         {
             get
             {
@@ -37,19 +37,29 @@ namespace WinFo.ViewModel
         }
         #endregion
 
-        public StartupEntryViewModel()
+        public async void AsyncUpdateStartupEntryInformation()
         {
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
             IStartupEntryService rs = sf.CreateStartupEntryService();
 
-            List<StartupEntry> entries = rs.GetStartupEntries();
+            IsModelInformationBeingUpdated = true;
 
-            foreach(StartupEntry entry in entries)
+            ModelInformationUpdateProgress = "Loading startup entry data...";
+
+            StartupEntries = await Task.Run(() =>
             {
-                _startupEntries.Add(entry);
-            }
+                return rs.GetStartupEntries();
+            });
 
+            RaisePropertyChanged("StartupEntries");
+
+            IsModelInformationBeingUpdated = false;
+        }
+
+        public StartupEntryViewModel()
+        {
+            AsyncUpdateStartupEntryInformation();
         }
     }
 }

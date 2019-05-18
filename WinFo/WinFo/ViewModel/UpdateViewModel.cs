@@ -13,26 +13,40 @@ namespace WinFo.ViewModel
     /// <summary>
     /// The view model for update information
     /// </summary>
-    public class UpdateViewModel
+    public class UpdateViewModel : BaseViewModel
     {
         #region fields
-        private ObservableCollection<Update> _updates = new ObservableCollection<Update>();
+        private List<Update> _updates = new List<Update>();
         #endregion
 
         #region properties
-        public ObservableCollection<Update> Updates { get => _updates; set => _updates = value; }
+        public List<Update> Updates { get => _updates; set => _updates = value; }
         #endregion
 
-        public UpdateViewModel()
+        public async void AsyncUpdateUpdateInformation()
         {
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
             IUpdateService ius = sf.CreateUpdateService();
 
-            foreach(Update ud in ius.GetUpdates())
+            IsModelInformationBeingUpdated = true;
+
+            ModelInformationUpdateProgress = "Loading update data...";
+
+            Updates = await Task.Run(() =>
             {
-                _updates.Add(ud);
-            }
+                return ius.GetUpdates();
+            });
+
+            RaisePropertyChanged("Updates");
+
+            IsModelInformationBeingUpdated = false;
+
+        }
+
+        public UpdateViewModel()
+        {
+            AsyncUpdateUpdateInformation();
         }
     }
 }

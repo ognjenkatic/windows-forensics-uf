@@ -267,7 +267,7 @@ namespace WinFo.ViewModel
         }
         #endregion
 
-        public async void UpdateUserSessionInformation()
+        public async void AsyncUpdateUserSessionInformation()
         {
             IsModelInformationBeingUpdated = true;
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
@@ -423,7 +423,7 @@ namespace WinFo.ViewModel
         }
         public UserSessionViewModel()
         {
-            UpdateUserSessionInformation();
+            AsyncUpdateUserSessionInformation();
         }
     }
 }

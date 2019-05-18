@@ -13,22 +13,35 @@ namespace WinFo.ViewModel
     /// <summary>
     /// The view model for service information
     /// </summary>
-    public class WindowsServiceViewModel
+    public class WindowsServiceViewModel : BaseViewModel
     {
-        ObservableCollection<WindowsService> _services = new ObservableCollection<WindowsService>();
+        private List<WindowsService> _services = new List<WindowsService>();
 
-        public ObservableCollection<WindowsService> Services { get => _services; set => _services = value; }
+        public List<WindowsService> Services { get => _services; set => _services = value; }
 
-        public WindowsServiceViewModel()
+        public async void AsyncUpdateWindowsServiceInformation()
         {
             IServiceFactory sf = ServiceFactoryProducer.GetServiceFactory();
 
             IWindowsServiceService wss = sf.CreateWindowsServiceService();
 
-            foreach(WindowsService ws in wss.GetServices())
+            IsModelInformationBeingUpdated = true;
+
+            ModelInformationUpdateProgress = "Loading service data...";
+
+            Services = await Task.Run(() =>
             {
-                _services.Add(ws);
-            }
+                return wss.GetServices();
+            });
+
+            RaisePropertyChanged("Services");
+
+            IsModelInformationBeingUpdated = false;
+        }
+
+        public WindowsServiceViewModel()
+        {
+            AsyncUpdateWindowsServiceInformation();
         }
     }
 }
