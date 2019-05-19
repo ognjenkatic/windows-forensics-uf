@@ -7,7 +7,7 @@
         xmlns:view="clr-namespace:WinFo.View"
         mc:Ignorable="d"
         Title="InstalledProgramView" Height="450" Width="800"
-        Background="{StaticResource BPBackgroundGradient}">
+        Background="{StaticResource BPBackgroundGradient}" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.DataContext>
         <local:InstalledProgramsViewModel/>
     </Window.DataContext>
