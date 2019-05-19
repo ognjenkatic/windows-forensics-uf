@@ -31,7 +31,7 @@ namespace WinFo.Service.Usage.Win7
             foreach (string subkeyName in installedProgramRegEntry.GetValueNames())
             {
                 object subkeyValue = installedProgramRegEntry.GetValue(subkeyName);
-
+                
                 if (subkeyValue != null)
                     switch (subkeyName)
                     {
@@ -42,7 +42,14 @@ namespace WinFo.Service.Usage.Win7
                             }
                         case ("InstallDate"):
                             {
-                                ip.InstallDate = DateTime.ParseExact(subkeyValue.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture);
+                                try
+                                {
+                                    ip.InstallDate = DateTime.ParseExact(subkeyValue.ToString(), new string[] { CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern, "ddMMyyyy","yyyyMMdd","MMddyyyy","yyyyddMM" }, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                                } catch (Exception exc)
+                                {
+                                    MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
+                                    ip.InstallDate = DateTime.MinValue;
+                                }
                                 break;
                             }
                         case ("Publisher"):
@@ -97,6 +104,8 @@ namespace WinFo.Service.Usage.Win7
                 {
                     RegistryKey installedProgramRegEntry = Registry.LocalMachine.OpenSubKey(_INSTALLED_PROGRAMS_PATH + "\\" + id);
                     InstalledProgram ip = ParseInstalledProgramFromKey(installedProgramRegEntry, id);
+                    if (ip.InstallDate == DateTime.MinValue)
+                        ip.InstallDate = RegQueryInformationHelper.GetLastWritten(installedProgramRegEntry);
                     if (!installedPrograms.Contains(ip))
                         installedPrograms.Add(ip);
                 }
@@ -105,6 +114,8 @@ namespace WinFo.Service.Usage.Win7
                 {
                     RegistryKey installedProgramRegEntry = Registry.CurrentUser.OpenSubKey(_INSTALLED_PROGRAMS_PATH + "\\" + id);
                     InstalledProgram ip = ParseInstalledProgramFromKey(installedProgramRegEntry, id);
+                    if (ip.InstallDate == DateTime.MinValue)
+                        ip.InstallDate = RegQueryInformationHelper.GetLastWritten(installedProgramRegEntry);
                     if (!installedPrograms.Contains(ip))
                         installedPrograms.Add(ip);
                 }
@@ -113,6 +124,8 @@ namespace WinFo.Service.Usage.Win7
                 {
                     RegistryKey installedProgramRegEntry = Registry.LocalMachine.OpenSubKey(_INSTALLED_PROGRAMS_x86_KEY_PATH + "\\" + id);
                     InstalledProgram ip = ParseInstalledProgramFromKey(installedProgramRegEntry, id);
+                    if (ip.InstallDate == DateTime.MinValue)
+                        ip.InstallDate = RegQueryInformationHelper.GetLastWritten(installedProgramRegEntry);
                     if (!installedPrograms.Contains(ip))
                         installedPrograms.Add(ip);
                 }
