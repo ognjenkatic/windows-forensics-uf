@@ -117,5 +117,10 @@ namespace WinFo.Service
         {
             return new Win7RecentDocumentService();
         }
+
+        public IUserAssistService CreateUserAssistService()
+        {
+            return new Win7UserAssistService();
+        }
     }
 }

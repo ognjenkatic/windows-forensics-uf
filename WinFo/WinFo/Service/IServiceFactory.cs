@@ -55,5 +55,7 @@ namespace WinFo.Service
 
         IRecentDocumentService CreateRecentDocumentService();
 
+        IUserAssistService CreateUserAssistService();
+
     }
 }

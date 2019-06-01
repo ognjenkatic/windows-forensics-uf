@@ -332,6 +332,12 @@ namespace WinFo.ViewModel
                             guv.ShowDialog();
                             break;
                         }
+                    case ("User Assist"):
+                        {
+                            UserAssistView uaw = new UserAssistView();
+                            uaw.ShowDialog();
+                            break;
+                        }
                 }
             }
             

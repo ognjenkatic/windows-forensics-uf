@@ -117,6 +117,7 @@
     <Compile Include="Model\Usage\RecentDocument.cs" />
     <Compile Include="Model\Usage\RunBarEntry.cs" />
     <Compile Include="Model\Usage\USBDeviceHistoryEntry.cs" />
+    <Compile Include="Model\Usage\UserAssistEntry.cs" />
     <Compile Include="Model\Usage\WindowsService.cs" />
     <Compile Include="Model\Usage\TCPConnection.cs" />
     <Compile Include="Model\Usage\Process.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Service\Usage\IRecentlyOpenedFileService.cs" />
     <Compile Include="Service\Usage\IRecentRunBarService.cs" />
     <Compile Include="Service\Usage\IUSBDeviceHistoryService.cs" />
+    <Compile Include="Service\Usage\IUserAssistService.cs" />
     <Compile Include="Service\Usage\IWindowsServiceService.cs" />
     <Compile Include="Service\Usage\IUserSessionService.cs" />
     <Compile Include="Service\Usage\IWLANSessionService.cs" />
@@ -168,6 +170,7 @@
     <Compile Include="Service\Usage\Win7\Win7ComputerSessionService.cs" />
     <Compile Include="Service\Usage\Win7\Win7RunBarService.cs" />
     <Compile Include="Service\Usage\Win7\Win7USBDeviceHistoryService.cs" />
+    <Compile Include="Service\Usage\Win7\Win7UserAssistService.cs" />
     <Compile Include="Service\Usage\Win7\Win7UserSessionService.cs" />
     <Compile Include="Service\Usage\Win7\IPHelperExtendedTCPTableWrapper.cs" />
     <Compile Include="Service\Usage\Win7\Win7WindowsServiceService.cs" />
@@ -175,6 +178,7 @@
     <Compile Include="Service\Utility\MemoryDisplayFormatter.cs" />
     <Compile Include="Service\Utility\ProgressDelegate.cs" />
     <Compile Include="Service\Utility\IVerboseService.cs" />
+    <Compile Include="Service\Utility\ROT13Decoder.cs" />
     <Compile Include="Service\Win10ServiceFactory.cs" />
     <Compile Include="Service\Win7ServiceFactory.cs" />
     <Compile Include="ViewModel\ARPTableViewModel.cs" />
@@ -197,6 +201,7 @@
     <Compile Include="ViewModel\ShareViewModel.cs" />
     <Compile Include="ViewModel\UpdateViewModel.cs" />
     <Compile Include="ViewModel\USBDeviceHistoryViewModel.cs" />
+    <Compile Include="ViewModel\UserAssistViewModel.cs" />
     <Compile Include="ViewModel\UserSessionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelCommand.cs" />
     <Compile Include="ViewModel\WindowsServiceViewModel.cs" />
@@ -248,6 +253,9 @@
     </Compile>
     <Compile Include="View\USBDeviceHistoryView.xaml.cs">
       <DependentUpon>USBDeviceHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserAssistView.xaml.cs">
+      <DependentUpon>UserAssistView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserSessionView.xaml.cs">
       <DependentUpon>UserSessionView.xaml</DependentUpon>
@@ -335,6 +343,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\USBDeviceHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserAssistView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
