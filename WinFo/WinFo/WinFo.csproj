@@ -114,6 +114,8 @@
     <Compile Include="Model\Usage\InstalledProgram.cs" />
     <Compile Include="Model\Usage\MainWindowCacheEntry.cs" />
     <Compile Include="Model\Usage\OpenedFileEntry.cs" />
+    <Compile Include="Model\Usage\RecentAppEntry.cs" />
+    <Compile Include="Model\Usage\RecentAppItemEntry.cs" />
     <Compile Include="Model\Usage\RecentDocument.cs" />
     <Compile Include="Model\Usage\RunBarEntry.cs" />
     <Compile Include="Model\Usage\USBDeviceHistoryEntry.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="Service\Usage\IInstalledProgramService.cs" />
     <Compile Include="Service\Usage\IMainWindowCacheService.cs" />
     <Compile Include="Service\Usage\IProcessService.cs" />
+    <Compile Include="Service\Usage\IRecentAppService.cs" />
     <Compile Include="Service\Usage\IRecentDocumentService.cs" />
     <Compile Include="Service\Usage\IRecentlyOpenedFileService.cs" />
     <Compile Include="Service\Usage\IRecentRunBarService.cs" />
@@ -159,6 +162,7 @@
     <Compile Include="Service\Usage\IUserSessionService.cs" />
     <Compile Include="Service\Usage\IWLANSessionService.cs" />
     <Compile Include="Service\Usage\Win10\Win10ComputerSessionService.cs" />
+    <Compile Include="Service\Usage\Win10\Win10RecentAppService.cs" />
     <Compile Include="Service\Usage\Win7\RegQueryInformationHelper.cs" />
     <Compile Include="Service\Usage\Win7\Win7ARPTableService.cs" />
     <Compile Include="Service\Usage\Win7\IPHelperNetTableWrapper.cs" />

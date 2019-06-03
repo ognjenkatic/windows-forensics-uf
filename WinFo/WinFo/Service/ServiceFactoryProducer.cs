@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinFo.Model.Usage;
 using WinFo.Service.MyDebug;
+using WinFo.Service.Usage.Win10;
 using WinFo.Service.Usage.Win7;
 using WinFo.Service.Utility;
 
@@ -22,8 +23,6 @@ namespace WinFo.Service
         {
             IServiceFactory serviceFactory = null;
 
-            Win7UserAssistService ua = new Win7UserAssistService();
-            List<UserAssistEntry> lua = ua.GetUserAssistEntries();
             try
             {
                 ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT Version FROM win32_OperatingSystem");
