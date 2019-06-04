@@ -200,6 +200,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NetworkAdapterViewModel.cs" />
     <Compile Include="ViewModel\ProcessTreeViewModel.cs" />
+    <Compile Include="ViewModel\RecentAppViewModel.cs" />
     <Compile Include="ViewModel\RecentlyUsedEntryViewModel.cs" />
     <Compile Include="ViewModel\StartupEntryViewModel.cs" />
     <Compile Include="ViewModel\ShareViewModel.cs" />
@@ -242,6 +243,9 @@
     </Compile>
     <Compile Include="View\ProcessView.xaml.cs">
       <DependentUpon>ProcessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RecentAppView.xaml.cs">
+      <DependentUpon>RecentAppView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RecentlyUsedEntryView.xaml.cs">
       <DependentUpon>RecentlyUsedEntryView.xaml</DependentUpon>
@@ -327,6 +331,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProcessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RecentAppView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

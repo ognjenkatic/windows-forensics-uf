@@ -124,5 +124,11 @@ namespace WinFo.Service
         {
             return new Win7UserAssistService();
         }
+
+        // TO-DO this functionality is not present in this form for windows, come up with a better way of relaying this information to the user
+        public IRecentAppService CreateRecentAppService()
+        {
+            return null;
+        }
     }
 }

@@ -338,6 +338,12 @@ namespace WinFo.ViewModel
                             uaw.ShowDialog();
                             break;
                         }
+                    case ("Recent Apps"):
+                        {
+                            RecentAppView rav = new RecentAppView();
+                            rav.ShowDialog();
+                            break;
+                        }
                 }
             }
             

@@ -9,6 +9,9 @@ using WinFo.Service.MyDebug;
 
 namespace WinFo.Service.Usage.Win10
 {
+    /// <summary>
+    /// Service responsable for fetching information about recently used apps
+    /// </summary>
     public class Win10RecentAppService : IRecentAppService
     {
         #region fields
@@ -28,6 +31,15 @@ namespace WinFo.Service.Usage.Win10
                 {
                     RegistryKey recentAppSubkey = recentAppsKey.OpenSubKey(subkey);
 
+                    RecentAppEntry rae = new RecentAppEntry();
+
+                    rae.AppId = (string)recentAppSubkey.GetValue("AppId");
+                    rae.AppPath = (string)recentAppSubkey.GetValue("AppPath");
+                    rae.LastAccessedTime = DateTime.FromFileTime((long)recentAppSubkey.GetValue("LastAccessedTime"));
+                    rae.LaunchCount = (int)recentAppSubkey.GetValue("LaunchCount");
+
+                    rae.RecentItems = new List<RecentAppItemEntry>();
+
                     foreach(string appItemsSubkey in recentAppSubkey.GetSubKeyNames())
                     {
                         if (appItemsSubkey.Equals(_RECENT_APP_ITEMS_REG_KEY))
@@ -38,14 +50,18 @@ namespace WinFo.Service.Usage.Win10
                             {
                                 RegistryKey recentItemSubkey = recentItemsSubkey.OpenSubKey(itemSubkey);
 
-                                string displayName = (string)recentItemSubkey.GetValue("DisplayName");
+                                RecentAppItemEntry raie = new RecentAppItemEntry();
+                                raie.DisplayName = (string)recentItemSubkey.GetValue("DisplayName");
+                                raie.Path = (string)recentItemSubkey.GetValue("Path");
+                                raie.LastAccessedTime = DateTime.FromFileTime((long)recentItemSubkey.GetValue("LastAccessedTime"));
 
-                                Console.WriteLine("---" + displayName);
+                                rae.RecentItems.Add(raie);
+
                             }
                         }
                     }
-                    string appId = (string)recentAppSubkey.GetValue("AppId");
-                    Console.WriteLine(appId);
+
+                    entries.Add(rae);
                 }
             } catch (Exception exc)
             {

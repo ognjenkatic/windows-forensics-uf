@@ -122,5 +122,10 @@ namespace WinFo.Service
         {
             return new Win7UserAssistService();
         }
+
+        public IRecentAppService CreateRecentAppService()
+        {
+            return new Win10RecentAppService();
+        }
     }
 }
