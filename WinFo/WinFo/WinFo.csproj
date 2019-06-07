@@ -118,6 +118,7 @@
     <Compile Include="Model\Usage\RecentAppItemEntry.cs" />
     <Compile Include="Model\Usage\RecentDocument.cs" />
     <Compile Include="Model\Usage\RunBarEntry.cs" />
+    <Compile Include="Model\Usage\ShimCacheEntry.cs" />
     <Compile Include="Model\Usage\USBDeviceHistoryEntry.cs" />
     <Compile Include="Model\Usage\UserAssistEntry.cs" />
     <Compile Include="Model\Usage\WindowsService.cs" />
@@ -156,12 +157,14 @@
     <Compile Include="Service\Usage\IRecentDocumentService.cs" />
     <Compile Include="Service\Usage\IRecentlyOpenedFileService.cs" />
     <Compile Include="Service\Usage\IRecentRunBarService.cs" />
+    <Compile Include="Service\Usage\IShimCacheService.cs" />
     <Compile Include="Service\Usage\IUSBDeviceHistoryService.cs" />
     <Compile Include="Service\Usage\IUserAssistService.cs" />
     <Compile Include="Service\Usage\IWindowsServiceService.cs" />
     <Compile Include="Service\Usage\IUserSessionService.cs" />
     <Compile Include="Service\Usage\IWLANSessionService.cs" />
     <Compile Include="Service\Usage\Win10\Win10ComputerSessionService.cs" />
+    <Compile Include="Service\Usage\Win10\Win10ShimCacheService.cs" />
     <Compile Include="Service\Usage\Win10\Win10RecentAppService.cs" />
     <Compile Include="Service\Usage\Win7\RegQueryInformationHelper.cs" />
     <Compile Include="Service\Usage\Win7\Win7ARPTableService.cs" />
@@ -202,6 +205,7 @@
     <Compile Include="ViewModel\ProcessTreeViewModel.cs" />
     <Compile Include="ViewModel\RecentAppViewModel.cs" />
     <Compile Include="ViewModel\RecentlyUsedEntryViewModel.cs" />
+    <Compile Include="ViewModel\ShimCacheViewModel.cs" />
     <Compile Include="ViewModel\StartupEntryViewModel.cs" />
     <Compile Include="ViewModel\ShareViewModel.cs" />
     <Compile Include="ViewModel\UpdateViewModel.cs" />
@@ -249,6 +253,9 @@
     </Compile>
     <Compile Include="View\RecentlyUsedEntryView.xaml.cs">
       <DependentUpon>RecentlyUsedEntryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShimCacheView.xaml.cs">
+      <DependentUpon>ShimCacheView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StartupEntryView.xaml.cs">
       <DependentUpon>StartupEntryView.xaml</DependentUpon>
@@ -339,6 +346,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RecentlyUsedEntryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShimCacheView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

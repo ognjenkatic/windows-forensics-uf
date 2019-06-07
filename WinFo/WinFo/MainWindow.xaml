@@ -55,6 +55,7 @@
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="Users And Groups" Content="Users And Groups"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="User Assist" Content="User Assist"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="Recent Apps" Content="Recent Apps"/>
+                <Button Command="{Binding LoadWindowCommand}" CommandParameter="Shim Cache" Content="Shim Cache"/>
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer Margin="210,0,-0.4,-0.4">

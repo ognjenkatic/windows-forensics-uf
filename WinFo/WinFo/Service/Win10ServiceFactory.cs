@@ -127,5 +127,10 @@ namespace WinFo.Service
         {
             return new Win10RecentAppService();
         }
+
+        public IShimCacheService CreateShimCacheService()
+        {
+            return new Win10ShimCacheService();
+        }
     }
 }

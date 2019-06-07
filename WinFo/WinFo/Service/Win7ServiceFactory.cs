@@ -128,7 +128,12 @@ namespace WinFo.Service
         // TO-DO this functionality is not present in this form for windows, come up with a better way of relaying this information to the user
         public IRecentAppService CreateRecentAppService()
         {
-            return null;
+            throw new NotImplementedException();
+        }
+
+        public IShimCacheService CreateShimCacheService()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -9,6 +9,9 @@ using WinFo.Service.Usage;
 
 namespace WinFo.ViewModel
 {
+    /// <summary>
+    /// User Assist View Model
+    /// </summary>
     public class UserAssistViewModel : BaseViewModel
     {
         private List<UserAssistEntry> _userAssistEntries = new List<UserAssistEntry>();

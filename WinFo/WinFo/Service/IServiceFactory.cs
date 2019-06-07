@@ -59,5 +59,7 @@ namespace WinFo.Service
 
         IRecentAppService CreateRecentAppService();
 
+        IShimCacheService CreateShimCacheService();
+
     }
 }

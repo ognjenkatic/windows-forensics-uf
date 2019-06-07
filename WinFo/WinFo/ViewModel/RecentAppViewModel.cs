@@ -9,6 +9,9 @@ using WinFo.Service.Usage;
 
 namespace WinFo.ViewModel
 {
+    /// <summary>
+    /// Recent app View Model
+    /// </summary>
     public class RecentAppViewModel : BaseViewModel
     {
         private List<RecentAppEntry> _recentAppEntries;

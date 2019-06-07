@@ -344,6 +344,12 @@ namespace WinFo.ViewModel
                             rav.ShowDialog();
                             break;
                         }
+                    case ("Shim Cache"):
+                        {
+                            ShimCacheView scv = new ShimCacheView();
+                            scv.ShowDialog();
+                            break;
+                        }
                 }
             }
             
