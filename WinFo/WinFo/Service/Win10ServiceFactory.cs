@@ -132,5 +132,10 @@ namespace WinFo.Service
         {
             return new Win10ShimCacheService();
         }
+
+        public IPrefetchService CreatePrefetchService()
+        {
+            return new Win10PrefetchService();
+        }
     }
 }

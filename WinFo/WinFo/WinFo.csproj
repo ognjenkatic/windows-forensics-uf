@@ -114,6 +114,7 @@
     <Compile Include="Model\Usage\InstalledProgram.cs" />
     <Compile Include="Model\Usage\MainWindowCacheEntry.cs" />
     <Compile Include="Model\Usage\OpenedFileEntry.cs" />
+    <Compile Include="Model\Usage\PrefetchEntry.cs" />
     <Compile Include="Model\Usage\RecentAppEntry.cs" />
     <Compile Include="Model\Usage\RecentAppItemEntry.cs" />
     <Compile Include="Model\Usage\RecentDocument.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Service\Usage\IComputerSessionService.cs" />
     <Compile Include="Service\Usage\IInstalledProgramService.cs" />
     <Compile Include="Service\Usage\IMainWindowCacheService.cs" />
+    <Compile Include="Service\Usage\IPrefetchService.cs" />
     <Compile Include="Service\Usage\IProcessService.cs" />
     <Compile Include="Service\Usage\IRecentAppService.cs" />
     <Compile Include="Service\Usage\IRecentDocumentService.cs" />
@@ -164,6 +166,7 @@
     <Compile Include="Service\Usage\IUserSessionService.cs" />
     <Compile Include="Service\Usage\IWLANSessionService.cs" />
     <Compile Include="Service\Usage\Win10\Win10ComputerSessionService.cs" />
+    <Compile Include="Service\Usage\Win10\Win10PrefetchService.cs" />
     <Compile Include="Service\Usage\Win10\Win10ShimCacheService.cs" />
     <Compile Include="Service\Usage\Win10\Win10RecentAppService.cs" />
     <Compile Include="Service\Usage\Win7\RegQueryInformationHelper.cs" />
@@ -182,6 +185,7 @@
     <Compile Include="Service\Usage\Win7\IPHelperExtendedTCPTableWrapper.cs" />
     <Compile Include="Service\Usage\Win7\Win7WindowsServiceService.cs" />
     <Compile Include="Service\Usage\Win7\Win7WLANSessionService.cs" />
+    <Compile Include="Service\Utility\ExpressHuffmanDecompression.cs" />
     <Compile Include="Service\Utility\MemoryDisplayFormatter.cs" />
     <Compile Include="Service\Utility\ProgressDelegate.cs" />
     <Compile Include="Service\Utility\IVerboseService.cs" />
@@ -202,6 +206,7 @@
     <Compile Include="ViewModel\LogicalDiskViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NetworkAdapterViewModel.cs" />
+    <Compile Include="ViewModel\PrefetchViewModel.cs" />
     <Compile Include="ViewModel\ProcessTreeViewModel.cs" />
     <Compile Include="ViewModel\RecentAppViewModel.cs" />
     <Compile Include="ViewModel\RecentlyUsedEntryViewModel.cs" />
@@ -244,6 +249,9 @@
     </Compile>
     <Compile Include="View\NetworkAdapterView.xaml.cs">
       <DependentUpon>NetworkAdapterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrefetchView.xaml.cs">
+      <DependentUpon>PrefetchView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProcessView.xaml.cs">
       <DependentUpon>ProcessView.xaml</DependentUpon>
@@ -334,6 +342,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NetworkAdapterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrefetchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

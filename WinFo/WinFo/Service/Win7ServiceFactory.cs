@@ -135,5 +135,10 @@ namespace WinFo.Service
         {
             throw new NotImplementedException();
         }
+
+        public IPrefetchService CreatePrefetchService()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

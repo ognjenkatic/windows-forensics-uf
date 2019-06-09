@@ -350,6 +350,12 @@ namespace WinFo.ViewModel
                             scv.ShowDialog();
                             break;
                         }
+                    case ("Prefetch"):
+                        {
+                            PrefetchView pfv = new PrefetchView();
+                            pfv.ShowDialog();
+                            break;
+                        }
                 }
             }
             

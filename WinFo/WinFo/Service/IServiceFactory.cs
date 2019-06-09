@@ -61,5 +61,7 @@ namespace WinFo.Service
 
         IShimCacheService CreateShimCacheService();
 
+        IPrefetchService CreatePrefetchService();
+
     }
 }

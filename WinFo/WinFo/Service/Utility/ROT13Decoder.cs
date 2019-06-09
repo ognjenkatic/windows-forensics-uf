@@ -14,11 +14,9 @@ namespace WinFo.Service.Utility
 
             foreach(char letter in ciphertext)
             {
-                //velika slova 65(A)-90(Z), mala slova 97(a)-122(z)
                 int numVal = (int)letter;
                 int shifted = numVal;
-                //T:\Sberafvp\Jverfunex\Jverfunex.rkr
-                //G:\Forensic\Wireshark\Wireshark.exe
+
                 if (numVal >=65 && numVal <= 90)
                 {
                     shifted = (numVal - 13 < 65) ? (numVal + 13) : numVal - 13;
