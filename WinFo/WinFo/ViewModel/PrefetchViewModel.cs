@@ -12,8 +12,20 @@ namespace WinFo.ViewModel
     public class PrefetchViewModel : BaseViewModel
     {
         private List<PrefetchEntry> _entries;
-
+        private PrefetchEntry _selectedEntry;
         public List<PrefetchEntry> Entries { get => _entries; set => _entries = value; }
+        public PrefetchEntry SelectedEntry
+        {
+            get
+            {
+                return _selectedEntry;
+            }
+            set
+            {
+                _selectedEntry = value;
+                RaisePropertyChanged("SelectedEntry");
+            }
+        }
 
         public async void AsyncUpdatePrefetchInformation()
         {

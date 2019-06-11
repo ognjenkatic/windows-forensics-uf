@@ -115,6 +115,8 @@
     <Compile Include="Model\Usage\MainWindowCacheEntry.cs" />
     <Compile Include="Model\Usage\OpenedFileEntry.cs" />
     <Compile Include="Model\Usage\PrefetchEntry.cs" />
+    <Compile Include="Model\Usage\PrefetchFileMetricsEntry.cs" />
+    <Compile Include="Model\Usage\PrefetchVolumeInformationEntry.cs" />
     <Compile Include="Model\Usage\RecentAppEntry.cs" />
     <Compile Include="Model\Usage\RecentAppItemEntry.cs" />
     <Compile Include="Model\Usage\RecentDocument.cs" />
