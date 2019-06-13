@@ -170,7 +170,7 @@ namespace WinFo.Service.Usage.Win10
                                 int dirnameCharCount = BitConverter.ToInt16(uncompressedBuffer, dOffset + fOffset + dirnameOffset);
                                 dirnameOffset += 2;
                                 pdie.DirectoriesLoaded[j] = Encoding.Unicode.GetString(uncompressedBuffer, dOffset + fOffset + dirnameOffset + 2, dirnameCharCount * 2).TrimEnd('\0');
-                                dirnameOffset += dirnameCharCount*2;
+                                dirnameOffset += (1+dirnameCharCount)*2;
 
                                 
                             }
