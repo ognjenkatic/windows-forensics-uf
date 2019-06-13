@@ -29,7 +29,12 @@
                     <DataGrid Margin="10" IsReadOnly="True" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=SelectedEntry.FileMetrics}" />
                 </TabItem>
                 <TabItem Header="Volume Information">
-                    <TreeView  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Path=SelectedEntry.VolumeInformation}"  Background="{x:Null}">
+                    <TreeView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Path=SelectedEntry.VolumeInformation}"  Background="{x:Null}">
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <Setter Property="IsExpanded" Value="True"/>
+                            </Style>
+                        </TreeView.ItemContainerStyle>
                         <TreeView.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding Path=DirectoriesLoaded}">
                                 <StackPanel Orientation="Horizontal">
