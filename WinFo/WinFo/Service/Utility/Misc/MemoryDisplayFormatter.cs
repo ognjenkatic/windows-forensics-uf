@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFo.Service.Utility
+namespace WinFo.Service.Utility.Misc
 {
     //TO-DO make this into a value converter if it will only be used for display purposes
     public class MemoryDisplayFormatter

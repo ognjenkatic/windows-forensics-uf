@@ -7,6 +7,7 @@ using WinFo.Model.Usage;
 using WinFo.Service.MyDebug;
 using System.Diagnostics;
 using System.Management;
+using WinFo.Service.Utility.IP;
 
 namespace WinFo.Service.Usage.Win7
 {

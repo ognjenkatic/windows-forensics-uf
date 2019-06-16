@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFo.Service.Usage.Win7
+namespace WinFo.Service.Utility.IP
 {
     // The code below was taken from http://pinvoke.net/default.aspx/iphlpapi.GetExtendedTcpTable, Nov 29th 2018
     

@@ -69,6 +69,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ManagedEsent.1.9.4\lib\net40\Esent.Interop.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -171,9 +174,11 @@
     <Compile Include="Service\Usage\Win10\Win10PrefetchService.cs" />
     <Compile Include="Service\Usage\Win10\Win10ShimCacheService.cs" />
     <Compile Include="Service\Usage\Win10\Win10RecentAppService.cs" />
-    <Compile Include="Service\Usage\Win7\RegQueryInformationHelper.cs" />
+    <Compile Include="Service\Utility\Esent\EsentTableColumn.cs" />
+    <Compile Include="Service\Utility\Esent\EsentTableRow.cs" />
+    <Compile Include="Service\Utility\Registry\RegQueryInformationHelper.cs" />
     <Compile Include="Service\Usage\Win7\Win7ARPTableService.cs" />
-    <Compile Include="Service\Usage\Win7\IPHelperNetTableWrapper.cs" />
+    <Compile Include="Service\Utility\IP\IPHelperNetTableWrapper.cs" />
     <Compile Include="Service\Usage\Win7\Win7InstalledProgramService.cs" />
     <Compile Include="Service\Usage\Win7\Win7MainWindowCacheService.cs" />
     <Compile Include="Service\Usage\Win7\Win7ProcessService.cs" />
@@ -184,14 +189,15 @@
     <Compile Include="Service\Usage\Win7\Win7USBDeviceHistoryService.cs" />
     <Compile Include="Service\Usage\Win7\Win7UserAssistService.cs" />
     <Compile Include="Service\Usage\Win7\Win7UserSessionService.cs" />
-    <Compile Include="Service\Usage\Win7\IPHelperExtendedTCPTableWrapper.cs" />
+    <Compile Include="Service\Utility\IP\IPHelperExtendedTCPTableWrapper.cs" />
     <Compile Include="Service\Usage\Win7\Win7WindowsServiceService.cs" />
     <Compile Include="Service\Usage\Win7\Win7WLANSessionService.cs" />
-    <Compile Include="Service\Utility\ExpressHuffmanDecompression.cs" />
-    <Compile Include="Service\Utility\MemoryDisplayFormatter.cs" />
-    <Compile Include="Service\Utility\ProgressDelegate.cs" />
-    <Compile Include="Service\Utility\IVerboseService.cs" />
-    <Compile Include="Service\Utility\ROT13Decoder.cs" />
+    <Compile Include="Service\Utility\Esent\EsentReader.cs" />
+    <Compile Include="Service\Utility\Misc\ExpressHuffmanDecompression.cs" />
+    <Compile Include="Service\Utility\Misc\MemoryDisplayFormatter.cs" />
+    <Compile Include="Service\Utility\Misc\ProgressDelegate.cs" />
+    <Compile Include="Service\IVerboseService.cs" />
+    <Compile Include="Service\Utility\Misc\ROT13Decoder.cs" />
     <Compile Include="Service\Win10ServiceFactory.cs" />
     <Compile Include="Service\Win7ServiceFactory.cs" />
     <Compile Include="ViewModel\ARPTableViewModel.cs" />

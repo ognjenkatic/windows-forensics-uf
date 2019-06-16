@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WinFo.Service.MyDebug;
 using WinFo.Service.Utility;
 using WinFo.Usage.Model;
+using WinFo.Service.Utility.Misc;
 
 namespace WinFo.Service.Usage.Win10
 {

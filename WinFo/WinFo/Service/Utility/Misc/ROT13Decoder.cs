@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFo.Service.Utility
+namespace WinFo.Service.Utility.Misc
 {
     public class ROT13Decoder
     {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinFo.Service.MyDebug;
 
-namespace WinFo.Service.Usage.Win7
+namespace WinFo.Service.Utility.Registry
 {
     public class RegQueryInformationHelper
     {

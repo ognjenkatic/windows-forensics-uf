@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFo.Service.Utility
+namespace WinFo.Service.Utility.Misc
 {
     public class ExpressHuffmanDecompression
     {

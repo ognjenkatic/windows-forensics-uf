@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinFo.Model.Usage;
 using WinFo.Service.MyDebug;
+using WinFo.Service.Utility.Registry;
 
 namespace WinFo.Service.Usage.Win7
 {

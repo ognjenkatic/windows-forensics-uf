@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinFo.Model.Configuration;
 using WinFo.Service.Utility;
+using WinFo.Service.Utility.Misc;
 
 namespace WinFo.ViewModel
 {

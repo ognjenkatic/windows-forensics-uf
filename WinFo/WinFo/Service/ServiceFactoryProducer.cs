@@ -8,7 +8,7 @@ using WinFo.Model.Usage;
 using WinFo.Service.MyDebug;
 using WinFo.Service.Usage.Win10;
 using WinFo.Service.Usage.Win7;
-using WinFo.Service.Utility;
+using WinFo.Service.Utility.Esent;
 
 namespace WinFo.Service
 {
@@ -17,12 +17,10 @@ namespace WinFo.Service
     /// </summary>
     public class ServiceFactoryProducer
     {
-        // for the moment only returns win7 service factories
-        // TO-DO  - make dynamic
         public static IServiceFactory GetServiceFactory()
         {
             IServiceFactory serviceFactory = null;
-
+            
             try
             {
                 ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT Version FROM win32_OperatingSystem");
