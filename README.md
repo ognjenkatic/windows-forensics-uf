@@ -25,3 +25,8 @@ The current version of the application provides information about the following:
 * Processes and connections
 * Services
 * USB Device History
+* Prefetch 
+* SRUM application usage
+* SRUM network usage
+* Shim Cache
+* User Assist
