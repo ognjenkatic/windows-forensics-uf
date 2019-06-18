@@ -29,9 +29,11 @@ namespace WinFo.Service.Utility.Esent
             int rowIndex = 0;
             foreach(ColumnInfo columnInfo in columnInfos)
             {
+         
                 EsentTableColumn etc = new EsentTableColumn();
                 switch (columnInfo.Coltyp)
                 {
+                    
                     case (JET_coltyp.DateTime):
                         {
                             etc.Type = typeof(DateTime);
@@ -44,6 +46,21 @@ namespace WinFo.Service.Utility.Esent
                             etc.Type = typeof(Int32);
                             etc.Name = columnInfo.Name;
                             etc.Value = Api.RetrieveColumnAsInt32(session, table, columnInfo.Columnid);
+                            break;
+                        }
+                    case (JET_coltyp.LongBinary):
+                        {
+                            etc.Type = typeof(byte[]);
+                            etc.Name = columnInfo.Name;
+                            etc.Value = Api.RetrieveColumn(session, table, columnInfo.Columnid);
+                            break;
+
+                        }
+                    case (JET_coltyp.UnsignedByte):
+                        {
+                            etc.Type = typeof(byte);
+                            etc.Name = columnInfo.Name;
+                            etc.Value = Api.RetrieveColumnAsByte(session, table, columnInfo.Columnid);
                             break;
                         }
                     //To-DO: fix this ugly workaround, enum seems to be missing values
@@ -71,6 +88,7 @@ namespace WinFo.Service.Utility.Esent
                 using (Session m_sesid = new Session(m_jetInstance))
                 {
                     JET_DBID m_dbid = JET_DBID.Nil;
+
                     Api.JetAttachDatabase(m_sesid, _filePath, AttachDatabaseGrbit.ReadOnly);
                     Api.JetOpenDatabase(m_sesid, _filePath, null, out m_dbid, OpenDatabaseGrbit.ReadOnly);
                     
@@ -83,11 +101,6 @@ namespace WinFo.Service.Utility.Esent
                             EsentTableRow etr = FetchRow(table, m_sesid, columns);
                             rows.Add(etr);
                         }
-
-                        Api.JetCloseDatabase(m_sesid, m_dbid, CloseDatabaseGrbit.None);
-                        Api.JetDetachDatabase(m_sesid, tableName);
-
-                        Console.WriteLine("da");
                     }
                 };
                 m_jetInstance.Term();

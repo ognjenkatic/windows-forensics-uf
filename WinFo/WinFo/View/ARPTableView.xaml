@@ -13,6 +13,7 @@
         <local:ARPTableViewModel/>
     </Window.DataContext>
     <Grid>
+        
         <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}"/>
         <DataGrid Margin="10" IsReadOnly="True" ItemsSource="{Binding Path=ArpEntries}"  />
     </Grid>

@@ -140,5 +140,10 @@ namespace WinFo.Service
         {
             throw new NotImplementedException();
         }
+
+        public ISRUMService CreateSRUMService()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

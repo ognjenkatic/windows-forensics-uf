@@ -63,5 +63,7 @@ namespace WinFo.Service
 
         IPrefetchService CreatePrefetchService();
 
+        ISRUMService CreateSRUMService();
+
     }
 }

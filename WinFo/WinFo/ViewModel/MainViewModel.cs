@@ -356,6 +356,18 @@ namespace WinFo.ViewModel
                             pfv.ShowDialog();
                             break;
                         }
+                    case ("SRUM App Usage"):
+                        {
+                            SRUMView sv = new SRUMView();
+                            sv.ShowDialog();
+                            break;
+                        }
+                    case ("SRUM Network Connectivity"):
+                        {
+                            SRUMNetworkView snv = new SRUMNetworkView();
+                            snv.ShowDialog();
+                            break;
+                        }
                 }
             }
             

@@ -137,5 +137,10 @@ namespace WinFo.Service
         {
             return new Win10PrefetchService();
         }
+
+        public ISRUMService CreateSRUMService()
+        {
+            return new Win10SRUMService();
+        }
     }
 }

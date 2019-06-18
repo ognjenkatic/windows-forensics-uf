@@ -125,6 +125,8 @@
     <Compile Include="Model\Usage\RecentDocument.cs" />
     <Compile Include="Model\Usage\RunBarEntry.cs" />
     <Compile Include="Model\Usage\ShimCacheEntry.cs" />
+    <Compile Include="Model\Usage\SRUMApplicationResourceUsageDataEntry.cs" />
+    <Compile Include="Model\Usage\SRUMNetworkConnectivityEntry.cs" />
     <Compile Include="Model\Usage\USBDeviceHistoryEntry.cs" />
     <Compile Include="Model\Usage\UserAssistEntry.cs" />
     <Compile Include="Model\Usage\WindowsService.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="Service\Usage\IRecentlyOpenedFileService.cs" />
     <Compile Include="Service\Usage\IRecentRunBarService.cs" />
     <Compile Include="Service\Usage\IShimCacheService.cs" />
+    <Compile Include="Service\Usage\ISRUMService.cs" />
     <Compile Include="Service\Usage\IUSBDeviceHistoryService.cs" />
     <Compile Include="Service\Usage\IUserAssistService.cs" />
     <Compile Include="Service\Usage\IWindowsServiceService.cs" />
@@ -174,8 +177,10 @@
     <Compile Include="Service\Usage\Win10\Win10PrefetchService.cs" />
     <Compile Include="Service\Usage\Win10\Win10ShimCacheService.cs" />
     <Compile Include="Service\Usage\Win10\Win10RecentAppService.cs" />
+    <Compile Include="Service\Usage\Win10\Win10SRUMService.cs" />
     <Compile Include="Service\Utility\Esent\EsentTableColumn.cs" />
     <Compile Include="Service\Utility\Esent\EsentTableRow.cs" />
+    <Compile Include="Service\Utility\IP\IPInterfaceLUIDHelper.cs" />
     <Compile Include="Service\Utility\Registry\RegQueryInformationHelper.cs" />
     <Compile Include="Service\Usage\Win7\Win7ARPTableService.cs" />
     <Compile Include="Service\Utility\IP\IPHelperNetTableWrapper.cs" />
@@ -219,6 +224,8 @@
     <Compile Include="ViewModel\RecentAppViewModel.cs" />
     <Compile Include="ViewModel\RecentlyUsedEntryViewModel.cs" />
     <Compile Include="ViewModel\ShimCacheViewModel.cs" />
+    <Compile Include="ViewModel\SRUMNetworkViewModel.cs" />
+    <Compile Include="ViewModel\SRUMViewModel.cs" />
     <Compile Include="ViewModel\StartupEntryViewModel.cs" />
     <Compile Include="ViewModel\ShareViewModel.cs" />
     <Compile Include="ViewModel\UpdateViewModel.cs" />
@@ -272,6 +279,12 @@
     </Compile>
     <Compile Include="View\ShimCacheView.xaml.cs">
       <DependentUpon>ShimCacheView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SRUMNetworkView.xaml.cs">
+      <DependentUpon>SRUMNetworkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SRUMView.xaml.cs">
+      <DependentUpon>SRUMView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StartupEntryView.xaml.cs">
       <DependentUpon>StartupEntryView.xaml</DependentUpon>
@@ -370,6 +383,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ShimCacheView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SRUMNetworkView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SRUMView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

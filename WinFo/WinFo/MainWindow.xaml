@@ -57,6 +57,8 @@
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="Recent Apps" Content="Recent Apps"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="Shim Cache" Content="Shim Cache"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="Prefetch" Content="Prefetch"/>
+                <Button Command="{Binding LoadWindowCommand}" CommandParameter="SRUM App Usage" Content="SRUM App Usage"/>
+                <Button Command="{Binding LoadWindowCommand}" CommandParameter="SRUM Network Connectivity" Content="SRUM Network Connectivity"/>
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer Margin="210,0,-0.4,-0.4">
