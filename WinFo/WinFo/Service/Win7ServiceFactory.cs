@@ -145,5 +145,10 @@ namespace WinFo.Service
         {
             throw new NotImplementedException();
         }
+
+        public IBAMService CreateBAMService()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

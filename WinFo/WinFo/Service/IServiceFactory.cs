@@ -65,5 +65,7 @@ namespace WinFo.Service
 
         ISRUMService CreateSRUMService();
 
+        IBAMService CreateBAMService();
+
     }
 }

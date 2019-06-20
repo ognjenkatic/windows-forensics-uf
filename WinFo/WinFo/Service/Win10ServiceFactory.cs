@@ -142,5 +142,10 @@ namespace WinFo.Service
         {
             return new Win10SRUMService();
         }
+
+        public IBAMService CreateBAMService()
+        {
+            return new Win10BAMService();
+        }
     }
 }

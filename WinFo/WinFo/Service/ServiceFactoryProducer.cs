@@ -20,7 +20,7 @@ namespace WinFo.Service
         public static IServiceFactory GetServiceFactory()
         {
             IServiceFactory serviceFactory = null;
-            
+
             try
             {
                 ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT Version FROM win32_OperatingSystem");

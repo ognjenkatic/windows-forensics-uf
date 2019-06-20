@@ -114,6 +114,7 @@
     <Compile Include="Model\Configuration\ComputerSystem.cs" />
     <Compile Include="Model\Configuration\Update.cs" />
     <Compile Include="Model\Usage\ARPEntry.cs" />
+    <Compile Include="Model\Usage\BAMEntry.cs" />
     <Compile Include="Model\Usage\InstalledProgram.cs" />
     <Compile Include="Model\Usage\MainWindowCacheEntry.cs" />
     <Compile Include="Model\Usage\OpenedFileEntry.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="Service\ServiceFactoryProducer.cs" />
     <Compile Include="Service\IServiceFactory.cs" />
     <Compile Include="Service\Usage\IARPTableService.cs" />
+    <Compile Include="Service\Usage\IBAMService.cs" />
     <Compile Include="Service\Usage\IComputerSessionService.cs" />
     <Compile Include="Service\Usage\IInstalledProgramService.cs" />
     <Compile Include="Service\Usage\IMainWindowCacheService.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="Service\Usage\IWindowsServiceService.cs" />
     <Compile Include="Service\Usage\IUserSessionService.cs" />
     <Compile Include="Service\Usage\IWLANSessionService.cs" />
+    <Compile Include="Service\Usage\Win10\Win10BAMService.cs" />
     <Compile Include="Service\Usage\Win10\Win10ComputerSessionService.cs" />
     <Compile Include="Service\Usage\Win10\Win10PrefetchService.cs" />
     <Compile Include="Service\Usage\Win10\Win10ShimCacheService.cs" />
@@ -206,6 +209,7 @@
     <Compile Include="Service\Win10ServiceFactory.cs" />
     <Compile Include="Service\Win7ServiceFactory.cs" />
     <Compile Include="ViewModel\ARPTableViewModel.cs" />
+    <Compile Include="ViewModel\BAMViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BIOSViewModel.cs" />
     <Compile Include="ViewModel\ComputerSessionViewModel.cs" />
@@ -237,6 +241,9 @@
     <Compile Include="ViewModel\WLANSessionViewModel.cs" />
     <Compile Include="View\ARPTableView.xaml.cs">
       <DependentUpon>ARPTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BAMView.xaml.cs">
+      <DependentUpon>BAMView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BIOSView.xaml.cs">
       <DependentUpon>BIOSView.xaml</DependentUpon>
@@ -327,6 +334,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ARPTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BAMView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

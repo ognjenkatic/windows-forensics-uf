@@ -368,6 +368,12 @@ namespace WinFo.ViewModel
                             snv.ShowDialog();
                             break;
                         }
+                    case ("BAM Data"):
+                        {
+                            BAMView bv = new BAMView();
+                            bv.ShowDialog();
+                            break;
+                        }
                 }
             }
             

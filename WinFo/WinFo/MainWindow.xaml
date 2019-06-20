@@ -59,6 +59,7 @@
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="Prefetch" Content="Prefetch"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="SRUM App Usage" Content="SRUM App Usage"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="SRUM Network Connectivity" Content="SRUM Network Connectivity"/>
+                <Button Command="{Binding LoadWindowCommand}" CommandParameter="BAM Data" Content="BAM Data"/>
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer Margin="210,0,-0.4,-0.4">
