@@ -19,13 +19,20 @@ namespace WinFo.Service.Usage.Win10
             {
                 RegistryKey bamKey = Registry.LocalMachine.OpenSubKey(_BAM_REG_KEY);
 
-                foreach(string subkeyName in bamKey.GetSubKeyNames())
+                if (bamKey == null)
+                {
+                    bamKey = Registry.LocalMachine.OpenSubKey(_ALT_BAM_REG_KEY);
+                }
+                if (bamKey == null)
+                    return null;
+
+                foreach (string subkeyName in bamKey.GetSubKeyNames())
                 {
                     //TO-DO add regex check
                     string sid = subkeyName;
                     RegistryKey sidKey = bamKey.OpenSubKey(sid);
 
-                    foreach(string valueName in sidKey.GetValueNames())
+                    foreach (string valueName in sidKey.GetValueNames())
                     {
                         if (sidKey.GetValueKind(valueName) == RegistryValueKind.Binary)
                         {
@@ -41,6 +48,7 @@ namespace WinFo.Service.Usage.Win10
                         }
                     }
                 }
+
             } catch (Exception exc)
             {
                 MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
