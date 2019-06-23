@@ -30,3 +30,4 @@ The current version of the application provides information about the following:
 * SRUM network usage
 * Shim Cache
 * User Assist
+* BAM information
