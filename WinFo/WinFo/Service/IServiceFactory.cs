@@ -67,5 +67,7 @@ namespace WinFo.Service
 
         IBAMService CreateBAMService();
 
+        IRecycleBinService CreateRecycleBinService();
+
     }
 }

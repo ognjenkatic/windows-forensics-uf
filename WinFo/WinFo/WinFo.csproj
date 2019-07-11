@@ -78,6 +78,9 @@
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
@@ -124,6 +127,7 @@
     <Compile Include="Model\Usage\RecentAppEntry.cs" />
     <Compile Include="Model\Usage\RecentAppItemEntry.cs" />
     <Compile Include="Model\Usage\RecentDocument.cs" />
+    <Compile Include="Model\Usage\RecycleBinEntry.cs" />
     <Compile Include="Model\Usage\RunBarEntry.cs" />
     <Compile Include="Model\Usage\ShimCacheEntry.cs" />
     <Compile Include="Model\Usage\SRUMApplicationResourceUsageDataEntry.cs" />
@@ -168,6 +172,7 @@
     <Compile Include="Service\Usage\IRecentDocumentService.cs" />
     <Compile Include="Service\Usage\IRecentlyOpenedFileService.cs" />
     <Compile Include="Service\Usage\IRecentRunBarService.cs" />
+    <Compile Include="Service\Usage\IRecycleBinService.cs" />
     <Compile Include="Service\Usage\IShimCacheService.cs" />
     <Compile Include="Service\Usage\ISRUMService.cs" />
     <Compile Include="Service\Usage\IUSBDeviceHistoryService.cs" />
@@ -178,6 +183,7 @@
     <Compile Include="Service\Usage\Win10\Win10BAMService.cs" />
     <Compile Include="Service\Usage\Win10\Win10ComputerSessionService.cs" />
     <Compile Include="Service\Usage\Win10\Win10PrefetchService.cs" />
+    <Compile Include="Service\Usage\Win10\Win10RecycleBinService.cs" />
     <Compile Include="Service\Usage\Win10\Win10ShimCacheService.cs" />
     <Compile Include="Service\Usage\Win10\Win10RecentAppService.cs" />
     <Compile Include="Service\Usage\Win10\Win10SRUMService.cs" />
@@ -206,6 +212,8 @@
     <Compile Include="Service\Utility\Misc\ProgressDelegate.cs" />
     <Compile Include="Service\IVerboseService.cs" />
     <Compile Include="Service\Utility\Misc\ROT13Decoder.cs" />
+    <Compile Include="Service\Utility\Serialization\IMySerializer.cs" />
+    <Compile Include="Service\Utility\Serialization\MyJSONSerializer.cs" />
     <Compile Include="Service\Win10ServiceFactory.cs" />
     <Compile Include="Service\Win7ServiceFactory.cs" />
     <Compile Include="ViewModel\ARPTableViewModel.cs" />
@@ -214,6 +222,7 @@
     <Compile Include="ViewModel\BIOSViewModel.cs" />
     <Compile Include="ViewModel\ComputerSessionViewModel.cs" />
     <Compile Include="ViewModel\CPUInfoViewModel.cs" />
+    <Compile Include="ViewModel\DataExportViewModel.cs" />
     <Compile Include="ViewModel\DiskDriveViewModel.cs" />
     <Compile Include="ViewModel\DiskPartitionViewModel.cs" />
     <Compile Include="ViewModel\EnvironmentVariableViewModel.cs" />
@@ -227,6 +236,7 @@
     <Compile Include="ViewModel\ProcessTreeViewModel.cs" />
     <Compile Include="ViewModel\RecentAppViewModel.cs" />
     <Compile Include="ViewModel\RecentlyUsedEntryViewModel.cs" />
+    <Compile Include="ViewModel\RecycleBinViewModel.cs" />
     <Compile Include="ViewModel\ShimCacheViewModel.cs" />
     <Compile Include="ViewModel\SRUMNetworkViewModel.cs" />
     <Compile Include="ViewModel\SRUMViewModel.cs" />
@@ -253,6 +263,9 @@
     </Compile>
     <Compile Include="View\ComputerSystemView.xaml.cs">
       <DependentUpon>ComputerSystemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DataExportView.xaml.cs">
+      <DependentUpon>DataExportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EnvironmentVariableView.xaml.cs">
       <DependentUpon>EnvironmentVariableView.xaml</DependentUpon>
@@ -283,6 +296,9 @@
     </Compile>
     <Compile Include="View\RecentlyUsedEntryView.xaml.cs">
       <DependentUpon>RecentlyUsedEntryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RecycleBinView.xaml.cs">
+      <DependentUpon>RecycleBinView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ShimCacheView.xaml.cs">
       <DependentUpon>ShimCacheView.xaml</DependentUpon>
@@ -353,6 +369,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DataExportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EnvironmentVariableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -390,6 +410,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RecentlyUsedEntryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RecycleBinView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

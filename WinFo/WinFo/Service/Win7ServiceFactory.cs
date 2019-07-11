@@ -150,5 +150,10 @@ namespace WinFo.Service
         {
             throw new NotImplementedException();
         }
+
+        public IRecycleBinService CreateRecycleBinService()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

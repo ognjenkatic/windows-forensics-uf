@@ -150,7 +150,8 @@ namespace WinFo.Service.Usage.Win7
 
             string logMessage = $"Loaded {validSessions.Count} user sessions.";
             MyDebugger.Instance.LogMessage(logMessage, DebugVerbocity.Informational);
-            UpdateProgress(logMessage);
+            if (UpdateProgress != null)
+                UpdateProgress(logMessage);
 
             return validSessions;
         }
