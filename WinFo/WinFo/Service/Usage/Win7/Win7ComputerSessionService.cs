@@ -45,7 +45,7 @@ namespace WinFo.Service.Usage.Win7
                 int counter = 0;
                 foreach (EventLogEntry ele in el.Entries)
                 {
-                    UpdateProgress($"Searching for computer session entries, processed {++counter}/{el.Entries.Count} events found ({Math.Round(100.0*counter/el.Entries.Count)}%).");
+                    UpdateProgress?.Invoke($"Searching for computer session entries, processed {++counter}/{el.Entries.Count} events found ({Math.Round(100.0*counter/el.Entries.Count)}%).");
                     int eventId = (UInt16)ele.InstanceId;
 
                     if (eventId == _STARTUP_INDICATOR_EVENT_ID)
@@ -77,8 +77,7 @@ namespace WinFo.Service.Usage.Win7
 
             string logMessage = $"Loaded {sessions.Count} computer sessions.";
             MyDebugger.Instance.LogMessage(logMessage, DebugVerbocity.Informational);
-            if (UpdateProgress != null)
-                UpdateProgress(logMessage);
+            UpdateProgress?.Invoke(logMessage);
             return sessions;
         }
     }

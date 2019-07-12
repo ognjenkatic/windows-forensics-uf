@@ -13,7 +13,7 @@ namespace WinFo.ViewModel
     public class SRUMNetworkViewModel : BaseViewModel
     {
         private List<SRUMNetworkConnectivityEntry> entries;
-        private string _filePath;
+        private string _filePath = null;
         public List<SRUMNetworkConnectivityEntry> Entries { get => entries; set => entries = value; }
 
         public ViewModelCommand SelectFileCommand { get; set; }
@@ -65,6 +65,7 @@ namespace WinFo.ViewModel
         public SRUMNetworkViewModel()
         {
             SelectFileCommand = new ViewModelCommand(SelectFile, CanSelectFile);
+            AsyncUpdateSRUMNetworkInformation();
         }
     }
 }

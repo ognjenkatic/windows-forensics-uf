@@ -17,6 +17,75 @@ namespace WinFo.ViewModel
     public class DataExportViewModel : BaseViewModel
     {
         private static string _FOLDER_BASE_NAME = "winfo_export";
+
+        private bool _areAllChecked;
+        public bool AreAllChecked
+        {
+            get
+            {
+                return _areAllChecked;
+            }
+            set
+            {
+                if (_areAllChecked != value)
+                {
+                    _areAllChecked = value;
+                    IsARPTableChecked = value;
+                    IsSharesChecked = value;
+                    IsNetworkAdaptersChecked = value;
+                    IsUserSessionsChecked = value;
+                    IsComputerSessionsChecked = value;
+                    IsIP4RoutesChecked = value;
+                    IsComputerSystemChecked = value;
+                    IsEnvironmentVariablesChecked = value;
+                    IsStartupEntriesChecked = value;
+                    IsRecentlyUsedChecked = value;
+                    IsUpdatesChecked = value;
+                    IsProcessesChecked = value;
+                    IsBIOSChecked = value;
+                    IsServicesChecked = value;
+                    IsWLANSessionsChecked = value;
+                    IsInstalledProgramsChecked = value;
+                    IsUSBDeviceHistoryChecked = value;
+                    IsUsersAndGroupsChecked = value;
+                    IsUserAssistChecked = value;
+                    IsRecentAppsChecked = value;
+                    IsShimCacheChecked = value;
+                    IsPrefetchChecked = value;
+                    IsSRUMAppUsageChecked = value;
+                    IsSRUMNetworkConnectivityChecked = value;
+                    IsBAMDataChecked = value;
+                    IsRecycleBinDataChecked = value;
+
+                    RaisePropertyChanged("IsUserAssistChecked");
+                    RaisePropertyChanged("IsRecentAppsChecked");
+                    RaisePropertyChanged("IsShimCacheChecked");
+                    RaisePropertyChanged("IsPrefetchChecked");
+                    RaisePropertyChanged("IsSRUMNetworkConnectivityChecked");
+                    RaisePropertyChanged("IsSRUMAppUsageChecked");
+                    RaisePropertyChanged("IsBAMDataChecked");
+                    RaisePropertyChanged("IsRecycleBinDataChecked");
+                    RaisePropertyChanged("IsUsersAndGroupsChecked");
+                    RaisePropertyChanged("IsUSBDeviceHistoryChecked");
+                    RaisePropertyChanged("IsInstalledProgramsChecked");
+                    RaisePropertyChanged("IsWLANSessionsChecked");
+                    RaisePropertyChanged("IsServicesChecked");
+                    RaisePropertyChanged("IsBIOSChecked");
+                    RaisePropertyChanged("IsProcessesChecked");
+                    RaisePropertyChanged("IsUpdatesChecked");
+                    RaisePropertyChanged("IsRecentlyUsedChecked");
+                    RaisePropertyChanged("IsStartupEntriesChecked");
+                    RaisePropertyChanged("IsEnvironmentVariablesChecked");
+                    RaisePropertyChanged("IsComputerSystemChecked");
+                    RaisePropertyChanged("IsIP4RoutesChecked");
+                    RaisePropertyChanged("IsComputerSessionsChecked");
+                    RaisePropertyChanged("IsUserSessionsChecked");
+                    RaisePropertyChanged("IsNetworkAdaptersChecked");
+                    RaisePropertyChanged("IsARPTableChecked");
+                    RaisePropertyChanged("IsSharesChecked");
+                }
+            }
+        }
         public bool IsARPTableChecked { get; set; }
 
         public bool IsSharesChecked { get; set; }
@@ -498,6 +567,38 @@ namespace WinFo.ViewModel
                 {
                     string serialized = new MyJSONSerializer().Serialize(entries);
                     File.WriteAllText(Path.Combine(exportDirName,"recycle_bin.json"), serialized);
+                }
+            }
+
+            if (IsSRUMAppUsageChecked)
+            {
+                ISRUMService rbs = sf.CreateSRUMService();
+
+                List<SRUMApplicationResourceUsageDataEntry> entries = await Task.Run(() =>
+                {
+                    return rbs.GetSRUMApplicationResourceUsageDataEntries(null);
+                });
+
+                if (entries != null && entries.Count > 0)
+                {
+                    string serialized = new MyJSONSerializer().Serialize(entries);
+                    File.WriteAllText(Path.Combine(exportDirName, "srum_app_resource_usage.json"), serialized);
+                }
+            }
+
+            if (IsSRUMNetworkConnectivityChecked)
+            {
+                ISRUMService rbs = sf.CreateSRUMService();
+
+                List<SRUMNetworkConnectivityEntry> entries = await Task.Run(() =>
+                {
+                    return rbs.GetSRUMNetworkConnectivityEntries(null);
+                });
+
+                if (entries != null && entries.Count > 0)
+                {
+                    string serialized = new MyJSONSerializer().Serialize(entries);
+                    File.WriteAllText(Path.Combine(exportDirName, "srum_network_usage.json"), serialized);
                 }
             }
 

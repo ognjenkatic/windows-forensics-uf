@@ -20,6 +20,8 @@ namespace WinFo.Service.Usage.Win10
 
         public List<SRUMApplicationResourceUsageDataEntry> GetSRUMApplicationResourceUsageDataEntries(string filePath)
         {
+            filePath = filePath ?? @"C:\Windows\SysNative\sru\SRUDB.dat";
+
             List<SRUMApplicationResourceUsageDataEntry> entries = new List<SRUMApplicationResourceUsageDataEntry>();
 
             try
@@ -88,7 +90,8 @@ namespace WinFo.Service.Usage.Win10
 
         public List<SRUMNetworkConnectivityEntry> GetSRUMNetworkConnectivityEntries(string filePath)
         {
-        
+            filePath = filePath ?? @"C:\Windows\SysNative\sru\SRUDB.dat";
+
             List<SRUMNetworkConnectivityEntry> entries = new List<SRUMNetworkConnectivityEntry>();
             
 

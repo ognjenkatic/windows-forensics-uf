@@ -15,6 +15,7 @@
     <Grid>
         <StackPanel HorizontalAlignment="Left" Width="200">
             <Label Content="Check data for export"/>
+            <CheckBox Content="Export All" IsChecked="{Binding Path=AreAllChecked}" Margin="0,0,0,20"/>
             <CheckBox Content="Shares" IsChecked="{Binding Path=IsSharesChecked}"/>
             <CheckBox Content="Network Adapters" IsChecked="{Binding Path=IsNetworkAdaptersChecked}"/>
             <CheckBox Content="User Sessions" IsChecked="{Binding Path=IsUserSessionsChecked}"/>

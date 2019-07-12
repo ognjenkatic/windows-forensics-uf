@@ -13,7 +13,7 @@ namespace WinFo.ViewModel
     public class SRUMViewModel : BaseViewModel
     {
         private List<SRUMApplicationResourceUsageDataEntry> entries;
-        private string _filePath;
+        private string _filePath = null;
         public List<SRUMApplicationResourceUsageDataEntry> Entries { get => entries; set => entries = value; }
 
         public ViewModelCommand SelectFileCommand { get; set; }
@@ -64,8 +64,8 @@ namespace WinFo.ViewModel
         public SRUMViewModel()
         {
             SelectFileCommand = new ViewModelCommand(SelectFile, CanSelectFile);
-            
-            
+            AsyncUpdateSRUMInformation();
+
         }
     }
 }
