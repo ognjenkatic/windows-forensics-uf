@@ -1,6 +1,9 @@
 # windows-forensics-uf
 A user friendly application for retrieving and consolidating information about your computer system.
 
+![alt text](https://github.com/ognjenkatic/windows-forensics-uf/blob/master/screen.png?raw=true)
+
+
 The application is targeted towards beginner level administrators but could be useful to anyone in need of a quick and easy tool for basic computer forensic tasks on a windows operating system.
 
 The current version of the application provides information about the following:
