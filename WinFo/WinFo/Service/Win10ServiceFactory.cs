@@ -147,5 +147,10 @@ namespace WinFo.Service
         {
             return new Win10BAMService();
         }
+
+        public IRecycleBinService CreateRecycleBinService()
+        {
+            return new Win10RecycleBinService();
+        }
     }
 }

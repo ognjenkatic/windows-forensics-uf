@@ -374,6 +374,18 @@ namespace WinFo.ViewModel
                             bv.ShowDialog();
                             break;
                         }
+                    case ("Recycle Bin Data"):
+                        {
+                            RecycleBinView rbv = new RecycleBinView();
+                            rbv.ShowDialog();
+                            break;
+                        }
+                    case ("Export Data"):
+                        {
+                            DataExportView dev = new DataExportView();
+                            dev.ShowDialog();
+                            break;
+                        }
                 }
             }
             

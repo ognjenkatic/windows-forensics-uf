@@ -15,7 +15,6 @@ namespace WinFo.Service.Configuration.Win7
     public class Win7ShareService : IShareService
     {
         #region fields
-        private static string _SHARE_SEARCH_STRING = "SELECT Caption, Description, InstallDate, Name, Path, Type, Status FROM Win32_Share";
         private static string _SHARES_SEARCH_STRING = "SELECT Share, SharedElement FROM Win32_ShareToDirectory";
         #endregion
 

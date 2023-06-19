@@ -89,7 +89,7 @@ namespace WinFo.Service.Usage.Win7
                 // iterate over events and add the ones of interest to the dictionary
                 foreach (EventLogEntry ele in eventLog.Entries)
                 {
-                    UpdateProgress($"Searching for user session entries, processed {++counter}/{eventLog.Entries.Count} events found ({Math.Round(100.0 * counter / eventLog.Entries.Count)}%).");
+                    UpdateProgress?.Invoke($"Searching for user session entries, processed {++counter}/{eventLog.Entries.Count} events found ({Math.Round(100.0 * counter / eventLog.Entries.Count)}%).");
                     // extract the event id part of instance id
                     int eventId = (UInt16)ele.InstanceId;
 
@@ -150,7 +150,7 @@ namespace WinFo.Service.Usage.Win7
 
             string logMessage = $"Loaded {validSessions.Count} user sessions.";
             MyDebugger.Instance.LogMessage(logMessage, DebugVerbocity.Informational);
-            UpdateProgress(logMessage);
+            UpdateProgress?.Invoke(logMessage);
 
             return validSessions;
         }

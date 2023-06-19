@@ -41,7 +41,7 @@ namespace WinFo.Service.Usage.Win7
                         
                         if (file.EndsWith("lnk"))
                         {
-                            UpdateProgress($"Searching for recently opened file entries, found so far: {++counter}");
+                            UpdateProgress?.Invoke($"Searching for recently opened file entries, found so far: {++counter}");
                             IWshShell shell = new WshShell();
                             if (shell.CreateShortcut(file) is IWshShortcut lnk)
                             {
@@ -82,7 +82,7 @@ namespace WinFo.Service.Usage.Win7
 
             string logMessage = $"Loaded {recentlyOpenedFiles.Count} recently opened entries.";
             MyDebugger.Instance.LogMessage(logMessage, DebugVerbocity.Informational);
-            UpdateProgress(logMessage);
+            UpdateProgress?.Invoke(logMessage);
             return recentlyOpenedFiles;
         }
     }

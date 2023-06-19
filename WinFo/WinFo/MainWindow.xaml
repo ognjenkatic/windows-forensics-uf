@@ -60,6 +60,8 @@
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="SRUM App Usage" Content="SRUM App Usage"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="SRUM Network Connectivity" Content="SRUM Network Connectivity"/>
                 <Button Command="{Binding LoadWindowCommand}" CommandParameter="BAM Data" Content="BAM Data"/>
+                <Button Command="{Binding LoadWindowCommand}" CommandParameter="Recycle Bin Data" Content="Recycle Bin Data"/>
+                <Button Command="{Binding LoadWindowCommand}" CommandParameter="Export Data" Content="Export Data" Margin="0,20,0,0"/>
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer Margin="210,0,-0.4,-0.4">

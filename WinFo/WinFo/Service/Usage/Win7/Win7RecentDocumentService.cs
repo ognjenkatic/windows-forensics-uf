@@ -36,7 +36,7 @@ namespace WinFo.Service.Usage.Win7
 
                 foreach (string subkeyName in subkeys)
                 {
-                    UpdateProgress("Working on key "+subkeyName);
+                    UpdateProgress?.Invoke("Working on key "+subkeyName);
                     RegistryKey subkey = recentDocumentsRegistryKey.OpenSubKey(subkeyName);
 
                     string[] documentEntries = subkey.GetValueNames();

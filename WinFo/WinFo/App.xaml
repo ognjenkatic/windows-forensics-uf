@@ -10,6 +10,9 @@
             <Style TargetType="RowDefinition">
                 <Setter Property="Height" Value="Auto"/>
             </Style>
+            <Style TargetType="CheckBox">
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
             <Style TargetType="Label">
                 <Setter Property="Foreground" Value="{StaticResource SoftForeground}"/>
                 <Setter Property="Height" Value="20"/>
