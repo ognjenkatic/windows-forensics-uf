@@ -15,7 +15,8 @@ namespace WinFo.Service.Usage.Win7
     public class Win7RecentlyOpenedFileService : IRecentlyOpenedFileService
     {
         #region fields
-        private static string _RECENTLY_OPENED_PATH = @"%USERPROFILE%\\AppData\\Roaming\\Microsoft\\Windows\Recent";
+        private static string _RECENTLY_OPENED_PATH =
+            @"%USERPROFILE%\\AppData\\Roaming\\Microsoft\\Windows\Recent";
 
         public event UpdateProgressDelegate UpdateProgress;
         #endregion
@@ -31,17 +32,20 @@ namespace WinFo.Service.Usage.Win7
             int counter = 0;
             try
             {
-                string recentFolderPath = Environment.ExpandEnvironmentVariables(_RECENTLY_OPENED_PATH);
+                string recentFolderPath = Environment.ExpandEnvironmentVariables(
+                    _RECENTLY_OPENED_PATH
+                );
                 IEnumerable<string> recentFiles = Directory.EnumerateFiles(recentFolderPath);
 
                 foreach (string file in recentFiles)
                 {
                     try
                     {
-                        
                         if (file.EndsWith("lnk"))
                         {
-                            UpdateProgress?.Invoke($"Searching for recently opened file entries, found so far: {++counter}");
+                            UpdateProgress?.Invoke(
+                                $"Searching for recently opened file entries, found so far: {++counter}"
+                            );
                             IWshShell shell = new WshShell();
                             if (shell.CreateShortcut(file) is IWshShortcut lnk)
                             {
@@ -50,16 +54,23 @@ namespace WinFo.Service.Usage.Win7
                                 ofe.Name = Path.GetFileName(lnk.TargetPath);
                                 ofe.Path = lnk.TargetPath;
                                 ofe.Shortcut = file;
-                                
-                                if (System.IO.File.Exists(lnk.TargetPath)) {
+
+                                if (System.IO.File.Exists(lnk.TargetPath))
+                                {
                                     ofe.Accessed = System.IO.File.GetLastAccessTime(lnk.TargetPath);
                                     ofe.Created = System.IO.File.GetCreationTime(lnk.TargetPath);
-                                    ofe.Creator = System.IO.File.GetAccessControl(lnk.TargetPath).GetOwner(typeof(System.Security.Principal.NTAccount)).ToString();
+                                    ofe.Creator = new FileInfo(lnk.TargetPath)
+                                        .GetAccessControl()
+                                        .GetOwner(typeof(System.Security.Principal.NTAccount))
+                                        .ToString();
                                     ofe.Exists = true;
-                                } else
+                                }
+                                else
                                 {
                                     ofe.Exists = false;
-                                    ofe.Accessed = ofe.Created = System.IO.File.GetCreationTime(lnk.FullName);
+                                    ofe.Accessed = ofe.Created = System.IO.File.GetCreationTime(
+                                        lnk.FullName
+                                    );
                                     ofe.Name = lnk.FullName;
                                     ofe.Path = lnk.WorkingDirectory;
                                 }
@@ -73,7 +84,6 @@ namespace WinFo.Service.Usage.Win7
                         MyDebugger.Instance.LogMessage(exc, DebugVerbocity.Exception);
                     }
                 }
-
             }
             catch (Exception exc)
             {
