@@ -1,0 +1,19 @@
+[-][Mar 12 2024 10:08:59]Access to the path 'C:\WINDOWS\Prefetch' is denied.
+[-][Mar 12 2024 10:08:59]Object reference not set to an instance of an object.
+[-][Mar 12 2024 10:08:59]Access to the path 'C:\$Recycle.Bin\S-1-5-18' is denied.
+[-][Mar 12 2024 10:08:59]Access to the path 'C:\$Recycle.Bin\S-1-5-21-1467556535-4127921981-1488053335-1000' is denied.
+[+][Mar 12 2024 10:09:00]Loaded information about 2 shares!
+[-][Mar 12 2024 10:09:00]Index and count must refer to a location within the buffer. (Parameter 'bytes')
+[-][Mar 12 2024 10:09:00]Requested registry access is not allowed.
+[+][Mar 12 2024 10:09:00]Loaded 0 user sessions.
+[-][Mar 12 2024 10:09:01]Instance Name already in use
+[-][Mar 12 2024 10:09:01]File not found
+[-][Mar 12 2024 10:09:05]Access to the path 'C:\$Recycle.Bin\S-1-5-21-1467556535-4127921981-1488053335-1003' is denied.
+[-][Mar 12 2024 10:09:05]Access to the path 'C:\$Recycle.Bin\S-1-5-21-1467556535-4127921981-1488053335-1006' is denied.
+[-][Mar 12 2024 10:09:05]Access to the path 'C:\$Recycle.Bin\S-1-5-21-1467556535-4127921981-1488053335-500' is denied.
+[-][Mar 12 2024 10:09:05]Access to the path 'C:\$Recycle.Bin\S-1-5-21-1572891307-96104397-3367916595-500' is denied.
+[+][Mar 12 2024 10:09:17]Loaded 467 recently opened entries.
+[+][Mar 12 2024 10:09:22]Loaded 5 recently run entries.
+[+][Mar 12 2024 10:09:22]Loaded 137 window cache entries.
+[+][Mar 12 2024 10:09:22]Loaded 1361 recent documents.
+[+][Mar 12 2024 10:09:30]Loaded 84 computer sessions.

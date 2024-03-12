@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinFo.View"
-        xmlns:model="clr-namespace:WinFo.Model.Usage"
+        xmlns:model="clr-namespace:WinFo.Model.Usage;assembly=WinFo.Application"
         xmlns:vm="clr-namespace:WinFo.ViewModel"
         mc:Ignorable="d"
         Title="GroupUserView" Height="450" Width="800"

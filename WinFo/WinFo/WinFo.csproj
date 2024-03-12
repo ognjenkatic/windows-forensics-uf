@@ -31,19 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="CustomControl\" />
-    <Folder Include="Service\Configuration\Win10\" />
   </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="IWshRuntimeLibrary">
-      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
+ 
   <ItemGroup>
     <Resource Include="Resource\images\net_plug.png" />
   </ItemGroup>
@@ -70,10 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LiveCharts.Wpf.NetCore3" Version="0.9.8" />
-    <PackageReference Include="ManagedEsent" Version="2.0.0" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Management" Version="8.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WinFo.Application\WinFo.Application.csproj" />
   </ItemGroup>
 </Project>

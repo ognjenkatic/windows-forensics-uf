@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinFo.ViewModel"
-        xmlns:model="clr-namespace:WinFo.Model.Usage"
+        xmlns:model="clr-namespace:WinFo.Model.Usage;assembly=WinFo.Application"
         xmlns:view="clr-namespace:WinFo.View"
         mc:Ignorable="d"
         Title="ARPTableView" Height="450" Width="800"

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinFo.ViewModel"
-        xmlns:model="clr-namespace:WinFo.Model.Configuration"
+        xmlns:model="clr-namespace:WinFo.Model.Configuration;assembly=WinFo.Application"
         xmlns:view="clr-namespace:WinFo.View"
         mc:Ignorable="d"
         Title="{Binding Path=ModelTarget}"  Height="450" Width="800" WindowState="Maximized" Background="{DynamicResource BPBackgroundGradient}">

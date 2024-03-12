@@ -7,13 +7,13 @@
         xmlns:viewModel="clr-namespace:WinFo.ViewModel"
         mc:Ignorable="d"
         Background="{StaticResource BPBackgroundGradient}"
-        WindowState="Maximized"
-        Title="DataExportView" Height="450" Width="800">
+        WindowState="Normal"
+        Title="DataExportView" Height="520" Width="700" WindowStartupLocation="CenterScreen" MinWidth="700" MinHeight="520">
     <Window.DataContext>
         <viewModel:DataExportViewModel/>
     </Window.DataContext>
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Width="200">
+        <StackPanel HorizontalAlignment="Left" Width="200" CanVerticallyScroll="True">
             <Label Content="Check data for export"/>
             <CheckBox Content="Export All" IsChecked="{Binding Path=AreAllChecked}" Margin="0,0,0,20"/>
             <CheckBox Content="Shares" IsChecked="{Binding Path=IsSharesChecked}"/>
@@ -43,6 +43,7 @@
             <CheckBox Content="BAM Data" IsChecked="{Binding Path=IsBAMDataChecked}"/>
             <CheckBox Content="Recycle Bin Data" IsChecked="{Binding Path=IsRecycleBinDataChecked}"/>
         </StackPanel>
-        <Button Command="{Binding Path=ExportDataCommand}" Content="Start Exporting Data" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="250,0,0,20"></Button>
+        <Button Command="{Binding Path=ExportDataCommand}" Content="Export to directory" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="250,0,0,20"></Button>
+        <Button Content="Upload to server" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="366,0,0,20"></Button>
     </Grid>
 </Window>
