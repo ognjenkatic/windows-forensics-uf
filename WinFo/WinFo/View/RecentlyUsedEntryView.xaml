@@ -1,0 +1,31 @@
+﻿<Window x:Class="WinFo.View.RecentlyUsedEntryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WinFo.ViewModel"
+        xmlns:view="clr-namespace:WinFo.View"
+        mc:Ignorable="d"
+        Title="RecentlyUsedEntryView" Height="450" Width="800"
+        Background="{StaticResource BPBackgroundGradient}"
+        WindowState="Maximized">
+    <Window.DataContext>
+        <local:RecentlyUsedEntryViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <view:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}"/>
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <StackPanel>
+                <Label Content="Recently opened files"/> 
+                <DataGrid Margin="10" ItemsSource="{Binding Path=RecentlyOpenedFilesEntries}" IsReadOnly="True"/>
+                <Label Content="Recent documents"/>
+                <DataGrid Margin="10" ItemsSource="{Binding Path=RecentDocumentEntries}" IsReadOnly="True"/>
+                <Label Content="Recent Run Bar Entries"/>
+                <DataGrid Margin="10" ItemsSource="{Binding Path=RecentRunBarEntries}" IsReadOnly="True"/>
+                <Label Content="Recent window title cache"/>
+                <DataGrid Margin="10" ItemsSource="{Binding Path=RecentWindowEntries}" IsReadOnly="True"/>
+                
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

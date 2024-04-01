@@ -1,0 +1,78 @@
+﻿<Window x:Class="WinFo.View.RecentAppView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WinFo.ViewModel"
+        xmlns:view="clr-namespace:WinFo.View"
+        xmlns:model="clr-namespace:WinFo.Model.Usage;assembly=WinFo.Application"
+        mc:Ignorable="d"
+        Title="RecentAppView" Height="450" Width="800"
+        Background="{StaticResource BPBackgroundGradient}"
+        WindowState="Maximized">
+    <Window.DataContext>
+        <local:RecentAppViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <view:MySpinningLoader Grid.ColumnSpan="2" Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}"/>
+        <TreeView  Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" ItemsSource="{Binding Path=RecentAppEntries}"  Background="{x:Null}" SelectedItemChanged="TreeView_SelectedItemChanged">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=RecentItems}" DataType="{x:Type model:RecentAppItemEntry}" >
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Path=AppId}"/>
+                        
+                    </StackPanel>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate DataType="{x:Type model:RecentAppItemEntry}" >
+                        <StackPanel>
+                            <Label Content="{Binding DisplayName}"/>
+                        </StackPanel>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <Grid Margin="10" Grid.Column="1" Name="RecentAppGrid" DataContext="{Binding SelectedRecentAppEntry}" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="App Id"/>
+            <Label Grid.Row="1" Content="App Path"/>
+            <Label Grid.Row="2" Content="Last Accessed Time"/>
+            <Label Grid.Row="3" Content="Launch Count"/>
+            <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=AppId}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=AppPath}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=LastAccessedTime}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=LaunchCount}"/>
+        </Grid>
+        <Grid Margin="10" Grid.Column="1" Name="RecentAppItemGrid" DataContext="{Binding SelectedRecentAppItemEntry}" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Display Name"/>
+            <Label Grid.Row="1" Content="Last Accessed Time"/>
+            <Label Grid.Row="2" Content="Path"/>
+            <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=DisplayName}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=LastAccessedTime}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=Path}"/>
+        </Grid>
+    </Grid>
+</Window>

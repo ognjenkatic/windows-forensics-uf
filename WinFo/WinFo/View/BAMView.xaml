@@ -1,0 +1,19 @@
+﻿<Window x:Class="WinFo.View.BAMView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WinFo.View"
+        xmlns:viewModel="clr-namespace:WinFo.ViewModel"
+        mc:Ignorable="d"
+        Title="BAMView" Height="450" Width="800"
+        WindowState="Maximized"
+        Background="{StaticResource BPBackgroundGradient}">
+    <Window.DataContext>
+        <viewModel:BAMViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <local:MySpinningLoader Panel.ZIndex="10" Visibility="{Binding Path=IsModelInformationBeingUpdated, Converter={StaticResource Bvc}, FallbackValue=Collapsed}"/>
+        <DataGrid Margin="10" IsReadOnly="True" ItemsSource="{Binding Path=Entries}"/>
+    </Grid>
+</Window>
